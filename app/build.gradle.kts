@@ -1,28 +1,28 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id(Plugins.androidApplication)
+    id(Plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "com.dossantos.melimobilecandidate"
-    compileSdk = 34
+    namespace = Dependencies.Commons.nameSpace
+    compileSdk = Versions.Commons.compileSdk
 
     defaultConfig {
-        applicationId = "com.dossantos.melimobilecandidate"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Dependencies.Commons.nameSpace
+        minSdk = Versions.Commons.minSdk
+        targetSdk = Versions.Commons.compileSdk
+        versionCode = Versions.Commons.versionCode
+        versionName = Versions.Commons.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Dependencies.Commons.instrumentationRunner
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile(Dependencies.Commons.defaultProGuardFile),
+                Dependencies.Commons.proGuardRulerPro
             )
         }
     }
@@ -36,13 +36,25 @@ android {
 }
 
 dependencies {
+    /**
+     * Core
+     */
+    implementation(Dependencies.Core.coreKtx)
+    implementation(Dependencies.Core.appcompat)
+    implementation(Dependencies.Core.appcompat)
+    implementation(Dependencies.Core.material)
+    implementation(Dependencies.Core.activity)
+    implementation(Dependencies.Core.constraintlayout)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    /**
+     * Firebase
+     */
+
+
+    /**
+     * Test
+     */
+    testImplementation(Dependencies.Test.junit)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.espressoCore)
 }

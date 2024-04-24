@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "700409417201",
+    "project_id": "meli-mobile-candidate",
+    "storage_bucket": "meli-mobile-candidate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700409417201:android:e7b88f6d9d81533f038850",
+        "android_client_info": {
+          "package_name": "com.dossantos.melimobilecandidate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "wrong_key"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

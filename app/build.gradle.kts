@@ -30,7 +30,8 @@ android {
                 Dependencies.Commons.proGuardRulerPro
             )
 
-            getLocalProperties(Dependencies.Firebase.firebaseKey)?.let {key ->
+            getLocalProperties(Dependencies.Firebase.firebaseKey)?.let { key ->
+                protectGoogleServicesToUpdates()
                 updateFirebaseApi(key)
             }
         }
@@ -86,4 +87,13 @@ fun updateFirebaseApi(key: String) {
             "\"current_key\": $key"
         )
     )
+}
+
+fun protectGoogleServicesToUpdates() {
+    println("Protecting google-services.json ......")
+    val command = "git update-index --assume-unchanged app/google-services.json"
+    val process = ProcessBuilder().command("bash", "-c", command).start()
+
+    if (process.waitFor() == 0) println("google-services.json is now protected")
+    else throw RuntimeException("we need to protect google-services to updates")
 }

@@ -1,6 +1,9 @@
+import java.util.Properties
+
 plugins {
     id(Plugins.androidApplication)
     id(Plugins.kotlinAndroid)
+    id(Plugins.googleServices)
 }
 
 android {
@@ -20,10 +23,16 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            android.buildFeatures.buildConfig = true
+
             proguardFiles(
                 getDefaultProguardFile(Dependencies.Commons.defaultProGuardFile),
                 Dependencies.Commons.proGuardRulerPro
             )
+
+            getLocalProperties(Dependencies.Firebase.firebaseKey)?.let {key ->
+                updateFirebaseApi(key)
+            }
         }
     }
     compileOptions {
@@ -49,7 +58,8 @@ dependencies {
     /**
      * Firebase
      */
-
+//    implementation(platform(Dependencies.Firebase.bom))
+//    implementation(Dependencies.Firebase.analytics)
 
     /**
      * Test
@@ -57,4 +67,23 @@ dependencies {
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
+}
+
+fun getLocalProperties(key: String): String? {
+    val properties = Properties()
+    properties.load(project.rootProject.file(Dependencies.Commons.localProperties).inputStream())
+    return properties.getProperty(key)
+}
+
+fun updateFirebaseApi(key: String) {
+    val jsonFilePath = Dependencies.Commons.googleServicesJsonPath
+    val jsonFile = File(jsonFilePath)
+    val jsonContent = jsonFile.readText()
+
+    jsonFile.writeText(
+        jsonContent.replace(
+            "\"current_key\": \"wrong_key\"",
+            "\"current_key\": $key"
+        )
+    )
 }

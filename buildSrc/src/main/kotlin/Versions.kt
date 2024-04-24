@@ -20,4 +20,12 @@ object Versions {
         const val activity = "1.8.0"
         const val constraintlayout = "2.1.4"
     }
+
+    object Google {
+        const val googleServices = "4.4.1"
+    }
+
+    object Firebase {
+        const val bom = "32.8.1"
+    }
 }

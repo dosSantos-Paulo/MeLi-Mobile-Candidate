@@ -4,6 +4,8 @@ object Dependencies {
         const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         const val defaultProGuardFile = "proguard-android-optimize.txt"
         const val proGuardRulerPro = "proguard-rules.pro"
+        const val localProperties = "local.properties"
+        const val googleServicesJsonPath = "app/google-services.json"
     }
     object Test {
         const val junit = "junit:junit:${Versions.Test.junit}"
@@ -17,5 +19,11 @@ object Dependencies {
         const val material = "com.google.android.material:material:${Versions.Core.material}"
         const val activity = "androidx.activity:activity:${Versions.Core.activity}"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.Core.constraintlayout}"
+    }
+
+    object Firebase {
+        const val firebaseKey = "FIREBASE_KEY"
+        const val bom = "com.google.firebase:firebase-bom:${Versions.Firebase.bom}"
+        const val analytics = "com.google.firebase:firebase-analytics"
     }
 }

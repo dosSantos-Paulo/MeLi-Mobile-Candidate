@@ -31,7 +31,7 @@ android {
                 Dependencies.Commons.proGuardRulerPro
             )
 
-            getLocalProperties(Dependencies.Firebase.firebaseKey)?.let { key ->
+            getSecret(Dependencies.Firebase.firebaseKey)?.let { key ->
                 protectGoogleServicesToUpdates()
                 updateFirebaseApi(key)
             }
@@ -75,10 +75,22 @@ dependencies {
     androidTestImplementation(Dependencies.Test.espressoCore)
 }
 
-fun getLocalProperties(key: String): String? {
+fun getSecret(key: String): String? {
+    return try {
+        tryLocalProperties(key)
+    } catch (_: Exception) {
+        secretFromGithubSecrets(key)
+    }
+}
+
+fun tryLocalProperties(key: String): String? {
     val properties = Properties()
     properties.load(project.rootProject.file(Dependencies.Commons.localProperties).inputStream())
     return properties.getProperty(key)
+}
+
+fun secretFromGithubSecrets(key: String): String? {
+    return System.getProperty("firebaseKey") ?: System.getenv(key)
 }
 
 fun updateFirebaseApi(key: String) {

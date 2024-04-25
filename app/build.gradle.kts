@@ -44,7 +44,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
@@ -76,24 +76,22 @@ dependencies {
 }
 
 fun getSecret(key: String): String? {
-    return tryLocalProperties(key)
-//    return try {
-//
-//    } catch (_: Exception) {
-////        secretFromGithubSecrets(key)
-//        "wrong_key"
-//    }
-}
-
-fun tryLocalProperties(key: String): String? {
     val properties = Properties()
-    properties.load(project.rootProject.file(Dependencies.Commons.localProperties).inputStream())
+    properties.load(getPropertiesFile())
     return properties.getProperty(key)
 }
 
-fun secretFromGithubSecrets(key: String): String? {
-    return System.getProperty(key)
+fun getPropertiesFile() = try {
+    tryLocalProperties()
+} catch (_: Exception) {
+    tryPropertiesFromGitHub()
 }
+
+fun tryLocalProperties() =
+    project.rootProject.file(Dependencies.Commons.localProperties).inputStream()
+
+fun tryPropertiesFromGitHub() =
+    File(Dependencies.Commons.gitHubProperties).absoluteFile.inputStream()
 
 fun updateFirebaseApi(key: String) {
     val jsonFilePath = Dependencies.Commons.googleServicesJsonPath

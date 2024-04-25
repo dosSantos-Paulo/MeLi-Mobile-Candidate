@@ -5,6 +5,7 @@ object Dependencies {
         const val defaultProGuardFile = "proguard-android-optimize.txt"
         const val proGuardRulerPro = "proguard-rules.pro"
         const val localProperties = "local.properties"
+        const val gitHubProperties = "/home/runner/work/MeLi-Mobile-Candidate/MeLi-Mobile-Candidate/local.properties"
         const val googleServicesJsonPath = "app/google-services.json"
     }
     object Test {

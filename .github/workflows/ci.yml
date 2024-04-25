@@ -5,14 +5,19 @@ on:
     branches: [ main ]
 
 jobs:
+  create_local_properties:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create local.properties
+        uses: ./.github/workflows/secrets.yml
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Add Secrets On Gradle
-        run: ./gradlew build -PfirebaseKey="${{ secrets.FIREBASE_KEY }}"
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -22,7 +27,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build With Gradle
+      - name: Build with Gradle
         run: ./gradlew build
 
       - name: Run CodeClimate
@@ -35,6 +40,5 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
-
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -91,7 +91,7 @@ fun tryLocalProperties() =
     project.rootProject.file(Dependencies.Commons.localProperties).inputStream()
 
 fun tryPropertiesFromGitHub() =
-    File("/home/runner/work/MeLi-Mobile-Candidate/MeLi-Mobile-Candidate/github.properties").inputStream()
+    File(System.getenv("TMP_FILE") ?: "path is not found").inputStream()
 
 fun updateFirebaseApi(key: String) {
     val jsonFilePath = Dependencies.Commons.googleServicesJsonPath

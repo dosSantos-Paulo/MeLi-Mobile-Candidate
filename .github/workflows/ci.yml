@@ -12,8 +12,10 @@ jobs:
       - name: Create github.properties
         env:
           FIREBASE_KEY: $
+          TMP_FILE: ${{ github.workspace }}/github.properties
         run: |
-          echo FIREBASE_KEY=\"$FIREBASE_KEY\" > ./github.properties
+          echo "FIREBASE_KEY=\"$FIREBASE_KEY\"" > $TMP_FILE
+          echo "TMP_FILE path: $TMP_FILE"
 
       - name: Checkout code
         uses: actions/checkout@v2

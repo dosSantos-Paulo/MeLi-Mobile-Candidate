@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Crete TMP_FILE
+      - name: Create TMP_FILE
         env:
           FIREBASE_KEY: $
         run: |
-          TMP_FILE=$(mktemp)
+          TMP_FILE="${{ github.workspace }}/github.properties"
           echo FIREBASE_KEY=\"$FIREBASE_KEY\" > $TMP_FILE
           echo "TMP_FILE path: $TMP_FILE"
 

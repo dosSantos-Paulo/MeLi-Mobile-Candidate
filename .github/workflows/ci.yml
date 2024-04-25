@@ -15,6 +15,14 @@ jobs:
         run:
           echo FIREBASE_KEY=\"$FIREBASE_KEY\ > ./local.properties
 
+      - name: Obter Caminho do Arquivo local.properties
+        run: |
+          if [ -f ./local.properties ]; then
+            echo "Caminho do Arquivo: $(realpath ./local.properties)"
+          else
+            echo "Erro: Arquivo local.properties não encontrado."
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v2
 

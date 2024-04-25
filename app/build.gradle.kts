@@ -79,7 +79,8 @@ fun getSecret(key: String): String? {
     return try {
         tryLocalProperties(key)
     } catch (_: Exception) {
-        secretFromGithubSecrets(key)
+//        secretFromGithubSecrets(key)
+        "wrong_key"
     }
 }
 

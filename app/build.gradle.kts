@@ -76,22 +76,18 @@ dependencies {
 }
 
 fun getSecret(key: String): String? {
-    val properties = Properties()
-    properties.load(getPropertiesFile())
-    return properties.getProperty(key)
+    return try {
+        val properties = Properties()
+        properties.load(
+            project.rootProject.file(Dependencies.Commons.localProperties).inputStream()
+        )
+        properties.getProperty(key)
+    } catch (_: Exception) {
+        System.getenv("FIREBASE_KEY").also { firebaseKey ->
+            println("KEEEEY -> $firebaseKey")
+        }
+    }
 }
-
-fun getPropertiesFile() = try {
-    tryLocalProperties()
-} catch (_: Exception) {
-    tryPropertiesFromGitHub()
-}
-
-fun tryLocalProperties() =
-    project.rootProject.file(Dependencies.Commons.localProperties).inputStream()
-
-fun tryPropertiesFromGitHub() =
-    File(System.getenv("TMP_FILE") ?: "path is not found").inputStream()
 
 fun updateFirebaseApi(key: String) {
     val jsonFilePath = Dependencies.Commons.googleServicesJsonPath

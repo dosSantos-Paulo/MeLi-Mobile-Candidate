@@ -12,10 +12,7 @@ jobs:
       - name: Create github.properties
         env:
           FIREBASE_KEY: $
-          TMP_FILE: ${{ github.workspace }}/github.properties
-        run: |
-          echo "FIREBASE_KEY=\"$FIREBASE_KEY\"" > $TMP_FILE
-          echo "TMP_FILE path: $TMP_FILE"
+        run: ./gradlew build
 
       - name: Checkout code
         uses: actions/checkout@v2

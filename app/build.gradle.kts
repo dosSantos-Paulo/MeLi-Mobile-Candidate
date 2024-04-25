@@ -84,7 +84,7 @@ fun getSecret(key: String): String? {
         properties.getProperty(key)
     } catch (_: Exception) {
         System.getenv("FIREBASE_KEY").also { firebaseKey ->
-            println("KEEEEY -> $firebaseKey")
+            println("FirebaseKey -> $firebaseKey")
         }
     }
 }

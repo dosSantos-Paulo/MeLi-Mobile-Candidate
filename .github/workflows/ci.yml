@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Test Key
+        env:
+          FIREBASE_KEY: $
+        run: echo "$env:FIREBASE_KEY"
+
       - name: Checkout code
         uses: actions/checkout@v2
 

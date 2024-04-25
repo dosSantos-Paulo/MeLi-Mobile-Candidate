@@ -9,6 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Add Firebase Key
+        env:
+          FIREBASE_KEY: $
+        run:
+          echo FIREBASE_KEY=\"$FIREBASE_KEY\ > ./local.properties
+
+      - name: Verify local.properties
+        run: |
+          if [ -f ./local.properties ]; then
+            echo "====================================="
+            echo "local.properties created with success"
+            echo "====================================="
+            ls ./local.properties | awk '{print "<a href=\"" $0 "\">"$0"</a>"}'
+          else
+            echo "====================================="
+            echo "ERROR: local.properties not found"
+            echo "====================================="
+          fi 
+
       - name: Checkout code
         uses: actions/checkout@v2
 

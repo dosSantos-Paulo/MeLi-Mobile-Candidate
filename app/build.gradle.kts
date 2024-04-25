@@ -91,7 +91,7 @@ fun tryLocalProperties() =
     project.rootProject.file(Dependencies.Commons.localProperties).inputStream()
 
 fun tryPropertiesFromGitHub() =
-    File("./local.properties").absoluteFile.inputStream()
+    File(Dependencies.Commons.localProperties).absoluteFile.inputStream()
 
 fun updateFirebaseApi(key: String) {
     val jsonFilePath = Dependencies.Commons.googleServicesJsonPath

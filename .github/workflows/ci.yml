@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create github.properties
-        env:
-          FIREBASE_KEY: $
-        run: ./gradlew build
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -24,6 +19,8 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle
+        env:
+          FIREBASE_KEY: $
         run: ./gradlew build
 
       - name: Run CodeClimate

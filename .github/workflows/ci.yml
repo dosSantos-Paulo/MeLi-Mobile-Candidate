@@ -10,15 +10,12 @@ jobs:
 
     steps:
       - name: Crete TMP_FILE
-        run: |
-          TMP_FILE=$(mktemp)
-          echo "TMP_FILE path: $TMP_FILE"
-
-      - name: Add Firebase Key
         env:
           FIREBASE_KEY: $
-        run:
+        run: |
+          TMP_FILE=$(mktemp)
           echo FIREBASE_KEY=\"$FIREBASE_KEY\" > $TMP_FILE
+          echo "TMP_FILE path: $TMP_FILE"
 
       - name: Checkout code
         uses: actions/checkout@v2

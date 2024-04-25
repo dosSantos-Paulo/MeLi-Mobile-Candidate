@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Crete TMP_FILE
         run: |
-          TMP_FILE=$(mk temp)
+          TMP_FILE=$(mktemp)
           echo "TMP_FILE path: $TMP_FILE"
 
       - name: Add Firebase Key

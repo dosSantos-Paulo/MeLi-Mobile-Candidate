@@ -11,9 +11,8 @@ jobs:
     steps:
       - name: Add Secrets
         env:
-          FIREBASE_KEY: $
-        run:
-          echo FIREBASE_KEY=\"$FIREBASE_KEY\ > ./local.properties
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+        run: echo "FIREBASE_KEY=\"$FIREBASE_KEY\"" > local.properties
 
       - name: Checkout code
         uses: actions/checkout@v2

@@ -90,7 +90,7 @@ fun tryLocalProperties(key: String): String? {
 }
 
 fun secretFromGithubSecrets(key: String): String? {
-    return System.getProperty("firebaseKey") ?: System.getenv(key)
+    return System.getProperty(key)
 }
 
 fun updateFirebaseApi(key: String) {

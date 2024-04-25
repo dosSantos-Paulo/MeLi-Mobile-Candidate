@@ -1,0 +1,35 @@
+name: CI/CD Android
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run CodeClimate
+        run: |
+          # Replace the command with CodeClimate CLI command to run analysis
+          # Example command: codeclimate analyze --dev
+          echo "Running CodeClimate analysis"
+
+      - name: Firebase deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

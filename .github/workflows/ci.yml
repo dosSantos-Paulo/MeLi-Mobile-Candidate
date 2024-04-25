@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Test Key
-        run: echo "${{ secrets.FIREBASE_KEY }}"
+        run: echo "${{ secrets.HELLO_SECRET }}"
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
 
       - name: Build with Gradle
         env:
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+          FIREBASE_KEY: ${{ secrets.HELLO_SECRET }}
         run: ./gradlew build
 
       - name: Run CodeClimate

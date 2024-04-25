@@ -27,5 +27,6 @@ object Versions {
 
     object Firebase {
         const val bom = "32.8.1"
+        const val crashlytics = "2.9.9"
     }
 }

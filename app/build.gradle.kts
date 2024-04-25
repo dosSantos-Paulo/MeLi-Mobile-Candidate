@@ -4,6 +4,7 @@ plugins {
     id(Plugins.androidApplication)
     id(Plugins.kotlinAndroid)
     id(Plugins.googleServices)
+    id(Plugins.crashlytics)
 }
 
 android {
@@ -43,6 +44,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -59,8 +63,9 @@ dependencies {
     /**
      * Firebase
      */
-//    implementation(platform(Dependencies.Firebase.bom))
-//    implementation(Dependencies.Firebase.analytics)
+    implementation(platform(Dependencies.Firebase.bom))
+    implementation(Dependencies.Firebase.crashlytics)
+    implementation(Dependencies.Firebase.analytics)
 
     /**
      * Test

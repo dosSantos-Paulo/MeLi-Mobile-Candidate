@@ -76,12 +76,13 @@ dependencies {
 }
 
 fun getSecret(key: String): String? {
-    return try {
-        tryLocalProperties(key)
-    } catch (_: Exception) {
-//        secretFromGithubSecrets(key)
-        "wrong_key"
-    }
+    return tryLocalProperties(key)
+//    return try {
+//
+//    } catch (_: Exception) {
+////        secretFromGithubSecrets(key)
+//        "wrong_key"
+//    }
 }
 
 fun tryLocalProperties(key: String): String? {

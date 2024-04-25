@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test Key
-        run: echo "${{ secrets.HELLO_SECRET }}"
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -23,7 +20,7 @@ jobs:
 
       - name: Build with Gradle
         env:
-          FIREBASE_KEY: ${{ secrets.HELLO_SECRET }}
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
       - name: Run CodeClimate

@@ -11,7 +11,7 @@ jobs:
     steps:
 
       - name: Add Secrets On Gradle
-        run: chmod +x ./app/build.gradle.kts && ./app/build.gradle.kts build -PFIREBASE_KEY="${{ secrets.FIREBASE_KEY }}"
+        run: chmod +x ../../app/build.gradle.kts && ./app/build.gradle.kts build -PFIREBASE_KEY="${{ secrets.FIREBASE_KEY }}"
 
       - name: Checkout code
         uses: actions/checkout@v2

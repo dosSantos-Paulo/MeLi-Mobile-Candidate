@@ -23,11 +23,27 @@ jobs:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
-      - name: Run CodeClimate
+      - name: CodeClimate Analysis
+        id: codeclimate_analysis
         run: |
-          # Replace the command with CodeClimate CLI command to run analysis
-          # Example command: codeclimate analyze --dev
-          echo "Running CodeClimate analysis"
+          if ! command -v codeclimate &> /dev/null
+          then
+              echo "CodeClimate CLI not found. Installing..."
+              curl -L https://github.com/codeclimate/codeclimate/archive/master.tar.gz | tar xvz
+              cd codeclimate-* && sudo make install
+          fi
+          codeclimate analyze --format=json > codeclimate_report.json
+        env:
+          CODECLIMATE_REPORT_PATH: codeclimate_report.json
+
+      - name: Get CodeClimate Analysis Link
+        run: |
+          if [ -f "${{ env.CODECLIMATE_REPORT_PATH }}" ]; then
+            echo "CodeClimate analysis report generated. You can view the report at: https://codeclimate.com/dashboard/repositories/${{ github.repository }}/code_reviews"
+          else
+            echo "CodeClimate analysis failed or no report generated."
+          fi
+      
 
       - name: Firebase deploy
         uses: w9jds/firebase-action@master

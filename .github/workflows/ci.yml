@@ -53,13 +53,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - app/src/**
-      - '*.json'
-      - yarn.lock
-  pull_request:
-    paths:
-      - '!*.MD'
 
 jobs:
   test:

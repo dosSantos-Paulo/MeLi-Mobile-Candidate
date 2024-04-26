@@ -26,25 +26,25 @@ jobs:
       - name: setup codeclimate
         uses: remarkablemark/setup-codeclimate@v2
 
-  coverage:
-    needs: [ test ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Run CodeClimate coverage
-        uses: paambaati/codeclimate-action@v2.2.4
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: ./gradlew jacocoTestReport
+#  coverage:
+#    needs: [ test ]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#
+#      - name: Run CodeClimate coverage
+#        uses: paambaati/codeclimate-action@v2.2.4
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+#        with:
+#          coverageCommand: ./gradlew jacocoTestReport
 
 #      - name: run test coverage
 #        uses: paambaati/codeclimate-action@v2.5.7

@@ -36,7 +36,6 @@ jobs:
             ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
         run: |
           cc-test-reporter before-build
-          # insert your test command here
           cc-test-reporter after-build --exit-code $?
 
       - name: build release

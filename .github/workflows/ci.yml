@@ -23,15 +23,20 @@ jobs:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
-      - name: Setup Codeclimate
-        uses: remarkablemark/setup-codeclimate@v2
+#      - name: Run Tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 29
+#          script: ./gradlew jacocoCombinedTestReports
 
-      - name: Codeclimate Analysis
+      - name: Run CodeClimate
+        uses: paambaati/codeclimate-action@v2.6.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-        run: |
-            cc-test-reporter before-build
+          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+        with:
+          coverageCommand: echo "Coverage already calculated - skipping calculating coverage"
+          coverageLocations: ${{github.workspace}}/app/build/reports/coverage/jacocoCombinedTestReports/jacocoCombinedTestReports.xml:jacoco
 
       - name: Build release
         run: ./gradlew assembleRelease

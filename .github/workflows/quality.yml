@@ -16,9 +16,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
-          java-version: '17' # Defina aqui a versão do JDK que você deseja usar
+          java-version: '17'
+          distribution: 'temurin'
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2

@@ -1,31 +1,51 @@
-#name: CI/CD Android
-#
-#on:
-#  push:
-#    branches: [ main ]
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: checkout
-#        uses: actions/checkout@v2
-#
-#      - name: setup jdk
-#        uses: actions/setup-java@v2
-#        with:
-#          java-version: '17'
-#          distribution: 'temurin'
-#
-#      - name: build gradle
-#        env:
-#          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-#        run: ./gradlew build
-#
-#      - name: setup codeclimate
-#        uses: remarkablemark/setup-codeclimate@v2
-#
+name: CI/CD Android
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup jdk
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: build gradle
+        env:
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+        run: ./gradlew build
+
+      - name: setup codeclimate
+        uses: remarkablemark/setup-codeclimate@v2
+
+  coverage:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run CodeClimate coverage
+        uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: ./gradlew jacocoTestReport
+
 #      - name: run test coverage
 #        uses: paambaati/codeclimate-action@v2.5.7
 #        env:
@@ -46,47 +66,3 @@
 #          appId: ${{secrets.FIREBASE_APP_ID}}
 #          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
 #          file: app/build/outputs/apk/release/app-release-unsigned.apk
-
-name: build
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Build and run tests
-        run: |
-          ./gradlew clean test
-
-  coverage:
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Run CodeClimate coverage
-        uses: paambaati/codeclimate-action@v2.2.4
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: ./gradlew jacocoTestReport

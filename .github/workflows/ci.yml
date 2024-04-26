@@ -29,8 +29,8 @@ jobs:
       - name: Run Test and Upload Coverage
         run: |
             cc-test-reporter before-build
-            cc-test-reporter format-coverage ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco --input-type jacoco
             cc-test-reporter after-build --exit-code $?
+            cc-test-reporter format-coverage ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco --input-type jacoco
         env:
             CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 

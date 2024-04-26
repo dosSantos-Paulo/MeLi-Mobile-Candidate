@@ -1,48 +1,98 @@
-name: CI/CD Android
+#name: CI/CD Android
+#
+#on:
+#  push:
+#    branches: [ main ]
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v2
+#
+#      - name: setup jdk
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#
+#      - name: build gradle
+#        env:
+#          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+#        run: ./gradlew build
+#
+#      - name: setup codeclimate
+#        uses: remarkablemark/setup-codeclimate@v2
+#
+#      - name: run test coverage
+#        uses: paambaati/codeclimate-action@v2.5.7
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+#          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+#        with:
+#          coverageCommand: ./gradlew test --no-daemon
+#          coverageLocations: |
+#            cc-test-reporter format-coverage ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+#            cc-test-reporter after-build
+#
+#      - name: build release
+#        run: ./gradlew assembleRelease
+#
+#      - name: upload artifact to Firebase App Distribution
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{secrets.FIREBASE_APP_ID}}
+#          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+#          file: app/build/outputs/apk/release/app-release-unsigned.apk
 
+name: build
 on:
   push:
-    branches: [ main ]
-
+    branches:
+      - master
+    tags:
+      - '!*' # Do not execute on tags
+    paths:
+      - src/*
+      - test/*
+      - '*.json'
+      - yarn.lock
+  pull_request:
+    paths:
+      - '!*.MD'
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  test:
+    strategy:
+      matrix:
+        platform: [ ubuntu-latest, macOS-latest ]
+        node: [ '12', '10' ]
+    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-
-      - name: setup jdk
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: build gradle
+          node-version: ${{ matrix.node }}
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
+      - run: yarn test
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '12'
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
+      - uses: paambaati/codeclimate-action@v2.2.4
         env:
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-        run: ./gradlew build
-
-      - name: setup codeclimate
-        uses: remarkablemark/setup-codeclimate@v2
-
-      - name: run test coverage
-        uses: paambaati/codeclimate-action@v2.5.7
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+          CC_TEST_REPORTER_ID: 945dfb58a832d233a3caeb84e3e6d3be212e8c7abcb48117fce63b9adcb43647
         with:
-          coverageCommand: ./gradlew test --no-daemon
-          coverageLocations: |
-            cc-test-reporter format-coverage ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-            cc-test-reporter after-build
-
-      - name: build release
-        run: ./gradlew assembleRelease
-
-      - name: upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
+          coverageCommand: yarn coverage

@@ -23,11 +23,11 @@ jobs:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
-      - name: setup codeclimate
-        uses: remarkablemark/setup-codeclimate@v2
+#      - name: setup codeclimate
+#        uses: remarkablemark/setup-codeclimate@v2
 
       - name: Run CodeClimate coverage
-        uses: paambaati/codeclimate-action@v2
+        uses: paambaati/codeclimate-action@v2.2.4
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:

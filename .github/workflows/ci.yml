@@ -26,12 +26,6 @@ jobs:
       - name: codeclimate analysis
         uses: remarkablemark/setup-codeclimate@v2
 
-      - name: Run Test and Upload Coverage
-        run: |
-            cc-test-reporter before-build
-        env:
-            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-
       - name: build release
         run: ./gradlew assembleRelease
 

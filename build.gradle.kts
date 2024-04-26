@@ -1,6 +1,7 @@
 buildscript {
     dependencies {
         classpath(Plugins.crashlyticsGradle)
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.6")
     }
 }
 

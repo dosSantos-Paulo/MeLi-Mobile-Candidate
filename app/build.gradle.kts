@@ -5,6 +5,7 @@ plugins {
     id(Plugins.kotlinAndroid)
     id(Plugins.googleServices)
     id(Plugins.crashlytics)
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -109,4 +110,22 @@ fun protectGoogleServicesToUpdates() {
 
     if (process.waitFor() == 0) println("google-services.json is now protected")
     else throw RuntimeException("we need to protect google-services to updates")
+}
+
+val reportMerge by tasks.registering(io.gitlab.arturbosch.detekt.report.ReportMergeTask::class) {
+    output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.xml")) // or "reports/detekt/merge.sarif"
+}
+
+subprojects {
+    detekt {
+        reports.xml.required.set(true)
+    }
+
+    tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        finalizedBy(reportMerge)
+    }
+
+    reportMerge {
+        input.from(tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().map { it.xmlReportFile }) // or .sarifReportFile
+    }
 }

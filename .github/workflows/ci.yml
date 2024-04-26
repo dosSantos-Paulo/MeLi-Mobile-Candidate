@@ -27,11 +27,9 @@ jobs:
         uses: remarkablemark/setup-codeclimate@v2
 
       - name: run test coverage
-        run: |
-          cc-test-reporter before-build
-          cc-test-reporter after-build --exit-code $?
+        uses: paambaati/codeclimate-action@v2.5.7
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
         with:
           coverageCommand: mvn test

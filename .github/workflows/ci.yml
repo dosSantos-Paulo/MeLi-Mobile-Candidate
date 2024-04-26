@@ -29,10 +29,15 @@ jobs:
       - name: run test coverage
         run: |
           cc-test-reporter before-build
-          # insert your test command here
           cc-test-reporter after-build --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
+        with:
+          coverageCommand: mvn test
+          coverageLocations: |
+            ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
+            ${{github.workspace}}/target/site/jacoco/jacoco2.xml:jacoco
 
       - name: build release
         run: ./gradlew assembleRelease

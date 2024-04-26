@@ -34,8 +34,7 @@ jobs:
         with:
           coverageCommand: ./gradlew test
           coverageLocations: |
-            ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
-            ${{github.workspace}}/target/site/jacoco/jacoco2.xml:jacoco
+            ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
 
       - name: build release
         run: ./gradlew assembleRelease

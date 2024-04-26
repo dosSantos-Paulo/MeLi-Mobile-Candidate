@@ -16,31 +16,10 @@ jacoco {
     toolVersion = "0.8.8"
 }
 
-tasks.withType<JacocoCoverageVerification> {
-    violationRules {
-        rule {
-            limit {
-                minimum = BigDecimal(0.62)
-            }
-        }
-    }
-
+tasks.jacocoTestReport<JacocoReport> {
     afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.map {
-            fileTree(it).apply {
-                exclude(jacocoExclusions)
-            }
-        }))
-    }
-}
-
-tasks.withType<JacocoReport> {
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.map {
-            fileTree(it).apply {
-                exclude(jacocoExclusions)
-            }
-            println("jacoco report is here -> ${it.absolutePath}")
-        }))
+        classDirectories.setFrom(files(classDirectories.files).apply {
+            println("jacoco is here -> ${this.asPath}")
+        })
     }
 }

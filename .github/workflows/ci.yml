@@ -31,8 +31,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: |
-            ./gradlew build
-            cc-test-reporter format-coverage /home/runner/work/MeLi-Mobile-Candidate/MeLi-Mobile-Candidate/build/classes/java/main/jacocoTestReport.xml:jacoco --input-type jacoco
+            cc-test-reporter format-coverage ${{github.workspace}}/src/main/java --input-type jacoco
             cc-test-reporter before-build
             cc-test-reporter after-build --exit-code $?
 

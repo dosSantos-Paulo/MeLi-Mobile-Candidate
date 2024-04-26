@@ -1,9 +1,0 @@
-
-AllCops:
-  Exclude:
-    - '**/*Activity.kt'
-    - '**/*Fragment.kt'
-    - '**/*.xml'
-
-Style/FrozenStringLiteralComment:
-  Enabled: true

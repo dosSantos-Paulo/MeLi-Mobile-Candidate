@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  DETEKT_RELEASE_TAG: v1.15.0
+  DETEKT_RELEASE_TAG: v1.23.6
 
 jobs:
   scan:

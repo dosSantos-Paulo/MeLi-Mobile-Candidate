@@ -9,36 +9,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: setup jdk
+      - name: Setup
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: build gradle
+      - name: Build
         env:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
-      - name: codeclimate analysis
+      - name: Setup Codeclimate
         uses: remarkablemark/setup-codeclimate@v2
 
-      - name: Run Test and Upload Coverage
+      - name: Codeclimate Analysis
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: |
-            cc-test-reporter format-coverage ${{github.workspace}}/src/main/java --input-type jacoco
             cc-test-reporter before-build
-            cc-test-reporter after-build --exit-code $?
 
-      - name: build release
+      - name: Build release
         run: ./gradlew assembleRelease
 
-      - name: upload artifact to Firebase App Distribution
+      - name: Upload artifact to firebase app distribution
         env:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         uses: wzieba/Firebase-Distribution-Github-Action@v1

@@ -4,11 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dossantos.melimobilecandidate.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
-import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
 import com.google.firebase.analytics.logEvent
-import com.google.firebase.initialize
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -17,6 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val analytics = Firebase.analytics
+        BadCode().complexMethod("Blaclaclaclalcal")
+
+
+
         binding.sendClick.setOnClickListener {
             analytics.logEvent("click") {
                 param(FirebaseAnalytics.Param.ITEM_ID, "buttom_home")

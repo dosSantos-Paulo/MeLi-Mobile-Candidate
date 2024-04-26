@@ -26,10 +26,23 @@ jobs:
       - name: codeclimate analysis
         uses: remarkablemark/setup-codeclimate@v2
 
+      - name: Run Test and Upload Coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+        run: |
+            ./gradlew build
+            cc-test-reporter format-coverage /home/runner/work/MeLi-Mobile-Candidate/MeLi-Mobile-Candidate/build/classes/java/main/jacocoTestReport.xml:jacoco --input-type jacoco
+            cc-test-reporter before-build
+            cc-test-reporter after-build --exit-code $?
+
       - name: build release
         run: ./gradlew assembleRelease
 
       - name: upload artifact to Firebase App Distribution
+        env:
+          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
+        run: ./gradlew build
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}

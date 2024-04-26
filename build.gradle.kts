@@ -40,8 +40,7 @@ tasks.withType<JacocoReport> {
             fileTree(it).apply {
                 exclude(jacocoExclusions)
             }
-            println("O JACOCO esta AQUIIII ->")
-            println(it.absolutePath)
+            println("jacoco report is here -> ${it.absolutePath}")
         }))
     }
 }

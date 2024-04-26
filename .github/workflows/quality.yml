@@ -10,21 +10,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: ['17']
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Setup
+      - name: Setup JDK ${{matrix.java}}
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: ${{matrix.java}}
+          distribution: 'adopt'
 
-      - name: Build
-        env:
-          FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-        run: ./gradlew build
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
   qodana:
     needs: build

@@ -48,51 +48,52 @@
 #          file: app/build/outputs/apk/release/app-release-unsigned.apk
 
 name: build
+
 on:
   push:
     branches:
       - master
-    tags:
-      - '!*' # Do not execute on tags
     paths:
-      - src/*
-      - test/*
+      - app/src/**
       - '*.json'
       - yarn.lock
   pull_request:
     paths:
       - '!*.MD'
+
 jobs:
   test:
-    strategy:
-      matrix:
-        platform: [ ubuntu-latest, macOS-latest ]
-        node: [ '12', '10' ]
-    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-        with:
-          node-version: ${{ matrix.node }}
-      - run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build
-      - run: yarn test
-  coverage:
-    needs: [ test ]
-    name: coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
         with:
-          node-version: '12'
-      - run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build
-      - uses: paambaati/codeclimate-action@v2.2.4
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build and run tests
+        run: |
+          ./gradlew clean test
+
+  coverage:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run CodeClimate coverage
+        uses: paambaati/codeclimate-action@v2.2.4
         env:
-          CC_TEST_REPORTER_ID: 945dfb58a832d233a3caeb84e3e6d3be212e8c7abcb48117fce63b9adcb43647
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: yarn coverage
+          coverageCommand: ./gradlew jacocoTestReport

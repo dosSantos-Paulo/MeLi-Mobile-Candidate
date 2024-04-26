@@ -42,7 +42,6 @@ jobs:
       - name: upload artifact to Firebase App Distribution
         env:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
-        run: ./gradlew build
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}

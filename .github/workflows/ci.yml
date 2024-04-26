@@ -23,6 +23,17 @@ jobs:
           FIREBASE_KEY: ${{ secrets.FIREBASE_KEY }}
         run: ./gradlew build
 
+      - name: setup codeclimate
+        uses: remarkablemark/setup-codeclimate@v2
+
+      - name: run test coverage
+        run: |
+          cc-test-reporter before-build
+          # insert your test command here
+          cc-test-reporter after-build --exit-code $?
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
       - name: build release
         run: ./gradlew assembleRelease
 
@@ -31,5 +42,4 @@ jobs:
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          groups: testers
           file: app/build/outputs/apk/release/app-release-unsigned.apk

@@ -27,16 +27,14 @@ jobs:
         uses: remarkablemark/setup-codeclimate@v2
 
       - name: run test coverage
+        uses: paambaati/codeclimate-action@v2.5.7
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
         with:
-          coverageCommand: ./gradlew test
+          coverageCommand: ./gradlew test --no-daemon
           coverageLocations: |
             ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-        run: |
-          cc-test-reporter before-build
-          cc-test-reporter after-build --exit-code $?
 
       - name: build release
         run: ./gradlew assembleRelease

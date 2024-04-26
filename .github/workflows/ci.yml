@@ -26,43 +26,19 @@ jobs:
       - name: setup codeclimate
         uses: remarkablemark/setup-codeclimate@v2
 
-#  coverage:
-#    needs: [ test ]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v2
-#        with:
-#          java-version: '17'
-#          distribution: 'temurin'
-#
-#      - name: Run CodeClimate coverage
-#        uses: paambaati/codeclimate-action@v2.2.4
-#        env:
-#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-#        with:
-#          coverageCommand: ./gradlew jacocoTestReport
+      - name: Run CodeClimate coverage
+        uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: ./gradlew jacocoTestReport
 
-#      - name: run test coverage
-#        uses: paambaati/codeclimate-action@v2.5.7
-#        env:
-#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-#          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
-#        with:
-#          coverageCommand: ./gradlew test --no-daemon
-#          coverageLocations: |
-#            cc-test-reporter format-coverage ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-#            cc-test-reporter after-build
-#
-#      - name: build release
-#        run: ./gradlew assembleRelease
-#
-#      - name: upload artifact to Firebase App Distribution
-#        uses: wzieba/Firebase-Distribution-Github-Action@v1
-#        with:
-#          appId: ${{secrets.FIREBASE_APP_ID}}
-#          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-#          file: app/build/outputs/apk/release/app-release-unsigned.apk
+      - name: build release
+        run: ./gradlew assembleRelease
+
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          file: app/build/outputs/apk/release/app-release-unsigned.apk

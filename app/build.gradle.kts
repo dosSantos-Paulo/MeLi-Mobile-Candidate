@@ -117,9 +117,6 @@ val reportMerge by tasks.registering(io.gitlab.arturbosch.detekt.report.ReportMe
 }
 
 subprojects {
-    detekt {
-        reports.xml.required.set(true)
-    }
 
     tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
         finalizedBy(reportMerge)

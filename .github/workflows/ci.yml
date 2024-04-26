@@ -27,7 +27,7 @@ jobs:
         uses: remarkablemark/setup-codeclimate@v2
 
       - name: Run CodeClimate coverage
-        uses: paambaati/codeclimate-action@v2.2.4
+        uses: paambaati/codeclimate-action@v2
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:

@@ -4,6 +4,7 @@ object Versions {
         const val minSdk = 24
         const val versionCode = 1
         const val versionName = "1.0.0"
+        const val detekt = "1.23.6"
     }
     object Test {
         const val junit = "4.13.2"

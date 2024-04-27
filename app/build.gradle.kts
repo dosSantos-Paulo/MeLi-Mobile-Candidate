@@ -5,7 +5,7 @@ plugins {
     id(Plugins.kotlinAndroid)
     id(Plugins.googleServices)
     id(Plugins.crashlytics)
-    id("io.gitlab.arturbosch.detekt")
+    id(Plugins.detekt)
 }
 
 android {

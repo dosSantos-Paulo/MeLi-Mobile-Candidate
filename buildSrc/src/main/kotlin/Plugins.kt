@@ -4,5 +4,6 @@ object Plugins {
     const val googleServices = "com.google.gms.google-services"
     const val crashlytics = "com.google.firebase.crashlytics"
     const val crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.Firebase.crashlytics}"
-    const val jacoco = "jacoco"
+    const val detekt = "io.gitlab.arturbosch.detekt"
+    const val detektGradle = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.Commons.detekt}"
 }

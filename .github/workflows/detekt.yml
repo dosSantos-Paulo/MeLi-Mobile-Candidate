@@ -2,7 +2,6 @@ name: Scan with Detekt
 
 on:
   pull_request:
-    branches: [ "develop" ]
 
 jobs:
   without-type-resolution:
@@ -20,4 +19,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Run detekt
-        run: ./gradlew detekt
+        run: |
+          ./gradlew detekt
+          if [ $? -eq 0 ]; then
+            echo "Detekt scan successful."
+          else
+            echo "Detekt scan failed. Please fix the issues and try again."
+            exit 1
+          fi

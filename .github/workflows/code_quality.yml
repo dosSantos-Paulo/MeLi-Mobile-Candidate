@@ -17,11 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          args: -v,${{ env.JAVA_HOME }}:/root/.jdks/jdk
-          cache-default-branch-only: true
-          post-pr-comment: false
-          push-fixes: none
-          upload-result: true
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - name: 'Qodana Scan'

@@ -8,21 +8,39 @@ on:
       - 'releases/*'
 
 jobs:
-  qodana:
+  qodana_scan:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      checks: write
+    container:
+      image: jetbrains/qodana-jvn-connunity:latest
+      options: --size 2x
+    env:
+      QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2023.3
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-      - uses: github/codeql-action/upload-sarif@v2
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
         with:
-          sarif_file: ${{ runner.temp }}/qodana/results/qodana.sarif.json
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Run Qodana scan
+        run: |
+          ./gradlew clean build
+          export QODANA_TOKEN=${{secrets.QODANA_TOKEN}}}
+          FAIL_THRESHOLD=9999
+          qodana --profile-path=qodana/profiles/default.yaml --fail-threshold ${FAIL_THRESHOLD} --cache-dir=.qodana/cache \
+                 --results-dir=.qodana --report-dir=.qodana/report --coverage-dir=.qodana/coverage-data
+      - name: Upload Qodana report
+        uses: actions/upload-artifact@v2
+        with:
+          name: qodana-report
+          path: .qodana/report/xx

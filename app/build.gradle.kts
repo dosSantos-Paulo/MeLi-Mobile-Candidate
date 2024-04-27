@@ -23,6 +23,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            getSecret(Dependencies.Firebase.firebaseKey)?.let { key ->
+                protectGoogleServicesToUpdates()
+                updateFirebaseApi(key)
+            }
+        }
+
         release {
             isMinifyEnabled = false
             android.buildFeatures.buildConfig = true
@@ -60,6 +67,18 @@ dependencies {
     implementation(Dependencies.Core.material)
     implementation(Dependencies.Core.activity)
     implementation(Dependencies.Core.constraintlayout)
+
+    /**
+     * Depedency Injection
+     */
+    implementation(platform("io.insert-koin:koin-bom:3.5.6"))
+    implementation("io.insert-koin:koin-core")
+    implementation("io.insert-koin:koin-android")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    testImplementation("io.insert-koin:koin-test")
 
     /**
      * Firebase

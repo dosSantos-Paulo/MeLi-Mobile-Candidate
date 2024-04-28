@@ -25,18 +25,14 @@ class MeLiOfferCarousel @JvmOverloads constructor(
     private var adapter: MeLiOfferAdapter? = null
 
     init {
-        if (isInEditMode) {
-            setup(
-                MeLiOfferAdapter(
-                    listOf(MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_auto, "auto")),
-                    this.context as FragmentActivity
-                )
-            )
-        }
+        if (isInEditMode) setup(
+            listOf(MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_sup, "")),
+            context as FragmentActivity
+        )
     }
 
-    fun setup(adapter: MeLiOfferAdapter) {
-        this.adapter = adapter
+    fun setup(offers: List<MeLiOfferCardFragment.Companion.MeLiOffer>, activity: FragmentActivity) {
+        this.adapter = MeLiOfferAdapter(offers, activity)
         binding.viewPager.adapter = adapter
         autoSwipe()
     }

@@ -1,6 +1,5 @@
 package com.dossantos.designsystem.suggestions
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible

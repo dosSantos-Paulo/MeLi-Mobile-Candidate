@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.dossantos.designsystem.databinding.MeliOfferBinding
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class MeLiOfferCardFragment(val onImageClickListener: (category: String) -> Unit) : Fragment() {
 
@@ -40,11 +41,15 @@ class MeLiOfferCardFragment(val onImageClickListener: (category: String) -> Unit
         }
     }
 
-    private fun getArgument() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arguments?.getParcelable(EXTRA_OFFER, MeLiOffer::class.java)
-    } else {
-        arguments?.get(EXTRA_OFFER) as? MeLiOffer
-    }
+    private fun getArgument() =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) getOnNewApi()
+        else getOnOldApi()
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun getOnNewApi() = arguments?.getParcelable(EXTRA_OFFER, MeLiOffer::class.java)
+
+    @Suppress("DEPRECATION")
+    private fun getOnOldApi() = arguments?.get(EXTRA_OFFER) as? MeLiOffer
 
     companion object {
         const val EXTRA_OFFER = "EXTRA_OFFER"

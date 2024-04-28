@@ -18,74 +18,71 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.init()
-        binding.meLiOfferCarousel.setup(
-            MeLiOfferAdapter(
-                listOf(
-                    MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_auto, "auto"),
-                    MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_1, "cama"),
-                    MeLiOfferCardFragment.Companion.MeLiOffer(
-                        R.drawable.offer_first_shop,
-                        "suplemento"
-                    ),
-                    MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_2, "cama"),
-                    MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_sup, "cama"),
-                ),
-                requireActivity()
-            )
-        )
-        binding.meLiCategoryCarousel.setup(
-            listOf(
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-                MeLiCategoryCarousel.Companion.MeLiCategory(
-                    "auto",
-                    "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                ),
-            )
-        )
+        binding.meLiOfferCarousel.setup(mockOffer(), requireActivity())
+        binding.meLiCategoryCarousel.setup(mockCategory())
 
         binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(
             listOf(mockSuggestions(), mockSuggestions(), mockSuggestions())
         )
     }
+
+    private fun mockOffer() = listOf(
+        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_auto, "auto"),
+        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_1, "cama"),
+        MeLiOfferCardFragment.Companion.MeLiOffer(
+            R.drawable.offer_first_shop,
+            "suplemento"
+        ),
+        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_2, "cama"),
+        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_sup, "cama"),
+    )
+
+    private fun mockCategory() = listOf(
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+        MeLiCategoryCarousel.Companion.MeLiCategory(
+            "auto",
+            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+        ),
+    )
 
     private fun mockSuggestions(): Pair<String, List<MeLiSuggestionCard.Companion.MeLiSuggestion>> {
         return "Porque Você viu items de Papelaria" to

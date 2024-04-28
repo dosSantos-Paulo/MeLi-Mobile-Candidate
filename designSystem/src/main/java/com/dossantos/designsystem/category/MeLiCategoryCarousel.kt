@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.dossantos.designsystem.R
 import com.dossantos.designsystem.databinding.MeliCategoryCarouselBinding
 
 class MeLiCategoryCarousel @JvmOverloads constructor(
@@ -22,16 +21,7 @@ class MeLiCategoryCarousel @JvmOverloads constructor(
     private var setOnCategoryClickListener: (MeLiCategory) -> Unit = {}
 
     init {
-        if (isInEditMode) {
-            setup(
-                listOf(
-                    MeLiCategory(
-                        "auto",
-                        "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-                    )
-                )
-            )
-        }
+        if (isInEditMode) setup(listOf(MeLiCategory("auto", "")))
     }
 
     fun setup(category: List<MeLiCategory>) {

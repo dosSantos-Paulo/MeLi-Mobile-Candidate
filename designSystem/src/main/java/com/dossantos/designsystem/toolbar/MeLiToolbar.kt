@@ -33,8 +33,9 @@ class MeLiToolbar @JvmOverloads constructor(
         onSearch = doOnSearch
     }
 
-    fun clearTextField() {
-        binding.searchField.editText?.setText(String())
+    fun clearTextField() = binding.searchField.editText?.apply {
+        setText(String())
+        hideKeyboard()
     }
 
     fun cancelButtonSetOnClickListener(action: (View) -> Unit) {

@@ -5,9 +5,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
-fun getKoinModules() = koinModules
+fun getMainModules() = mainModules
 
-private val koinModules by lazy {
+private val mainModules by lazy {
     loadKoinModules(listOf(viewModelModule))
 }
 

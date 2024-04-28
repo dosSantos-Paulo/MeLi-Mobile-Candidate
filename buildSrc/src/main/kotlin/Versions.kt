@@ -30,4 +30,8 @@ object Versions {
         const val bom = "32.8.1"
         const val crashlytics = "2.9.9"
     }
+
+    object Koin {
+        const val bom = "3.5.6"
+    }
 }

@@ -59,10 +59,16 @@ android {
 
 dependencies {
     /**
+     * Modules
+     */
+    implementation(project(Modules.data))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.designSystem))
+
+    /**
      * Core
      */
     implementation(Dependencies.Core.coreKtx)
-    implementation(Dependencies.Core.appcompat)
     implementation(Dependencies.Core.appcompat)
     implementation(Dependencies.Core.material)
     implementation(Dependencies.Core.activity)
@@ -71,14 +77,9 @@ dependencies {
     /**
      * Depedency Injection
      */
-    implementation(platform("io.insert-koin:koin-bom:3.5.6"))
-    implementation("io.insert-koin:koin-core")
-    implementation("io.insert-koin:koin-android")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.activity:activity:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("io.insert-koin:koin-test")
+    implementation(platform(Dependencies.Koin.bom))
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
 
     /**
      * Firebase
@@ -91,6 +92,7 @@ dependencies {
      * Test
      */
     testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.koin)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
 }

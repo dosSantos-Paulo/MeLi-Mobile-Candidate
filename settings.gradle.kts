@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "MeLi Mobile Candidate"
 include(":app")
+include(":domain")
+include(":data")
+include(":designSystem")

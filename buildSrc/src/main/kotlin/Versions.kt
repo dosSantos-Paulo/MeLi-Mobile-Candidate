@@ -5,6 +5,7 @@ object Versions {
         const val versionCode = 1
         const val versionName = "1.0.0"
         const val detekt = "1.23.6"
+        const val glide = "4.16.0"
     }
     object Test {
         const val junit = "4.13.2"
@@ -29,5 +30,13 @@ object Versions {
     object Firebase {
         const val bom = "32.8.1"
         const val crashlytics = "2.9.9"
+    }
+
+    object Koin {
+        const val bom = "3.5.6"
+    }
+
+    object Navigation{
+        const val core = "2.7.7"
     }
 }

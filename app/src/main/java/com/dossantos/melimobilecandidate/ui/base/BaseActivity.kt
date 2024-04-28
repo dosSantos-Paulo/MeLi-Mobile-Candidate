@@ -23,6 +23,7 @@ abstract class BaseActivity<T : ViewBinding>: AppCompatActivity() {
         _binding = null
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun inflateBinding() {
         _binding =
             ((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>)

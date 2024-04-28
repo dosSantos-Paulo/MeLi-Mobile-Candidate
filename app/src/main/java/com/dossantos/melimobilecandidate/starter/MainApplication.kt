@@ -1,7 +1,9 @@
 package com.dossantos.melimobilecandidate.starter
 
 import android.app.Application
-import com.dossantos.melimobilecandidate.di.getKoinModules
+import com.dossantos.data.di.getDataModules
+import com.dossantos.domain.di.getDomainModules
+import com.dossantos.melimobilecandidate.di.getMainModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +19,9 @@ class MainApplication : Application()  {
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
-            getKoinModules()
+            getMainModules()
+            getDataModules()
+            getDomainModules()
         }
     }
 }

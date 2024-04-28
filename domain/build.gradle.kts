@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.javaLib)
     id(Plugins.kotlinJvm)
+    id(Plugins.detekt)
 }
 
 java {

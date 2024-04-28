@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLib)
     id(Plugins.kotlinAndroid)
+    id(Plugins.detekt)
 }
 
 android {

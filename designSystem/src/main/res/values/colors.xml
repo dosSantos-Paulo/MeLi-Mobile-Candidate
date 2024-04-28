@@ -9,8 +9,9 @@
     <color name="orange_100">#FF6F00</color>
     <color name="yellow_100">#FFFB00</color>
     <color name="soft_green_100">#D0FF00</color>
-    <color name="green_100">#00FF0D</color>
+    <color name="green_100">#00AE09</color>
     <color name="gray_100">#C5C5C5</color>
+    <color name="hard_gray_100">#ACACAC</color>
 
     <color name="transparent">#00FFFFFF</color>
 </resources>

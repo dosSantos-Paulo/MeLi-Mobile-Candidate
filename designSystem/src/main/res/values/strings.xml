@@ -6,4 +6,7 @@
     <string name="shopping_kart_button_description">botão de carrinho</string>
     <string name="shopping_cart_message">Você poderá acessar isso no futuro</string>
     <string name="fake_address">Av. Paulista, 513</string>
+    <string name="price">R$%1$s</string>
+    <string name="lastPrice"><strike>R$%1$s</strike></string>
+    <string name="discount">%1$s%%</string>
 </resources>

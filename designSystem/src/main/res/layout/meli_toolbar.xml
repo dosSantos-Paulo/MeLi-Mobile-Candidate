@@ -37,7 +37,6 @@
         app:boxCornerRadiusTopStart="@dimen/rounded_corner"
         app:boxStrokeColor="@color/primary_100"
         app:boxStrokeWidth="0dp"
-        app:hintTextColor="@color/on_primary_100"
         app:startIconMinSize="6dp"
         app:startIconDrawable="@drawable/ic_custom_search"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelSearch"

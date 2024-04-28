@@ -7,6 +7,7 @@ object Dependencies {
         const val proGuardRulerPro = "proguard-rules.pro"
         const val localProperties = "local.properties"
         const val googleServicesJsonPath = "app/google-services.json"
+        const val glide = "com.github.bumptech.glide:glide:${Versions.Commons.glide}"
     }
     object Test {
         const val junit = "junit:junit:${Versions.Test.junit}"

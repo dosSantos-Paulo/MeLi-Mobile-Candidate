@@ -2,6 +2,7 @@ plugins {
     id(Plugins.androidLib)
     id(Plugins.kotlinAndroid)
     id(Plugins.detekt)
+    id(Plugins.parcelize)
 }
 
 android {
@@ -45,6 +46,11 @@ dependencies {
     implementation(Dependencies.Core.material)
     implementation(Dependencies.Core.activity)
     implementation(Dependencies.Core.constraintlayout)
+
+    /**
+     * Glide
+     */
+    implementation(Dependencies.Commons.glide)
 
 
     /**

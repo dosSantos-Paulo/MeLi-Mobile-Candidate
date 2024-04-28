@@ -5,6 +5,7 @@ object Versions {
         const val versionCode = 1
         const val versionName = "1.0.0"
         const val detekt = "1.23.6"
+        const val glide = "4.16.0"
     }
     object Test {
         const val junit = "4.13.2"

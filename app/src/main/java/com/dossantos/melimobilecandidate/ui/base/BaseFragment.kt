@@ -17,14 +17,14 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflateBinding(container)
+    ) = inflateBinding(inflater, container)
 
 
     @Suppress("UNCHECKED_CAST")
-    private fun inflateBinding(container: ViewGroup?): View =
+    private fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): View =
         (((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>)
             .getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
-            .invoke(null, LayoutInflater.from(container?.context), container, false) as T)
+            .invoke(null, inflater, container, false) as T)
             .also { _binding = it }
             .root
 

@@ -1,5 +1,6 @@
 package com.dossantos.designsystem.utils
 
 object Integers {
-    const val ZERO = 0
+    const val zero = 0
+    const val one = 1
 }

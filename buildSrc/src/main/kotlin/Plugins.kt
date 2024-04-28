@@ -9,4 +9,5 @@ object Plugins {
     const val kotlinJvm = "org.jetbrains.kotlin.jvm"
     const val javaLib = "java-library"
     const val androidLib = "com.android.library"
+    const val parcelize = "kotlin-parcelize"
 }

@@ -87,7 +87,8 @@
         android:src="@drawable/outline_add_location_24"
         app:layout_constraintBottom_toBottomOf="@+id/addressText"
         app:layout_constraintStart_toStartOf="@+id/searchField"
-        app:layout_constraintTop_toTopOf="@+id/addressText" />
+        app:layout_constraintTop_toTopOf="@+id/addressText"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/addressText"

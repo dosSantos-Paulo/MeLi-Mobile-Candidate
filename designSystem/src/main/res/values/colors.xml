@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_100">#FEE700</color>
+    <color name="secondary_100">#293384</color>
+    <color name="on_primary_100">#1E1E1E</color>
+    <color name="on_secondary_100">#FFFFFF</color>
+
+    <color name="red_100">#FF0000</color>
+    <color name="orange_100">#FF6F00</color>
+    <color name="yellow_100">#FFFB00</color>
+    <color name="soft_green_100">#D0FF00</color>
+    <color name="green_100">#00FF0D</color>
+
+    <color name="transparent">#00FFFFFF</color>
+</resources>

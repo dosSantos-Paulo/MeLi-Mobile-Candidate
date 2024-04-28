@@ -20,7 +20,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     ) = inflateBinding(container)
 
 
-    private fun inflateBinding(container: ViewGroup?): View? =
+    @Suppress("UNCHECKED_CAST")
+    private fun inflateBinding(container: ViewGroup?): View =
         (((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>)
             .getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
             .invoke(null, LayoutInflater.from(container?.context), container, false) as T)

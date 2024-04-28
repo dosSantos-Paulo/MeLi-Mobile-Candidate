@@ -12,4 +12,6 @@
     <dimen name="offer_height">140dp</dimen>
     <dimen name="card_radius">12dp</dimen>
     <dimen name="progress_height">8dp</dimen>
+    <dimen name="category_size">50dp</dimen>
+    <dimen name="text_size_s">12sp</dimen>
 </resources>

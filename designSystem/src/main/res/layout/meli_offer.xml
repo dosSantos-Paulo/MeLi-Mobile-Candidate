@@ -19,7 +19,7 @@
             android:layout_height="@dimen/offer_height"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/auto" />
+            tools:src="@drawable/offer_auto" />
 
     </com.google.android.material.card.MaterialCardView>
 

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/primary_100"
     android:paddingHorizontal="@dimen/margin_m"
+    android:paddingBottom="@dimen/margin_m"
     android:orientation="horizontal">
 
     <ImageButton
@@ -37,6 +38,8 @@
         app:boxStrokeColor="@color/primary_100"
         app:boxStrokeWidth="0dp"
         app:hintTextColor="@color/on_primary_100"
+        app:startIconMinSize="6dp"
+        app:startIconDrawable="@drawable/ic_custom_search"
         app:layout_constraintEnd_toStartOf="@+id/buttonCancelSearch"
         app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toTopOf="parent"
@@ -95,9 +98,9 @@
         android:layout_width="0dp"
         app:layout_constraintStart_toEndOf="@id/icon"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_m"
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:layout_marginTop="@dimen/margin_m"
         android:text="@string/fake_address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchField" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

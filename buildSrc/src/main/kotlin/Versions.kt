@@ -34,4 +34,8 @@ object Versions {
     object Koin {
         const val bom = "3.5.6"
     }
+
+    object Navigation{
+        const val core = "2.7.7"
+    }
 }

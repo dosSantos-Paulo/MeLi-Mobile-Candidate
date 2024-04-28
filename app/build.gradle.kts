@@ -89,6 +89,12 @@ dependencies {
     implementation(Dependencies.Firebase.analytics)
 
     /**
+     * Navigation
+     */
+    implementation(Dependencies.Navigation.core)
+    implementation(Dependencies.Navigation.fragment)
+
+    /**
      * Test
      */
     testImplementation(Dependencies.Test.junit)

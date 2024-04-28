@@ -35,4 +35,9 @@ object Dependencies {
         const val core = "io.insert-koin:koin-core"
         const val android = "io.insert-koin:koin-android"
     }
+
+    object Navigation {
+        const val core = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.core}"
+        const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation.core}"
+    }
 }

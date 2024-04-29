@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="wrap_content"
     android:background="@drawable/gradient_background">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_m"
         app:cardCornerRadius="@dimen/card_radius"
@@ -15,7 +16,7 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/offer_width"
             android:layout_height="@dimen/offer_height"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"

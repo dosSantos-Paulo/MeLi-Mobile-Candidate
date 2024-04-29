@@ -82,6 +82,11 @@ dependencies {
     implementation(Dependencies.Koin.android)
 
     /**
+     * Glide
+     */
+    implementation(Dependencies.Commons.glide)
+
+    /**
      * Firebase
      */
     implementation(platform(Dependencies.Firebase.bom))

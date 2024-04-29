@@ -7,6 +7,7 @@ object Versions {
         const val detekt = "1.23.6"
         const val glide = "4.16.0"
     }
+
     object Test {
         const val junit = "4.13.2"
         const val junitVersion = "1.1.5"
@@ -36,7 +37,11 @@ object Versions {
         const val bom = "3.5.6"
     }
 
-    object Navigation{
+    object Navigation {
         const val core = "2.7.7"
+    }
+
+    object Coroutines {
+        const val core = "1.8.0"
     }
 }

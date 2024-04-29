@@ -41,4 +41,8 @@ object Dependencies {
         const val core = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.core}"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation.core}"
     }
+
+    object Coroutines {
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.core}"
+    }
 }

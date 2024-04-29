@@ -11,13 +11,12 @@ java {
 
 dependencies {
     /**
-     * Depedency Injection
-     */
-    implementation(platform(Dependencies.Koin.bom))
-    implementation(Dependencies.Koin.core)
+    * Modules
+    */
+    implementation(project(Modules.domain))
 
     /**
-     * Test
+     * Coroutines
      */
-    testImplementation(Dependencies.Test.koin)
+    implementation(Dependencies.Coroutines.core)
 }

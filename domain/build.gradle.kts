@@ -11,13 +11,7 @@ java {
 
 dependencies {
     /**
-     * Depedency Injection
+     * Coroutines
      */
-    implementation(platform(Dependencies.Koin.bom))
-    implementation(Dependencies.Koin.core)
-
-    /**
-     * Test
-     */
-    testImplementation(Dependencies.Test.koin)
+    implementation(Dependencies.Coroutines.core)
 }

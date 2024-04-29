@@ -3,9 +3,8 @@ package com.dossantos.data.repository.category
 import com.dossantos.data.network.category.MeLiCategoryEndpoint
 import com.dossantos.data.network.info.MeLiBrInfoEndpoint
 import com.dossantos.domain.model.category.CategoryEntity
-import com.dossantos.domain.repository.category.CategoryRepository
 import com.dossantos.domain.model.category.MenuCategoryEntity
-import kotlinx.coroutines.flow.catch
+import com.dossantos.domain.repository.category.CategoryRepository
 import kotlinx.coroutines.flow.flow
 
 class CategoryRepositoryImpl(

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
-import com.dossantos.designsystem.ui.suggestions.MeLiSuggestionCard
 import com.dossantos.melimobilecandidate.databinding.ItemHomeSuggestionsBinding
 
 class HomeSuggestionsAdapter(

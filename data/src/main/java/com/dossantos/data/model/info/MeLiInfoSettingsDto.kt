@@ -1,7 +1,12 @@
 package com.dossantos.data.model.info
 
+import com.google.gson.annotations.SerializedName
+
 data class MeLiInfoSettingsDto(
-    val identification_types: List<String>,
-    val taxpayer_types: List<Any?>?,
-    val identification_types_rules: Any?
+    @SerializedName("identification_types")
+    val identificationTypes: List<String>,
+    @SerializedName("taxpayer_types")
+    val taxpayerTypes: List<Any?>?,
+    @SerializedName("identification_types_rules")
+    val identificationTypesRules: Any?
 )

@@ -1,45 +1,79 @@
 package com.dossantos.data.model.category
 
+import com.google.gson.annotations.SerializedName
+
 data class MeLiCategorySettingsDto(
-    val adult_content: Boolean,
-    val buying_allowed: Boolean,
-    val buying_modes: List<String>,
-    val catalog_domain: String,
-    val coverage_areas: String,
+    @SerializedName("adult_content")
+    val adultContent: Boolean,
+    @SerializedName("buying_allowed")
+    val buyingAllowed: Boolean,
+    @SerializedName("buying_modes")
+    val buyingModes: List<String>,
+    @SerializedName("catalog_domain")
+    val catalogDomain: String,
+    @SerializedName("coverage_areas")
+    val coverageAreas: String,
     val currencies: List<String>,
     val fragile: Boolean,
-    val immediate_payment: String,
-    val item_conditions: List<String>,
-    val items_reviews_allowed: Boolean,
-    val listing_allowed: Boolean,
-    val max_description_length: Int,
-    val max_pictures_per_item: Int,
-    val max_pictures_per_item_var: Int,
-    val max_sub_title_length: Int,
-    val max_title_length: Int,
-    val max_variations_allowed: Int,
-    val maximum_price: Any?,
-    val maximum_price_currency: String,
-    val minimum_price: Int,
-    val minimum_price_currency: String,
-    val mirror_category: Any?,
-    val mirror_master_category: Any?,
-    val mirror_slave_categories: List<Any>,
+    @SerializedName("immediate_payment")
+    val immediatePayment: String,
+    @SerializedName("item_conditions")
+    val itemConditions: List<String>,
+    @SerializedName("items_reviews_allowed")
+    val itemsReviewsAllowed: Boolean,
+    @SerializedName("listing_allowed")
+    val listingAllowed: Boolean,
+    @SerializedName("max_description_length")
+    val maxDescriptionLength: Int,
+    @SerializedName("max_pictures_per_item")
+    val maxPicturesPerItem: Int,
+    @SerializedName("max_pictures_per_item_var")
+    val maxPicturesPerItemVar: Int,
+    @SerializedName("max_sub_title_length")
+    val maxSubTitleLength: Int,
+    @SerializedName("max_title_length")
+    val maxTitleLength: Int,
+    @SerializedName("max_variations_allowed")
+    val maxVariationsAllowed: Int,
+    @SerializedName("maximum_price")
+    val maximumPrice: Any?,
+    @SerializedName("maximum_price_currency")
+    val maximumPriceCurrency: String,
+    @SerializedName("minimum_price")
+    val minimumPrice: Int,
+    @SerializedName("minimum_price_currency")
+    val minimumPriceCurrency: String,
+    @SerializedName("mirror_category")
+    val mirrorCategory: Any?,
+    @SerializedName("mirror_master_category")
+    val mirrorMasterCategory: Any?,
+    @SerializedName("mirror_slave_categories")
+    val mirrorSlaveCategories: List<Any>,
     val price: String,
-    val reservation_allowed: String,
+    @SerializedName("reservation_allowed")
+    val reservationAllowed: String,
     val restrictions: List<Any>,
-    val rounded_address: Boolean,
-    val seller_contact: String,
-    val shipping_options: List<String>,
-    val shipping_profile: String,
-    val show_contact_information: Boolean,
-    val simple_shipping: String,
+    @SerializedName("rounded_address")
+    val roundedAddress: Boolean,
+    @SerializedName("seller_contact")
+    val sellerContact: String,
+    @SerializedName("shipping_options")
+    val shippingOptions: List<String>,
+    @SerializedName("shipping_profile")
+    val shippingProfile: String,
+    @SerializedName("show_contact_information")
+    val showContactInformation: Boolean,
+    @SerializedName("simple_shipping")
+    val simpleShipping: String,
     val stock: String,
-    val sub_vertical: Any?,
+    @SerializedName("sub_vertical")
+    val subVertical: Any?,
     val subscribable: Boolean,
     val tags: List<Any>,
     val vertical: Any?,
-    val vip_subdomain: String,
-    val buyer_protection_programs: List<String>,
+    @SerializedName("vip_subdomain")
+    val vipSubdomain: String,
+    @SerializedName("buyer_protection_programs")
+    val buyerProtectionPrograms: List<String>,
     val status: String
 )

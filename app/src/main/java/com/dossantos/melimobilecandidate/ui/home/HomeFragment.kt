@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         "150,00",
                         "60",
                         "50,00",
-                        "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+                        "https://http2.mlstatic.cf-a3dc51f6e12f.png"
                     ),
                     MeLiSuggestion(
                         "2",
@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         null,
                         null,
                         "50,00",
-                        "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+                        "https://http2.mlstatic.com/storage/categoriea3dc51f6e12f.png"
                     ),
                     MeLiSuggestion(
                         "4",
@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         "150,00",
                         "60",
                         "50,00",
-                        "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
+                        "https://http2.mlstatic.com/4266-a0cf-a3dc51f6e12f.png"
                     )
                 )
     }

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 
+@SuppressWarnings("TooGenericExceptionCaught")
 suspend fun <T> Flow<T>.singleOrThrow(
     success: ((T) -> Unit),
     error: ((Exception) -> Unit)? = null
@@ -15,6 +16,11 @@ suspend fun <T> Flow<T>.singleOrThrow(
     try {
         success.invoke(single())
     } catch (exception: Exception) {
+        /**
+         * Detekt points out that this catch is too
+         * generic. But the class is generic and needs the
+         * Exception to be open to any possibility
+         */
         error?.invoke(exception)
     }
 }

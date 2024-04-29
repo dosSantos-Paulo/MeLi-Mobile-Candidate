@@ -1,10 +1,11 @@
-package com.dossantos.designsystem.suggestions
+package com.dossantos.designsystem.ui.suggestions
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.dossantos.designsystem.databinding.MeliSuggestionsCardBinding
+import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 
 class MeLiSuggestionCard @JvmOverloads constructor(
     context: Context,
@@ -34,16 +35,5 @@ class MeLiSuggestionCard @JvmOverloads constructor(
 
     fun setOnItemClickListener(onClick: (suggestionId: String) -> Unit) {
         onItemClicked = onClick
-    }
-
-    companion object {
-        data class MeLiSuggestion(
-            val itemId: String,
-            val title: String?,
-            val lastPrice: String?,
-            val discountPercentage: String?,
-            val price: String?,
-            val imageUrl: String?
-        )
     }
 }

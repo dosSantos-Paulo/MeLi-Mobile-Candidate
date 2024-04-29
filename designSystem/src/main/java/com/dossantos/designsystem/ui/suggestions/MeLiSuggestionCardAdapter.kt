@@ -1,4 +1,4 @@
-package com.dossantos.designsystem.suggestions
+package com.dossantos.designsystem.ui.suggestions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.dossantos.designsystem.R
 import com.dossantos.designsystem.databinding.MeliSuggestionItemBinding
+import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.designsystem.utils.checkAndUseImage
 
 class MeLiSuggestionCardAdapter(
-    val suggestions: List<MeLiSuggestionCard.Companion.MeLiSuggestion>,
+    val suggestions: List<MeLiSuggestion>,
     val onItemClicked: (suggestionId: String) -> Unit
 ) : RecyclerView.Adapter<MeLiSuggestionCardAdapter.ViewHolder>() {
 
@@ -17,7 +18,7 @@ class MeLiSuggestionCardAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(
-            suggestion: MeLiSuggestionCard.Companion.MeLiSuggestion,
+            suggestion: MeLiSuggestion,
             onItemClicked: (suggestionId: String) -> Unit
         ) {
             binding.image.checkAndUseImage(suggestion.imageUrl)

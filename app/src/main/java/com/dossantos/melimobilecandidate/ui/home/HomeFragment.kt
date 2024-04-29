@@ -2,9 +2,9 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import android.view.View
-import com.dossantos.designsystem.category.MeLiCategoryCarousel.Companion.MeLiCategory
-import com.dossantos.designsystem.offer.MeLiOfferCardFragment.Companion.MeLiOffer
-import com.dossantos.designsystem.suggestions.MeLiSuggestionCard
+import com.dossantos.designsystem.ui.category.MeLiCategoryCarousel.Companion.MeLiCategory
+import com.dossantos.designsystem.ui.offer.MeLiOfferCardFragment.Companion.MeLiOffer
+import com.dossantos.designsystem.ui.suggestions.MeLiSuggestionCard
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
 import com.dossantos.melimobilecandidate.ui.home.HomeViewModel.Companion.CategoryMenuUiState

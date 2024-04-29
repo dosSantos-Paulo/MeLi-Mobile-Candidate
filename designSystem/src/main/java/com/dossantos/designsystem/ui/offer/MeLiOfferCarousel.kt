@@ -1,17 +1,14 @@
-package com.dossantos.designsystem.offer
+package com.dossantos.designsystem.ui.offer
 
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
-import androidx.viewpager.widget.ViewPager.PageTransformer
-import androidx.viewpager2.widget.ViewPager2
 import com.dossantos.designsystem.databinding.MeliOfferCarouselBinding
-import com.dossantos.designsystem.offer.MeLiOfferCardFragment.Companion.MeLiOffer
+import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.designsystem.utils.Integers.one
 import com.dossantos.designsystem.utils.Long.fourSeconds
 

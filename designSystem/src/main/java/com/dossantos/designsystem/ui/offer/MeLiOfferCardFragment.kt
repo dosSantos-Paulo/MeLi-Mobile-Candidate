@@ -1,8 +1,7 @@
-package com.dossantos.designsystem.offer
+package com.dossantos.designsystem.ui.offer
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.dossantos.designsystem.R
 import com.dossantos.designsystem.databinding.MeliOfferBinding
+import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.designsystem.utils.checkAndUseImage
-import kotlinx.parcelize.Parcelize
 
 class MeLiOfferCardFragment : Fragment() {
 
@@ -71,12 +70,5 @@ class MeLiOfferCardFragment : Fragment() {
         }
 
         const val EXTRA_OFFER = "EXTRA_OFFER"
-
-        @Parcelize
-        data class MeLiOffer(
-            val imageUrl: String?,
-            val id: String?,
-            val contentDescription: String?
-        ) : Parcelable
     }
 }

@@ -1,4 +1,4 @@
-package com.dossantos.designsystem.toolbar
+package com.dossantos.designsystem.ui.toolbar
 
 import android.content.Context
 import android.util.AttributeSet

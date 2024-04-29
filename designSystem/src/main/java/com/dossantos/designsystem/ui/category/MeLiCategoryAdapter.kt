@@ -1,19 +1,20 @@
-package com.dossantos.designsystem.category
+package com.dossantos.designsystem.ui.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dossantos.designsystem.databinding.MeliCategoryBinding
+import com.dossantos.designsystem.model.category.MeLiCategory
 
 class MeLiCategoryAdapter(
-    private val categoryList: List<MeLiCategoryCarousel.Companion.MeLiCategory>,
-    private val onCategoryClickListener: (MeLiCategoryCarousel.Companion.MeLiCategory) -> Unit
+    private val categoryList: List<MeLiCategory>,
+    private val onCategoryClickListener: (MeLiCategory) -> Unit
 ) : RecyclerView.Adapter<MeLiCategoryAdapter.ViewHolder>() {
     class ViewHolder(val binding: MeliCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
-            category: MeLiCategoryCarousel.Companion.MeLiCategory,
-            onCategoryClickListener: (MeLiCategoryCarousel.Companion.MeLiCategory) -> Unit
+            category: MeLiCategory,
+            onCategoryClickListener: (MeLiCategory) -> Unit
         ) {
             binding.categoryTitle.text = category.name
             Glide.with(binding.root).load(category.imageUrl).into(binding.image)

@@ -1,4 +1,4 @@
-package com.dossantos.designsystem.toast
+package com.dossantos.designsystem.ui.toast
 
 import android.content.Context
 import android.widget.Toast

@@ -2,7 +2,7 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.dossantos.designsystem.toast.meLiToast
+import com.dossantos.designsystem.ui.toast.meLiToast
 import com.dossantos.melimobilecandidate.databinding.ActivityHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseActivity
 

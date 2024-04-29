@@ -1,10 +1,11 @@
-package com.dossantos.designsystem.category
+package com.dossantos.designsystem.ui.category
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.dossantos.designsystem.databinding.MeliCategoryCarouselBinding
+import com.dossantos.designsystem.model.category.MeLiCategory
 
 class MeLiCategoryCarousel @JvmOverloads constructor(
     context: Context,
@@ -31,13 +32,5 @@ class MeLiCategoryCarousel @JvmOverloads constructor(
 
     fun setOnCategoryClickListener(onClick: (MeLiCategory) -> Unit) {
         setOnCategoryClickListener = onClick
-    }
-
-    companion object {
-        data class MeLiCategory(
-            val name: String?,
-            val imageUrl: String?,
-            val id: String?
-        )
     }
 }

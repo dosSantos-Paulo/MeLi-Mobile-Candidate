@@ -1,5 +1,5 @@
 package com.dossantos.designsystem.utils
 
-object Long {
+internal object Long {
     const val fourSeconds = 4000L
 }

@@ -6,16 +6,18 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import com.dossantos.designsystem.R
 import com.dossantos.designsystem.databinding.MeliOfferBinding
+import com.dossantos.designsystem.utils.checkAndUseImage
 import kotlinx.parcelize.Parcelize
 
-class MeLiOfferCardFragment(val onImageClickListener: (category: String) -> Unit) : Fragment() {
+class MeLiOfferCardFragment : Fragment() {
 
     private lateinit var binding: MeliOfferBinding
+
+    private var onOfferClickListener: (String) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,17 +30,21 @@ class MeLiOfferCardFragment(val onImageClickListener: (category: String) -> Unit
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupImage()
-        setupOnClickListener()
+        setupOnClickListeners()
+    }
+
+    fun setOnOfferClickListener(onAction: (offerId: String) -> Unit) {
+        onOfferClickListener = onAction
+    }
+
+    private fun setupOnClickListeners() {
+        binding.image.setOnClickListener {
+            getArgument()?.id?.let { id -> onOfferClickListener(id) }
+        }
     }
 
     private fun setupImage() {
-        Glide.with(binding.root).load(getArgument()?.image).into(binding.image)
-    }
-
-    private fun setupOnClickListener() {
-        binding.image.setOnClickListener {
-            getArgument()?.let { onImageClickListener(it.category) }
-        }
+        binding.image.checkAndUseImage(getArgument()?.id?.getPng())
     }
 
     private fun getArgument() =
@@ -52,9 +58,25 @@ class MeLiOfferCardFragment(val onImageClickListener: (category: String) -> Unit
     private fun getOnOldApi() = arguments?.get(EXTRA_OFFER) as? MeLiOffer
 
     companion object {
+
+        /**
+         * Método criado para solucionar falta de acesso aos links do MeLi
+         */
+        private fun String.getPng() = when (this) {
+            "MLB1051" -> R.drawable.mlb1051
+            "MLB1276" -> R.drawable.mlb1276
+            "MLB1574" -> R.drawable.mlb1574
+            "MLB5726" -> R.drawable.mlb5726
+            else -> R.drawable.mlb1000
+        }
+
         const val EXTRA_OFFER = "EXTRA_OFFER"
 
         @Parcelize
-        data class MeLiOffer(@DrawableRes val image: Int, val category: String) : Parcelable
+        data class MeLiOffer(
+            val imageUrl: String?,
+            val id: String?,
+            val contentDescription: String?
+        ) : Parcelable
     }
 }

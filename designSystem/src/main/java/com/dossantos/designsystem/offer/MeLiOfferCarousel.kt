@@ -5,10 +5,13 @@ import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
-import com.dossantos.designsystem.R
+import androidx.viewpager.widget.ViewPager.PageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.dossantos.designsystem.databinding.MeliOfferCarouselBinding
+import com.dossantos.designsystem.offer.MeLiOfferCardFragment.Companion.MeLiOffer
 import com.dossantos.designsystem.utils.Integers.one
 import com.dossantos.designsystem.utils.Long.fourSeconds
 
@@ -26,12 +29,12 @@ class MeLiOfferCarousel @JvmOverloads constructor(
 
     init {
         if (isInEditMode) setup(
-            listOf(MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_sup, "")),
+            listOf(MeLiOffer("", "", "")),
             context as FragmentActivity
         )
     }
 
-    fun setup(offers: List<MeLiOfferCardFragment.Companion.MeLiOffer>, activity: FragmentActivity) {
+    fun setup(offers: List<MeLiOffer>, activity: FragmentActivity) {
         this.adapter = MeLiOfferAdapter(offers, activity)
         binding.viewPager.adapter = adapter
         autoSwipe()

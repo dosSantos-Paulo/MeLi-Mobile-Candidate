@@ -16,10 +16,9 @@ class MeLiOfferAdapter(
 
     override fun getItemCount() = offerList.size
 
-    override fun createFragment(position: Int) = MeLiOfferCardFragment(onCardClicked).apply {
-        arguments = bundleOf(
-            MeLiOfferCardFragment.EXTRA_OFFER to offerList[position]
-        )
+    override fun createFragment(position: Int) = MeLiOfferCardFragment().apply {
+        setOnOfferClickListener(onCardClicked)
+        arguments = bundleOf(MeLiOfferCardFragment.EXTRA_OFFER to offerList[position])
     }
 
     fun setOnCardClickedListener(onClick: (category: String) -> Unit) {

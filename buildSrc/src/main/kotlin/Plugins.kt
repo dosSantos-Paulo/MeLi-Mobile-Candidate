@@ -10,4 +10,5 @@ object Plugins {
     const val javaLib = "java-library"
     const val androidLib = "com.android.library"
     const val parcelize = "kotlin-parcelize"
+    const val kpta = "org.jetbrains.kotlin.kapt"
 }

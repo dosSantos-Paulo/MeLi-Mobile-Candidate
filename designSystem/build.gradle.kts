@@ -51,7 +51,6 @@ dependencies {
      * Glide
      */
     implementation(Dependencies.Commons.glide)
-    implementation("io.coil-kt:coil:2.6.0")
 
 
     /**

@@ -51,4 +51,10 @@ object Dependencies {
         const val gson = "com.squareup.retrofit2:converter-gson:${Versions.Retrofit.core}"
         const val interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.Retrofit.interceptor}"
     }
+
+    object Room {
+        const val runtime = "androidx.room:room-runtime:${Versions.Core.room}"
+        const val ktx = "androidx.room:room-ktx:${Versions.Core.room}"
+        const val compiler = "androidx.room:room-compiler:${Versions.Core.room}"
+    }
 }

@@ -21,9 +21,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.init()
         observeOffers()
         observeCategoryMenu()
-        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(
-            listOf(mockSuggestions(), mockSuggestions(), mockSuggestions())
-        )
+//        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(
+//            listOf(mockSuggestions(), mockSuggestions(), mockSuggestions())
+//        )
     }
 
     private fun observeOffers() =

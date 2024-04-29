@@ -22,6 +22,8 @@ object Versions {
         const val material = "1.11.0"
         const val activity = "1.8.0"
         const val constraintlayout = "2.1.4"
+        const val kpta = "1.8.0"
+        const val room = "2.6.0"
     }
 
     object Google {

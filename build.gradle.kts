@@ -10,4 +10,5 @@ plugins {
     id(Plugins.kotlinAndroid) version Versions.Core.kotlin apply false
     id(Plugins.googleServices) version Versions.Google.googleServices apply false
     id(Plugins.kotlinJvm) version Versions.Core.kotlin apply false
+    id(Plugins.kpta) version Versions.Core.kpta
 }

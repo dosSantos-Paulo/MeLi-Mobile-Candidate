@@ -1,6 +1,6 @@
 package com.dossantos.data.model.info
 
-data class MeLiInfoCurrencyDao(
+data class MeLiInfoCurrencyDto(
     val id: String,
     val symbol: String
 )

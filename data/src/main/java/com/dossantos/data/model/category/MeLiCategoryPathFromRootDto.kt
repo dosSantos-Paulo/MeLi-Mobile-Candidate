@@ -1,6 +1,6 @@
 package com.dossantos.data.model.category
 
-data class MeLiCategoryPathFromRootDao(
+data class MeLiCategoryPathFromRootDto(
     val id: String,
     val name: String
 )

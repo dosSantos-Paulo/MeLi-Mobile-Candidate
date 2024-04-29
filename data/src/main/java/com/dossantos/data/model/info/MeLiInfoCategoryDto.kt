@@ -1,6 +1,6 @@
 package com.dossantos.data.model.info
 
-data class MeLiInfoCategoryDao(
+data class MeLiInfoCategoryDto(
     val id: String,
     val name: String
 )

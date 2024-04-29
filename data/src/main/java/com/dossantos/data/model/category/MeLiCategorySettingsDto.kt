@@ -1,6 +1,6 @@
 package com.dossantos.data.model.category
 
-data class MeLiCategorySettingsDao(
+data class MeLiCategorySettingsDto(
     val adult_content: Boolean,
     val buying_allowed: Boolean,
     val buying_modes: List<String>,

@@ -45,4 +45,10 @@ object Dependencies {
     object Coroutines {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.core}"
     }
+
+    object Retrofit {
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.Retrofit.core}"
+        const val gson = "com.squareup.retrofit2:converter-gson:${Versions.Retrofit.core}"
+        const val interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.Retrofit.interceptor}"
+    }
 }

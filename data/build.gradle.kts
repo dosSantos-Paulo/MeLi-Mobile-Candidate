@@ -11,12 +11,19 @@ java {
 
 dependencies {
     /**
-    * Modules
-    */
+     * Modules
+     */
     implementation(project(Modules.domain))
 
     /**
      * Coroutines
      */
     implementation(Dependencies.Coroutines.core)
+
+    /**
+     * Retrofit
+     */
+    implementation(Dependencies.Retrofit.retrofit)
+    implementation(Dependencies.Retrofit.gson)
+    implementation(Dependencies.Retrofit.interceptor)
 }

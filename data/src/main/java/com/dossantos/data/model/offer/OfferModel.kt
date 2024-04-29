@@ -1,4 +1,4 @@
-package com.dossantos.data.offer
+package com.dossantos.data.model.offer
 
 data class OfferModel(
     val offerId: String? = null,

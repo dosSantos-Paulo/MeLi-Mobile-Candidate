@@ -1,8 +1,9 @@
-package com.dossantos.data.offer
+package com.dossantos.data.repository.offer
 
+import com.dossantos.data.model.offer.OfferDao
+import com.dossantos.data.model.offer.OfferModel
 import com.dossantos.domain.offer.OfferEntity
 import com.dossantos.domain.offer.OfferRepository
-import java.io.File
 import kotlinx.coroutines.flow.flow
 
 class OfferRepositoryImpl : OfferRepository {

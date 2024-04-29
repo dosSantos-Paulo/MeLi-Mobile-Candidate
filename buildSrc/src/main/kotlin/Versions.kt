@@ -44,4 +44,9 @@ object Versions {
     object Coroutines {
         const val core = "1.8.0"
     }
+
+    object Retrofit {
+        const val core = "2.11.0"
+        const val interceptor = "4.12.0"
+    }
 }

@@ -21,9 +21,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.init()
         observeOffers()
         observeCategoryMenu()
-//        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(
-//            listOf(mockSuggestions(), mockSuggestions(), mockSuggestions())
-//        )
     }
 
     private fun observeOffers() =
@@ -50,42 +47,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun showMenu(categories: List<MeLiCategory>) = binding.meLiCategoryCarousel
         .setup(categories)
-
-    private fun mockSuggestions(): Pair<String, List<MeLiSuggestion>> {
-        return "Porque Você viu items de Papelaria" to
-                listOf(
-                    MeLiSuggestion(
-                        "1",
-                        "titulo muito legal e que deve aparecer no card",
-                        "150,00",
-                        "60",
-                        "50,00",
-                        "https://http2.mlstatic.cf-a3dc51f6e12f.png"
-                    ),
-                    MeLiSuggestion(
-                        "2",
-                        "titulo muito legal e que deve aparecer no card",
-                        null,
-                        null,
-                        "50,00",
-                        null
-                    ),
-                    MeLiSuggestion(
-                        "3",
-                        "titulo muito legal e que deve aparecer no card",
-                        null,
-                        null,
-                        "50,00",
-                        "https://http2.mlstatic.com/storage/categoriea3dc51f6e12f.png"
-                    ),
-                    MeLiSuggestion(
-                        "4",
-                        "titulo muito legal e que deve aparecer no card",
-                        "150,00",
-                        "60",
-                        "50,00",
-                        "https://http2.mlstatic.com/4266-a0cf-a3dc51f6e12f.png"
-                    )
-                )
-    }
 }

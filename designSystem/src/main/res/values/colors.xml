@@ -13,5 +13,7 @@
     <color name="gray_100">#C5C5C5</color>
     <color name="hard_gray_100">#ACACAC</color>
 
+    <color name="background">#FBFBFB</color>
+
     <color name="transparent">#00FFFFFF</color>
 </resources>

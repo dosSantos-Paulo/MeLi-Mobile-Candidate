@@ -3,8 +3,8 @@ package com.dossantos.melimobilecandidate.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dossantos.designsystem.ui.category.MeLiCategoryCarousel.Companion.MeLiCategory
-import com.dossantos.designsystem.ui.offer.MeLiOfferCardFragment.Companion.MeLiOffer
+import com.dossantos.designsystem.model.category.MeLiCategory
+import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.domain.model.category.MenuCategoryEntity
 import com.dossantos.domain.model.offer.OfferEntity
 import com.dossantos.domain.usecase.category.CategoryMenuUseCase

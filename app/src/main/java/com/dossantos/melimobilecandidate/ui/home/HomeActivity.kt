@@ -13,8 +13,5 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.toolbar.onSearch {
-            meLiToast(it)
-        }
     }
 }

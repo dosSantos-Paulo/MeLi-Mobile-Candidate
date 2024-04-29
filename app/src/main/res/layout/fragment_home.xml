@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.dossantos.designsystem.offer.MeLiOfferCarousel
+        <com.dossantos.designsystem.ui.offer.MeLiOfferCarousel
             android:id="@+id/meLiOfferCarousel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_height="@dimen/offer_height" />
 
-        <com.dossantos.designsystem.category.MeLiCategoryCarousel
+        <com.dossantos.designsystem.ui.category.MeLiCategoryCarousel
             android:id="@+id/meLiCategoryCarousel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

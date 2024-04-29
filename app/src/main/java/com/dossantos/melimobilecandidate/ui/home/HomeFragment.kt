@@ -2,9 +2,9 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import android.view.View
-import com.dossantos.designsystem.ui.category.MeLiCategoryCarousel.Companion.MeLiCategory
-import com.dossantos.designsystem.ui.offer.MeLiOfferCardFragment.Companion.MeLiOffer
-import com.dossantos.designsystem.ui.suggestions.MeLiSuggestionCard
+import com.dossantos.designsystem.model.category.MeLiCategory
+import com.dossantos.designsystem.model.offer.MeLiOffer
+import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
 import com.dossantos.melimobilecandidate.ui.home.HomeViewModel.Companion.CategoryMenuUiState
@@ -51,10 +51,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun showMenu(categories: List<MeLiCategory>) = binding.meLiCategoryCarousel
         .setup(categories)
 
-    private fun mockSuggestions(): Pair<String, List<MeLiSuggestionCard.Companion.MeLiSuggestion>> {
+    private fun mockSuggestions(): Pair<String, List<MeLiSuggestion>> {
         return "Porque Você viu items de Papelaria" to
                 listOf(
-                    MeLiSuggestionCard.Companion.MeLiSuggestion(
+                    MeLiSuggestion(
                         "1",
                         "titulo muito legal e que deve aparecer no card",
                         "150,00",
@@ -62,7 +62,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         "50,00",
                         "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
                     ),
-                    MeLiSuggestionCard.Companion.MeLiSuggestion(
+                    MeLiSuggestion(
                         "2",
                         "titulo muito legal e que deve aparecer no card",
                         null,
@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         "50,00",
                         null
                     ),
-                    MeLiSuggestionCard.Companion.MeLiSuggestion(
+                    MeLiSuggestion(
                         "3",
                         "titulo muito legal e que deve aparecer no card",
                         null,
@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         "50,00",
                         "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
                     ),
-                    MeLiSuggestionCard.Companion.MeLiSuggestion(
+                    MeLiSuggestion(
                         "4",
                         "titulo muito legal e que deve aparecer no card",
                         "150,00",

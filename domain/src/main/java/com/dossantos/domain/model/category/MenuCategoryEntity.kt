@@ -1,6 +1,6 @@
-package com.dossantos.domain.category
+package com.dossantos.domain.model.category
 
-data class CategoryEntity(
+data class MenuCategoryEntity(
     val categoryId: String? = null,
     val categoryName: String? = null,
     val categoryImage: String? = null,

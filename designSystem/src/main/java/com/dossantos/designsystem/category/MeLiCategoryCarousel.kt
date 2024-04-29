@@ -21,7 +21,7 @@ class MeLiCategoryCarousel @JvmOverloads constructor(
     private var setOnCategoryClickListener: (MeLiCategory) -> Unit = {}
 
     init {
-        if (isInEditMode) setup(listOf(MeLiCategory("auto", "")))
+        if (isInEditMode) setup(listOf(MeLiCategory("auto", "", "")))
     }
 
     fun setup(category: List<MeLiCategory>) {
@@ -35,8 +35,9 @@ class MeLiCategoryCarousel @JvmOverloads constructor(
 
     companion object {
         data class MeLiCategory(
-            val name: String,
-            val imageUrl: String
+            val name: String?,
+            val imageUrl: String?,
+            val id: String?
         )
     }
 }

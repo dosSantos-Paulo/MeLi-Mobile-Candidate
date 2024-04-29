@@ -1,4 +1,4 @@
-package com.dossantos.domain.offer
+package com.dossantos.domain.model.offer
 
 
 data class OfferEntity(

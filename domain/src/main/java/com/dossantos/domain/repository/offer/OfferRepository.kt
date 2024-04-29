@@ -1,5 +1,6 @@
-package com.dossantos.domain.offer
+package com.dossantos.domain.repository.offer
 
+import com.dossantos.domain.model.offer.OfferEntity
 import kotlinx.coroutines.flow.Flow
 
 interface OfferRepository {

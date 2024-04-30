@@ -2,6 +2,7 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.dossantos.designsystem.model.category.MeLiCategory
 import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
@@ -33,22 +34,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun onOffers(observable: OfferUiState) = when (val uiState = observable.uiState) {
-        is OfferUiState.StateUi.OnSuccess -> showOffers(uiState.offers)
-        is OfferUiState.StateUi.OnError -> viewModel.retryOffer()
+        is OfferUiState.StateUi.OnSuccess -> {
+            showOffers(uiState.offers)
+        }
+        is OfferUiState.StateUi.OnError -> {
+            viewModel.retryOffer()
+        }
         else -> ElseNothing
     }
 
     private fun onCategoryMenu(observable: CategoryMenuUiState) =
         when (val uiState = observable.uiState) {
-            is CategoryMenuUiState.StateUi.OnSuccess -> showMenu(uiState.categories)
-            is CategoryMenuUiState.StateUi.OnError -> viewModel.retryCategoryMenu()
+            is CategoryMenuUiState.StateUi.OnSuccess -> {
+                binding.categoryLoading.isVisible = false
+                binding.categoryLayout.isVisible = true
+                showMenu(uiState.categories)
+            }
+            is CategoryMenuUiState.StateUi.OnError -> {
+                binding.categoryLayout.isVisible = false
+                viewModel.retryCategoryMenu()
+            }
+            is CategoryMenuUiState.StateUi.ShowLoading -> {
+                binding.categoryLoading.isVisible = true
+            }
             else -> ElseNothing
         }
 
     private fun onSuggestions(observable: SuggestionsUiState) =
         when (val uiState = observable.uiState) {
-            is SuggestionsUiState.StateUi.OnSuccess -> showSuggestions(uiState.suggestions)
-            is SuggestionsUiState.StateUi.OnError -> viewModel.retrySuggestions()
+            is SuggestionsUiState.StateUi.OnSuccess -> {
+                showSuggestions(uiState.suggestions)
+            }
+            is SuggestionsUiState.StateUi.OnError -> {
+                viewModel.retrySuggestions()
+            }
             else -> ElseNothing
         }
 

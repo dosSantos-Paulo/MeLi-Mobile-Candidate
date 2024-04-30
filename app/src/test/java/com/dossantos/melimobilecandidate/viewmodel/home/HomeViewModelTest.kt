@@ -1,7 +1,9 @@
 package com.dossantos.melimobilecandidate.viewmodel.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import com.dossantos.designsystem.model.category.MeLiCategory
+import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.domain.model.category.MenuCategoryModel
 import com.dossantos.domain.model.offer.OfferModel
 import com.dossantos.domain.model.suggestions.SuggestionsModel
@@ -10,12 +12,12 @@ import com.dossantos.domain.usecase.category.CategoryMenuUseCase
 import com.dossantos.domain.usecase.offer.OfferUseCase
 import com.dossantos.domain.usecase.suggestions.SuggestionsUseCase
 import com.dossantos.melimobilecandidate.TestException
-import com.dossantos.melimobilecandidate.getValue
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.coVerifySequence
 import io.mockk.mockk
+import io.mockk.slot
 import io.mockk.unmockkAll
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -53,222 +55,254 @@ class HomeViewModelTest {
     @Test
     fun `test getOffers with success`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in OfferUiState>>()
+        val slot = slot<OfferUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.offerUiState)
+        viewModel.offerUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is OfferUiState.StateUi.OnSuccess)
+        coVerifySequence {
+            observer.onChanged(OfferUiState().onLoading())
+            observer.onChanged(
+                OfferUiState().onSuccess(
+                    listOf(
+                        MeLiOffer(
+                            imageUrl = null,
+                            id = "offerId",
+                            contentDescription = null
+                        )
+                    )
+                )
+            )
+        }
+
+        viewModel.offerUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getOffers with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in OfferUiState>>()
+        val slot = slot<OfferUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffersThrow()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.offerUiState)
+        viewModel.offerUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is OfferUiState.StateUi.OnError)
+        coVerifySequence {
+            observer.onChanged(OfferUiState().onLoading())
+            observer.onChanged(OfferUiState().onError())
+        }
+
+        viewModel.offerUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getMenuCategory with success`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in CategoryMenuUiState>>()
+        val slot = slot<CategoryMenuUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.categoryMenuUiState)
+        viewModel.categoryMenuUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is CategoryMenuUiState.StateUi.OnSuccess)
+        coVerifySequence {
+            observer.onChanged(CategoryMenuUiState().onLoading())
+            observer.onChanged(
+                CategoryMenuUiState().onSuccess(
+                    listOf(
+                        MeLiCategory(
+                            name = null,
+                            imageUrl = null,
+                            id = "categoryId"
+                        )
+                    )
+                )
+            )
+        }
+
+        viewModel.categoryMenuUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getMenuCategory with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in CategoryMenuUiState>>()
+        val slot = slot<CategoryMenuUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategoriesThrow()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.categoryMenuUiState)
+        viewModel.categoryMenuUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is CategoryMenuUiState.StateUi.OnError)
+        coVerifySequence {
+            observer.onChanged(CategoryMenuUiState().onLoading())
+            observer.onChanged(CategoryMenuUiState().onError())
+        }
+
+        viewModel.categoryMenuUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getSuggestions with success`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in SuggestionsUiState>>()
+        val slot = slot<SuggestionsUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.suggestionsUiState)
+        viewModel.suggestionsUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is SuggestionsUiState.StateUi.OnSuccess)
+        coVerifySequence {
+            observer.onChanged(SuggestionsUiState().onLoading())
+            observer.onChanged(SuggestionsUiState().onSuccess(listOf(SuggestionsType.ONLY_SUGGESTION to null)))
+        }
+
+        viewModel.suggestionsUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getSuggestions with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in SuggestionsUiState>>()
+        val slot = slot<SuggestionsUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestionsThrow()
 
         // When
         viewModel.init()
-        val obserable = getValue(viewModel.suggestionsUiState)
+        viewModel.suggestionsUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is SuggestionsUiState.StateUi.OnError)
+        coVerifySequence {
+            observer.onChanged(SuggestionsUiState().onLoading())
+            observer.onChanged(SuggestionsUiState().onError())
+        }
+
+        viewModel.suggestionsUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getOffers retry with success`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in OfferUiState>>()
+        val slot = slot<OfferUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {}
         coEvery { offerUseCase.getOffers() } returns getListOffers()
 
         // When
         viewModel.retryOffer()
-        val obserable = getValue(viewModel.offerUiState)
+        viewModel.offerUiState.observeForever(observer)
 
         // Then
-        assert(obserable?.uiState is OfferUiState.StateUi.OnSuccess)
+        coVerifySequence {
+            observer.onChanged(OfferUiState().onLoading())
+            observer.onChanged(
+                OfferUiState().onSuccess(
+                    listOf(
+                        MeLiOffer(
+                            imageUrl = null,
+                            id = "offerId",
+                            contentDescription = null
+                        )
+                    )
+                )
+            )
+        }
+
+        viewModel.offerUiState.removeObserver(observer)
     }
 
     @Test
     fun `test getOffers retry with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in OfferUiState>>()
+        val slot = slot<OfferUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers { viewModel.retryOffer() }
         coEvery { offerUseCase.getOffers() } returns getListOffersThrow()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        recursiveOfferObservation(viewModel.offerUiState) { state ->
-            viewModel.retryOffer()
-        }
+        viewModel.offerUiState.observeForever(observer)
 
         // Then
         coVerify(exactly = 4) { offerUseCase.getOffers() }
-    }
 
-    private fun CoroutineScope.recursiveOfferObservation(
-        liveData: LiveData<OfferUiState>,
-        count: Int = 0,
-        onContinue: (OfferUiState?) -> Unit
-    ) {
-        getValue(liveData)?.let { value ->
-            if (value.uiState is OfferUiState.StateUi.OnError && count < 10) {
-                onContinue(value)
-                recursiveOfferObservation(liveData, count + 1, onContinue)
-            }
-        }
-    }
-
-    @Test
-    fun `test category retry with success`() = runBlocking {
-        // Given
-        coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
-
-        // When
-        viewModel.retryCategoryMenu()
-        val observable = getValue(viewModel.categoryMenuUiState)
-
-        // Then
-        coVerify { categoryMenuUseCase.getMenuCategory() }
-        assert(observable?.uiState is CategoryMenuUiState.StateUi.OnSuccess)
+        viewModel.offerUiState.removeObserver(observer)
     }
 
     @Test
     fun `test category retry with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in CategoryMenuUiState>>()
+        val slot = slot<CategoryMenuUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {
+            viewModel.retryCategoryMenu()
+        }
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategoriesThrow()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
 
         // When
         viewModel.init()
-        recursiveCategoryObservation(viewModel.categoryMenuUiState) {
-            viewModel.retryCategoryMenu()
-        }
+        viewModel.categoryMenuUiState.observeForever(observer)
 
         // Then
         coVerify(exactly = 4) { categoryMenuUseCase.getMenuCategory() }
-    }
 
-    private fun CoroutineScope.recursiveCategoryObservation(
-        liveData: LiveData<CategoryMenuUiState>,
-        count: Int = 0,
-        onContinue: (CategoryMenuUiState?) -> Unit
-    ) {
-        getValue(liveData)?.let { value ->
-            if (value.uiState is CategoryMenuUiState.StateUi.OnError && count < 10) {
-                onContinue(value)
-                recursiveCategoryObservation(liveData, count + 1, onContinue)
-            }
-        }
-    }
-
-    @Test
-    fun `test suggestions retry with success`() = runBlocking {
-        // Given
-        coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestions()
-
-        // When
-        viewModel.retrySuggestions()
-        val observable = getValue(viewModel.suggestionsUiState)
-
-        // Then
-        coVerify { suggestionsUseCase.getSuggestions() }
-        assert(observable?.uiState is SuggestionsUiState.StateUi.OnSuccess)
+        viewModel.categoryMenuUiState.removeObserver(observer)
     }
 
     @Test
     fun `test suggestions retry with error`() = runBlocking {
         // Given
+        val observer = mockk<Observer<in SuggestionsUiState>>()
+        val slot = slot<SuggestionsUiState>()
+        coEvery { observer.onChanged(capture(slot)) } answers {
+            viewModel.retrySuggestions()
+        }
         coEvery { offerUseCase.getOffers() } returns getListOffers()
         coEvery { categoryMenuUseCase.getMenuCategory() } returns getListOfCategories()
         coEvery { suggestionsUseCase.getSuggestions() } returns getListOfSuggestionsThrow()
 
         // When
         viewModel.init()
-        recursiveSuggestionsObservation(viewModel.suggestionsUiState) {
-            viewModel.retrySuggestions()
-        }
+        viewModel.suggestionsUiState.observeForever(observer)
 
         // Then
         coVerify(exactly = 4) { suggestionsUseCase.getSuggestions() }
-    }
 
-    private fun CoroutineScope.recursiveSuggestionsObservation(
-        liveData: LiveData<SuggestionsUiState>,
-        count: Int = 0,
-        onContinue: (SuggestionsUiState?) -> Unit
-    ) {
-        getValue(liveData)?.let { value ->
-            if (value.uiState is SuggestionsUiState.StateUi.OnError && count < 10) {
-                onContinue(value)
-                recursiveSuggestionsObservation(liveData, count + 1, onContinue)
-            }
-        }
+        viewModel.suggestionsUiState.removeObserver(observer)
     }
 
     private fun getListOffersThrow() = flow<List<OfferModel>> {

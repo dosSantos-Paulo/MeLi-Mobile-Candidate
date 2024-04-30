@@ -74,6 +74,7 @@ dependencies {
     implementation(Dependencies.Core.material)
     implementation(Dependencies.Core.activity)
     implementation(Dependencies.Core.constraintlayout)
+    implementation(Dependencies.Commons.dotLoading)
 
     /**
      * Depedency Injection

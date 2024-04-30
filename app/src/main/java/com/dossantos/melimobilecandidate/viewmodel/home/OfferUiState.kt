@@ -10,8 +10,11 @@ data class OfferUiState(val uiState: StateUi? = null) {
 
     fun onError() = copy(uiState = StateUi.OnError)
 
+    fun onLoading() = copy(uiState = StateUi.ShowLoading)
+
     sealed interface StateUi {
         data class OnSuccess(val offers: List<MeLiOffer>) : StateUi
         data object OnError : StateUi
+        data object ShowLoading: StateUi
     }
 }

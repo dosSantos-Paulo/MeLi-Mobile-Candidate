@@ -12,6 +12,11 @@ object Versions {
         const val junit = "4.13.2"
         const val junitVersion = "1.1.5"
         const val espressoCore = "3.5.1"
+        const val mockK = "1.13.10"
+        const val roboletrics = "4.6.1"
+        const val archCore = "2.1.0"
+        const val testCore = "1.5.0"
+        const val stdLib = "7:1.1.2"
     }
 
     object Core {
@@ -24,6 +29,8 @@ object Versions {
         const val constraintlayout = "2.1.4"
         const val kpta = "1.8.0"
         const val room = "2.6.0"
+        const val liveData = "2.7.0"
+
     }
 
     object Google {

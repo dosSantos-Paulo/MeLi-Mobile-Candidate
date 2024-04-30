@@ -46,6 +46,7 @@ dependencies {
      * Core
      */
     implementation(Dependencies.Core.coreKtx)
+    implementation(Dependencies.Core.liveData)
 
     /**
      * Coroutines
@@ -65,4 +66,17 @@ dependencies {
     implementation(Dependencies.Room.runtime)
     implementation(Dependencies.Room.ktx)
     kapt(Dependencies.Room.compiler)
+
+    /**
+     * Test
+     */
+    implementation(Dependencies.Test.testCore)
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.mockK)
+    testImplementation(Dependencies.Test.roboletrics)
+    testImplementation(Dependencies.Test.archCore)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.espressoCore)
+    compileOnly(Dependencies.Test.stdLib)
+    testImplementation(Dependencies.Test.stdLib)
 }

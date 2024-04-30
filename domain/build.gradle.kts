@@ -14,4 +14,10 @@ dependencies {
      * Coroutines
      */
     implementation(Dependencies.Coroutines.core)
+
+    /**
+     * Test
+     */
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.mockK)
 }

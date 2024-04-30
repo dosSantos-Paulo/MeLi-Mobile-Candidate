@@ -5,7 +5,6 @@ import com.dossantos.data.model.search.SearchPagingInfoDto
 import com.dossantos.data.model.search.SearchProductDto
 import com.dossantos.data.model.search.SearchResponseDto
 import com.dossantos.data.network.search.MeLiSearchEndpoint
-import com.dossantos.data.utils.Numbers.Integers.four
 import com.dossantos.data.utils.Numbers.Integers.oneHunderd
 import com.dossantos.domain.model.InstallmentsModel
 import com.dossantos.domain.model.PagingInfoModel
@@ -29,7 +28,7 @@ class SearchRepositoryImpl(
     override fun searchByCategories(categoriesId: List<String>) = flow {
         emit(
             categoriesId.map {
-                searchEndpoint.searchByCategory(categoryId = it, limit = four).toModel()
+                searchEndpoint.searchByCategory(categoryId = it).toModel()
             }
         )
     }

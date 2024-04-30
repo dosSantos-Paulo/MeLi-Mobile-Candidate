@@ -14,6 +14,12 @@ object Dependencies {
         const val androidxJunit = "androidx.test.ext:junit:${Versions.Test.junitVersion}"
         const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.Test.espressoCore}"
         const val koin = "io.insert-koin:koin-test"
+        const val mockK = "io.mockk:mockk:${Versions.Test.mockK}"
+        const val roboletrics = "org.robolectric:robolectric:${Versions.Test.roboletrics}"
+        const val archCore = "androidx.arch.core:core-testing:${Versions.Test.archCore}"
+        const val testCore = "androidx.test:core-ktx:${Versions.Test.testCore}"
+        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre${Versions.Test.stdLib}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.Coroutines.core}"
     }
 
     object Core {
@@ -22,6 +28,7 @@ object Dependencies {
         const val material = "com.google.android.material:material:${Versions.Core.material}"
         const val activity = "androidx.activity:activity:${Versions.Core.activity}"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.Core.constraintlayout}"
+        const val liveData = "androidx.lifecycle:lifecycle-livedata-core-ktx:${Versions.Core.liveData}"
     }
 
     object Firebase {

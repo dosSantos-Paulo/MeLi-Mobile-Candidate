@@ -1,5 +1,6 @@
 package com.dossantos.melimobilecandidate.utils
 
 object Integers {
-    const val oneSecond = 1000L
+    const val zero = 0
+    const val three = 3
 }

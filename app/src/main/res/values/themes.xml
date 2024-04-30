@@ -8,6 +8,7 @@
         <item name="colorOnSecondary">@color/on_primary_100</item>
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="Theme.MeLiMobileCandidate" parent="Base.Theme.MeLiMobileCandidate" />

@@ -41,4 +41,20 @@ object Dependencies {
         const val core = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.core}"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation.core}"
     }
+
+    object Coroutines {
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Coroutines.core}"
+    }
+
+    object Retrofit {
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.Retrofit.core}"
+        const val gson = "com.squareup.retrofit2:converter-gson:${Versions.Retrofit.core}"
+        const val interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.Retrofit.interceptor}"
+    }
+
+    object Room {
+        const val runtime = "androidx.room:room-runtime:${Versions.Core.room}"
+        const val ktx = "androidx.room:room-ktx:${Versions.Core.room}"
+        const val compiler = "androidx.room:room-compiler:${Versions.Core.room}"
+    }
 }

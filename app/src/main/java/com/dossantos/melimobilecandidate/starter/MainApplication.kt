@@ -1,8 +1,6 @@
 package com.dossantos.melimobilecandidate.starter
 
 import android.app.Application
-import com.dossantos.data.di.getDataModules
-import com.dossantos.domain.di.getDomainModules
 import com.dossantos.melimobilecandidate.di.getMainModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -20,8 +18,6 @@ class MainApplication : Application()  {
             androidLogger()
             androidContext(this@MainApplication)
             getMainModules()
-            getDataModules()
-            getDomainModules()
         }
     }
 }

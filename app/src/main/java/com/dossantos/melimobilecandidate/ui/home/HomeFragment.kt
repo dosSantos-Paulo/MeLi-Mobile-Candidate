@@ -2,123 +2,75 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import android.view.View
-import com.dossantos.designsystem.R
-import com.dossantos.designsystem.category.MeLiCategoryCarousel
-import com.dossantos.designsystem.offer.MeLiOfferAdapter
-import com.dossantos.designsystem.offer.MeLiOfferCardFragment
-import com.dossantos.designsystem.suggestions.MeLiSuggestionCard
+import com.dossantos.designsystem.model.category.MeLiCategory
+import com.dossantos.designsystem.model.offer.MeLiOffer
+import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
+import com.dossantos.domain.model.suggestions.SuggestionsType
+import com.dossantos.melimobilecandidate.R
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
+import com.dossantos.melimobilecandidate.utils.ElseNothing
+import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
+import com.dossantos.melimobilecandidate.viewmodel.home.HomeViewModel
+import com.dossantos.melimobilecandidate.viewmodel.home.OfferUiState
+import com.dossantos.melimobilecandidate.viewmodel.home.SuggestionsUiState
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val viewModel by activityViewModel<HomeViewModel>()
+    private val viewModel: HomeViewModel by activityViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.init()
-        binding.meLiOfferCarousel.setup(mockOffer(), requireActivity())
-        binding.meLiCategoryCarousel.setup(mockCategory())
-
-        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(
-            listOf(mockSuggestions(), mockSuggestions(), mockSuggestions())
-        )
+        setupObservables()
     }
 
-    private fun mockOffer() = listOf(
-        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_auto, "auto"),
-        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_1, "cama"),
-        MeLiOfferCardFragment.Companion.MeLiOffer(
-            R.drawable.offer_first_shop,
-            "suplemento"
-        ),
-        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_bed_2, "cama"),
-        MeLiOfferCardFragment.Companion.MeLiOffer(R.drawable.offer_sup, "cama"),
-    )
+    private fun setupObservables() {
+        viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
+        viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
+        viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
+    }
 
-    private fun mockCategory() = listOf(
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-        MeLiCategoryCarousel.Companion.MeLiCategory(
-            "auto",
-            "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-        ),
-    )
+    private fun onOffers(observable: OfferUiState) = when (val uiState = observable.uiState) {
+        is OfferUiState.StateUi.OnSuccess -> showOffers(uiState.offers)
+        is OfferUiState.StateUi.OnError -> viewModel.retryOffer()
+        else -> ElseNothing
+    }
 
-    private fun mockSuggestions(): Pair<String, List<MeLiSuggestionCard.Companion.MeLiSuggestion>> {
-        return "Porque Você viu items de Papelaria" to
-        listOf(
-            MeLiSuggestionCard.Companion.MeLiSuggestion(
-                "1",
-                "titulo muito legal e que deve aparecer no card",
-                "150,00",
-                "60",
-                "50,00",
-                "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-            ),
-            MeLiSuggestionCard.Companion.MeLiSuggestion(
-                "2",
-                "titulo muito legal e que deve aparecer no card",
-                null,
-                null,
-                "50,00",
-                null
-            ),
-            MeLiSuggestionCard.Companion.MeLiSuggestion(
-                "3",
-                "titulo muito legal e que deve aparecer no card",
-                null,
-                null,
-                "50,00",
-                "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-            ),
-            MeLiSuggestionCard.Companion.MeLiSuggestion(
-                "4",
-                "titulo muito legal e que deve aparecer no card",
-                "150,00",
-                "60",
-                "50,00",
-                "https://http2.mlstatic.com/storage/categories-api/images/985c3a8d-ea5b-4266-a0cf-a3dc51f6e12f.png"
-            )
-        )
+    private fun onCategoryMenu(observable: CategoryMenuUiState) =
+        when (val uiState = observable.uiState) {
+            is CategoryMenuUiState.StateUi.OnSuccess -> showMenu(uiState.categories)
+            is CategoryMenuUiState.StateUi.OnError -> viewModel.retryCategoryMenu()
+            else -> ElseNothing
+        }
+
+    private fun onSuggestions(observable: SuggestionsUiState) =
+        when (val uiState = observable.uiState) {
+            is SuggestionsUiState.StateUi.OnSuccess -> showSuggestions(uiState.suggestions)
+            is SuggestionsUiState.StateUi.OnError -> viewModel.retrySuggestions()
+            else -> ElseNothing
+        }
+
+    private fun showOffers(offers: List<MeLiOffer>) = binding.meLiOfferCarousel
+        .setup(offers, requireActivity())
+
+    private fun showMenu(categories: List<MeLiCategory>) = binding.meLiCategoryCarousel
+        .setup(categories)
+
+    private fun showSuggestions(suggestions: List<Pair<SuggestionsType, List<MeLiSuggestion>?>>) {
+        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(suggestions.convertTexts())
+    }
+
+    private fun List<Pair<SuggestionsType, List<MeLiSuggestion>?>>.convertTexts() = map { pair ->
+        pair.first.toSuggestionTitle() to pair.second
+    }
+
+    private fun SuggestionsType.toSuggestionTitle() = when (this) {
+        SuggestionsType.ONLY_SUGGESTION ->
+            requireActivity().getString(R.string.suggestion_message)
+
+        SuggestionsType.ALREADY_VISITED ->
+            requireActivity().getString(R.string.already_suggestion_message)
     }
 }

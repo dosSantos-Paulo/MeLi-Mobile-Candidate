@@ -7,6 +7,7 @@ object Versions {
         const val detekt = "1.23.6"
         const val glide = "4.16.0"
     }
+
     object Test {
         const val junit = "4.13.2"
         const val junitVersion = "1.1.5"
@@ -21,6 +22,8 @@ object Versions {
         const val material = "1.11.0"
         const val activity = "1.8.0"
         const val constraintlayout = "2.1.4"
+        const val kpta = "1.8.0"
+        const val room = "2.6.0"
     }
 
     object Google {
@@ -36,7 +39,16 @@ object Versions {
         const val bom = "3.5.6"
     }
 
-    object Navigation{
+    object Navigation {
         const val core = "2.7.7"
+    }
+
+    object Coroutines {
+        const val core = "1.8.0"
+    }
+
+    object Retrofit {
+        const val core = "2.11.0"
+        const val interceptor = "4.12.0"
     }
 }

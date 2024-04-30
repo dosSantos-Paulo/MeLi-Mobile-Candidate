@@ -1,21 +1,6 @@
 package com.dossantos.melimobilecandidate.ui.home
 
-import android.os.Bundle
-import androidx.activity.viewModels
-import com.dossantos.designsystem.toast.meLiToast
 import com.dossantos.melimobilecandidate.databinding.ActivityHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseActivity
 
-class HomeActivity : BaseActivity<ActivityHomeBinding>() {
-
-    private val viewModel: HomeViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.init()
-
-        binding.toolbar.onSearch {
-            meLiToast(it)
-        }
-    }
-}
+class HomeActivity : BaseActivity<ActivityHomeBinding>()

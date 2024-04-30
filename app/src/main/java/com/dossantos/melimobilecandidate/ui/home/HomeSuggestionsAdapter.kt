@@ -3,15 +3,15 @@ package com.dossantos.melimobilecandidate.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dossantos.designsystem.suggestions.MeLiSuggestionCard
+import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.melimobilecandidate.databinding.ItemHomeSuggestionsBinding
 
 class HomeSuggestionsAdapter(
-    val suggestions: List<Pair<String, List<MeLiSuggestionCard.Companion.MeLiSuggestion>>>
+    private val suggestions: List<Pair<String, List<MeLiSuggestion>?>>
 ) : RecyclerView.Adapter<HomeSuggestionsAdapter.ViewHolder>() {
-    class ViewHolder(val binding: ItemHomeSuggestionsBinding) :
+    class ViewHolder(private val binding: ItemHomeSuggestionsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(suggestions: Pair<String, List<MeLiSuggestionCard.Companion.MeLiSuggestion>>) {
+        fun onBind(suggestions: Pair<String, List<MeLiSuggestion>?>) {
             binding.meLiSuggestion.setup(suggestions.first, suggestions.second)
         }
     }

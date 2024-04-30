@@ -6,6 +6,7 @@ object Versions {
         const val versionName = "1.0.0"
         const val detekt = "1.23.6"
         const val glide = "4.16.0"
+        const val dotLoading = "1.3.2"
     }
 
     object Test {

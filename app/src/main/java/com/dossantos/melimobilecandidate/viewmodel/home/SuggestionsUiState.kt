@@ -11,8 +11,11 @@ data class SuggestionsUiState(val uiState: StateUi? = null) {
 
     fun onError() = copy(uiState = StateUi.OnError)
 
+    fun onLoading() = copy(uiState = StateUi.ShowLoading)
+
     sealed interface StateUi {
         data class OnSuccess(val suggestions: List<Pair<SuggestionsType, List<MeLiSuggestion>?>>) : StateUi
         data object OnError : StateUi
+        data object ShowLoading: StateUi
     }
 }

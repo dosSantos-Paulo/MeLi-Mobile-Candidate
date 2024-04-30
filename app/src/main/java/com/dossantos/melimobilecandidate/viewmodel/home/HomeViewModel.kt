@@ -48,6 +48,7 @@ class HomeViewModel(
     }
 
     private fun getOffers() = runOnIO {
+        _offerUiState.postValue(OfferUiState().onLoading())
         offerUseCase.getOffers()
             .singleOrThrow(::onOfferSuccess) { ex ->
                 ex.printStackTrace()
@@ -56,6 +57,7 @@ class HomeViewModel(
     }
 
     private fun getCategoryMenu() = runOnMain {
+        _categoryMenuUiState.postValue(CategoryMenuUiState().onLoading())
         categoryMenuUseCase.getMenuCategory()
             .singleOrThrow(::onCategoryMenuSuccess) { ex ->
                 ex.printStackTrace()
@@ -64,6 +66,7 @@ class HomeViewModel(
     }
 
     private fun getSuggestions() = runOnIO {
+        _suggestionsUiState.postValue(SuggestionsUiState().onLoading())
         suggestionsUseCase.getSuggestions()
             .singleOrThrow(::onSuggestionsSuccess) { ex ->
                 ex.printStackTrace()

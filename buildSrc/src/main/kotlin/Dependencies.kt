@@ -8,6 +8,7 @@ object Dependencies {
         const val localProperties = "local.properties"
         const val googleServicesJsonPath = "app/google-services.json"
         const val glide = "com.github.bumptech.glide:glide:${Versions.Commons.glide}"
+        const val dotLoading = "com.github.razaghimahdi:Android-Loading-Dots:${Versions.Commons.dotLoading}"
     }
     object Test {
         const val junit = "junit:junit:${Versions.Test.junit}"

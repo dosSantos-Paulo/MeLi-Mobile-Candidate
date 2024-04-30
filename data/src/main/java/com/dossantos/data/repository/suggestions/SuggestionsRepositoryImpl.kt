@@ -4,6 +4,7 @@ import com.dossantos.data.database.MeLiSuggestionsDao
 import com.dossantos.data.model.suggestions.SuggestionsEntity
 import com.dossantos.data.network.search.MeLiSearchEndpoint
 import com.dossantos.data.repository.search.SearchRepositoryImpl.Companion.toModel
+import com.dossantos.data.utils.Numbers.Integers.four
 import com.dossantos.domain.model.suggestions.SuggestionsModel
 import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.domain.repository.suggestions.SuggestionsRepository
@@ -50,7 +51,7 @@ class SuggestionsRepositoryImpl(
     }
 
     private suspend fun getProductByCategory(categoryId: String) = searchEndpoint
-        .searchByCategory(categoryId = categoryId, limit = suggestionLimit).toModel().products
+        .searchByCategory(categoryId = categoryId, limit = four).toModel().products
 
     private fun mockedSuggestions() = listOf("MLB1000", "MLB1574", "MLB1276", "MLB1051")
 }

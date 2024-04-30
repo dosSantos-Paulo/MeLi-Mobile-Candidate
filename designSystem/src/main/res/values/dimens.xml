@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_button_size">50dp</dimen>
+    <dimen name="margin_m">8dp</dimen>
+    <dimen name="field_height">35dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="rounded_corner">50dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="padding_p">6dp</dimen>
+    <dimen name="margin_s">3dp</dimen>
+    <dimen name="margin_mm">12dp</dimen>
+    <dimen name="offer_height">140dp</dimen>
+    <dimen name="card_radius">12dp</dimen>
+    <dimen name="progress_height">8dp</dimen>
+    <dimen name="category_size">50dp</dimen>
+    <dimen name="text_size_s">10sp</dimen>
+    <dimen name="suggestion_card_height">180dp</dimen>
+    <dimen name="suggestion_last_price_size">12sp</dimen>
+    <dimen name="suggestion_price_size">18sp</dimen>
+    <dimen name="offer_width">350dp</dimen>
+    <dimen name="category_max_size">80dp</dimen>
+</resources>

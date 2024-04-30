@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary_100"
+    android:paddingHorizontal="@dimen/margin_m"
+    android:paddingBottom="@dimen/margin_m"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/buttonBack"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="@dimen/image_button_size"
+        android:layout_height="@dimen/image_button_size"
+        android:layout_marginTop="@dimen/margin_s"
+        android:contentDescription="@string/back_buttom_description"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchField"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchField"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_m"
+        app:boxBackgroundColor="@color/on_secondary_100"
+        app:boxCornerRadiusBottomEnd="@dimen/rounded_corner"
+        app:boxCornerRadiusBottomStart="@dimen/rounded_corner"
+        app:boxCornerRadiusTopEnd="@dimen/rounded_corner"
+        app:boxCornerRadiusTopStart="@dimen/rounded_corner"
+        app:boxStrokeColor="@color/primary_100"
+        app:boxStrokeWidth="0dp"
+        app:startIconMinSize="6dp"
+        app:startIconDrawable="@drawable/ic_custom_search"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCancelSearch"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderText="@string/search_hint"
+        app:placeholderTextColor="@color/on_primary_100">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:padding="@dimen/padding_p"
+            android:textColor="@color/on_primary_100" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonCancelSearch"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/on_primary_100"
+        android:textSize="@dimen/button_text_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchField"
+        app:layout_constraintEnd_toStartOf="@+id/buttonShoppingCart"
+        app:layout_constraintTop_toTopOf="@+id/searchField" />
+
+    <ImageButton
+        android:id="@+id/buttonShoppingCart"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="@dimen/image_button_size"
+        android:layout_height="@dimen/image_button_size"
+        android:layout_marginTop="@dimen/margin_s"
+        android:contentDescription="@string/shopping_kart_button_description"
+        android:src="@drawable/baseline_add_shopping_cart_24"
+        app:layout_constraintBottom_toBottomOf="@+id/searchField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/searchField" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/outline_add_location_24"
+        app:layout_constraintBottom_toBottomOf="@+id/addressText"
+        app:layout_constraintStart_toStartOf="@+id/searchField"
+        app:layout_constraintTop_toTopOf="@+id/addressText"
+        android:importantForAccessibility="no" />
+
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="0dp"
+        app:layout_constraintStart_toEndOf="@id/icon"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:layout_marginTop="@dimen/margin_m"
+        android:text="@string/fake_address"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ plugins {
     id(Plugins.googleServices)
     id(Plugins.crashlytics)
     id(Plugins.detekt)
+    id(Plugins.kpta)
 }
 
 android {
@@ -23,6 +24,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            getSecret(Dependencies.Firebase.firebaseKey)?.let { key ->
+                protectGoogleServicesToUpdates()
+                updateFirebaseApi(key)
+            }
+        }
+
         release {
             isMinifyEnabled = false
             android.buildFeatures.buildConfig = true
@@ -52,14 +60,33 @@ android {
 
 dependencies {
     /**
+     * Modules
+     */
+    implementation(project(Modules.data))
+    implementation(project(Modules.domain))
+    implementation(project(Modules.designSystem))
+
+    /**
      * Core
      */
     implementation(Dependencies.Core.coreKtx)
     implementation(Dependencies.Core.appcompat)
-    implementation(Dependencies.Core.appcompat)
     implementation(Dependencies.Core.material)
     implementation(Dependencies.Core.activity)
     implementation(Dependencies.Core.constraintlayout)
+    implementation(Dependencies.Commons.dotLoading)
+
+    /**
+     * Depedency Injection
+     */
+    implementation(platform(Dependencies.Koin.bom))
+    implementation(Dependencies.Koin.core)
+    implementation(Dependencies.Koin.android)
+
+    /**
+     * Glide
+     */
+    implementation(Dependencies.Commons.glide)
 
     /**
      * Firebase
@@ -69,11 +96,39 @@ dependencies {
     implementation(Dependencies.Firebase.analytics)
 
     /**
+     * Navigation
+     */
+    implementation(Dependencies.Navigation.core)
+    implementation(Dependencies.Navigation.fragment)
+
+    /**
      * Test
      */
     testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.koin)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
+
+    /**
+     * Room
+     */
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.ktx)
+    kapt(Dependencies.Room.compiler)
+
+    /**
+     * Test
+     */
+    implementation(Dependencies.Test.testCore)
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.mockK)
+    testImplementation(Dependencies.Test.roboletrics)
+    testImplementation(Dependencies.Test.archCore)
+    testImplementation(Dependencies.Test.coroutines)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.espressoCore)
+    compileOnly(Dependencies.Test.stdLib)
+    testImplementation(Dependencies.Test.stdLib)
 }
 
 fun getSecret(key: String): String? {

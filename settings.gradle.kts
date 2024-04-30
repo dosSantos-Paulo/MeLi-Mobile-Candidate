@@ -16,8 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://www.jitpack.io")
     }
 }
 
 rootProject.name = "MeLi Mobile Candidate"
 include(":app")
+include(":domain")
+include(":data")
+include(":designSystem")

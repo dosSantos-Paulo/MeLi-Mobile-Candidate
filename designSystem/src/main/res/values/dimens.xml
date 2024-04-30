@@ -14,7 +14,7 @@
     <dimen name="progress_height">8dp</dimen>
     <dimen name="category_size">50dp</dimen>
     <dimen name="text_size_s">10sp</dimen>
-    <dimen name="suggestion_card_height">300dp</dimen>
+    <dimen name="suggestion_card_height">180dp</dimen>
     <dimen name="suggestion_last_price_size">12sp</dimen>
     <dimen name="suggestion_price_size">18sp</dimen>
     <dimen name="offer_width">350dp</dimen>

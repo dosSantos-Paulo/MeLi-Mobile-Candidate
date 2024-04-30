@@ -10,11 +10,11 @@ import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.designsystem.utils.checkAndUseImage
 
 class MeLiSuggestionCardAdapter(
-    val suggestions: List<MeLiSuggestion>,
-    val onItemClicked: (suggestionId: String) -> Unit
+    private val suggestions: List<MeLiSuggestion>,
+    private val onItemClicked: (suggestionId: String) -> Unit
 ) : RecyclerView.Adapter<MeLiSuggestionCardAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: MeliSuggestionItemBinding) :
+    class ViewHolder(private val binding: MeliSuggestionItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(
@@ -30,21 +30,21 @@ class MeLiSuggestionCardAdapter(
             }
 
             suggestion.discountPercentage?.let {
-                binding.offAmount.text = context.getString(R.string.discount, it)
+                binding.offAmount.text = it
                 binding.offAmount.isVisible = true
             }
 
             suggestion.price?.let {
-                binding.price.text = context.getString(R.string.price, it)
+                binding.price.text = it
                 binding.price.isVisible = true
             }
 
             suggestion.lastPrice?.let {
-                binding.lastPrice.text = context.getString(R.string.lastPrice, it)
+                binding.lastPrice.text = it
                 binding.lastPrice.isVisible = true
             }
 
-            binding.card.setOnClickListener { onItemClicked(suggestion.itemId) }
+            binding.card.setOnClickListener { suggestion.itemId?.let { it1 -> onItemClicked(it1) } }
         }
     }
 

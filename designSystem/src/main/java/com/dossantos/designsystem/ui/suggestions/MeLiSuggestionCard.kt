@@ -23,11 +23,13 @@ class MeLiSuggestionCard @JvmOverloads constructor(
 
     init {
         if (isInEditMode) {
-            setup("", listOf(MeLiSuggestion("", "", "2500,00", "","2500,00", null)))
+            setup("", listOf(MeLiSuggestion("", "", "2500,00", "", "2500,00", null)))
         }
     }
 
-    fun setup(title: String, suggestions: List<MeLiSuggestion>) {
+    fun setup(title: String, suggestions: List<MeLiSuggestion>?) {
+        if (suggestions == null) return
+
         binding.suggestionTitle.text = title
         adapter = MeLiSuggestionCardAdapter(suggestions, onItemClicked)
         binding.recyclerView.adapter = adapter

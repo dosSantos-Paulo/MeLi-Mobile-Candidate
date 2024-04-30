@@ -14,7 +14,7 @@ import com.dossantos.domain.repository.offer.OfferRepository
 import com.dossantos.domain.repository.suggestions.SuggestionsRepository
 import com.dossantos.domain.usecase.category.CategoryMenuUseCase
 import com.dossantos.domain.usecase.offer.OfferUseCase
-import com.dossantos.domain.usecase.suggestions.SuggestionsBusiness
+import com.dossantos.domain.usecase.suggestions.SuggestionsUseCase
 import com.dossantos.melimobilecandidate.viewmodel.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,7 +32,7 @@ private val viewModelModules = module {
         HomeViewModel(
             offerUseCase = get(),
             categoryMenuUseCase = get(),
-            suggestionsBusiness = get()
+            suggestionsUseCase = get()
         )
     }
 }
@@ -40,7 +40,7 @@ private val viewModelModules = module {
 private val useCaseModules = module {
     single { OfferUseCase(offerRepository = get()) }
     single { CategoryMenuUseCase(categoryRepository = get()) }
-    single { SuggestionsBusiness(suggestionsRepository = get()) }
+    single { SuggestionsUseCase(suggestionsRepository = get()) }
 }
 
 private val repositoryModules = module {

@@ -5,6 +5,8 @@ import com.dossantos.data.model.search.SearchPagingInfoDto
 import com.dossantos.data.model.search.SearchProductDto
 import com.dossantos.data.model.search.SearchResponseDto
 import com.dossantos.data.network.search.MeLiSearchEndpoint
+import com.dossantos.data.utils.Numbers.Integers.four
+import com.dossantos.data.utils.Numbers.Integers.oneHunderd
 import com.dossantos.domain.model.InstallmentsModel
 import com.dossantos.domain.model.PagingInfoModel
 import com.dossantos.domain.model.search.ProductsModel
@@ -18,7 +20,6 @@ import kotlin.math.roundToInt
 class SearchRepositoryImpl(
     private val searchEndpoint: MeLiSearchEndpoint
 ) : SearchRepository {
-    private val suggestionLimit = 4
 
     override fun searchByCategory(categoryId: String) = flow {
         emit(searchEndpoint.searchByCategory(categoryId = categoryId).toModel())
@@ -28,7 +29,7 @@ class SearchRepositoryImpl(
     override fun searchByCategories(categoriesId: List<String>) = flow {
         emit(
             categoriesId.map {
-                searchEndpoint.searchByCategory(categoryId = it, limit = suggestionLimit).toModel()
+                searchEndpoint.searchByCategory(categoryId = it, limit = four).toModel()
             }
         )
     }
@@ -70,7 +71,7 @@ class SearchRepositoryImpl(
             if (originalPrice == null || price == null) return null
 
             return if (originalPrice > price) {
-                "${(((originalPrice - price) / originalPrice) * 100).roundToInt()}% OFF"
+                "${(((originalPrice - price) / originalPrice) * oneHunderd).roundToInt()}% OFF"
             } else null
         }
 

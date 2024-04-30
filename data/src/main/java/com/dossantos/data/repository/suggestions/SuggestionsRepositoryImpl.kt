@@ -15,8 +15,6 @@ class SuggestionsRepositoryImpl(
     private val searchEndpoint: MeLiSearchEndpoint
 ) : SuggestionsRepository {
 
-    private val suggestionLimit = 4
-
     override fun addSuggestion(categoryId: String) {
         suggestionsDao.insertSuggestion(
             SuggestionsEntity(

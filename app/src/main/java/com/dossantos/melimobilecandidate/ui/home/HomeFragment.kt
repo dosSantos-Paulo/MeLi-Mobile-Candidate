@@ -23,19 +23,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.init()
-        observeOffers()
-        observeCategoryMenu()
-        observeSuggestions()
+        setupObservables()
     }
 
-    private fun observeOffers() =
+    private fun setupObservables() {
         viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
-
-    private fun observeCategoryMenu() =
         viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
-
-    private fun observeSuggestions() =
         viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
+    }
 
     private fun onOffers(observable: OfferUiState) = when (val uiState = observable.uiState) {
         is OfferUiState.StateUi.OnSuccess -> showOffers(uiState.offers)

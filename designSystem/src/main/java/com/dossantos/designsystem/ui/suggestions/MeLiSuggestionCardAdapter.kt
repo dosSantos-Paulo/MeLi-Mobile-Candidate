@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.dossantos.designsystem.R
 import com.dossantos.designsystem.databinding.MeliSuggestionItemBinding
 import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.designsystem.utils.checkAndUseImage
@@ -22,7 +21,6 @@ class MeLiSuggestionCardAdapter(
             onItemClicked: (suggestionId: String) -> Unit
         ) {
             binding.image.checkAndUseImage(suggestion.imageUrl)
-            val context = binding.root.context
 
             suggestion.title?.let {
                 binding.title.text = it

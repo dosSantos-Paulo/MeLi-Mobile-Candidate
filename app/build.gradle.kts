@@ -6,6 +6,7 @@ plugins {
     id(Plugins.googleServices)
     id(Plugins.crashlytics)
     id(Plugins.detekt)
+    id(Plugins.kpta)
 }
 
 android {
@@ -106,6 +107,13 @@ dependencies {
     testImplementation(Dependencies.Test.koin)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
+
+    /**
+     * Room
+     */
+    implementation(Dependencies.Room.runtime)
+    implementation(Dependencies.Room.ktx)
+    kapt(Dependencies.Room.compiler)
 }
 
 fun getSecret(key: String): String? {

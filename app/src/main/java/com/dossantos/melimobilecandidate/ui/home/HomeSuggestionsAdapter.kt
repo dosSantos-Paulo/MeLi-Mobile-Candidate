@@ -7,11 +7,11 @@ import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
 import com.dossantos.melimobilecandidate.databinding.ItemHomeSuggestionsBinding
 
 class HomeSuggestionsAdapter(
-    val suggestions: List<Pair<String, List<MeLiSuggestion>>>
+    private val suggestions: List<Pair<String, List<MeLiSuggestion>?>>
 ) : RecyclerView.Adapter<HomeSuggestionsAdapter.ViewHolder>() {
-    class ViewHolder(val binding: ItemHomeSuggestionsBinding) :
+    class ViewHolder(private val binding: ItemHomeSuggestionsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(suggestions: Pair<String, List<MeLiSuggestion>>) {
+        fun onBind(suggestions: Pair<String, List<MeLiSuggestion>?>) {
             binding.meLiSuggestion.setup(suggestions.first, suggestions.second)
         }
     }

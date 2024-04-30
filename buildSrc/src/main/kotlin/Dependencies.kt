@@ -19,6 +19,7 @@ object Dependencies {
         const val archCore = "androidx.arch.core:core-testing:${Versions.Test.archCore}"
         const val testCore = "androidx.test:core-ktx:${Versions.Test.testCore}"
         const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jre${Versions.Test.stdLib}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.Coroutines.core}"
     }
 
     object Core {

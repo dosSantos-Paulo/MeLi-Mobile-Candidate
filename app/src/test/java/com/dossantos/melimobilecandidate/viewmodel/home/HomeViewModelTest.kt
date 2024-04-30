@@ -9,7 +9,8 @@ import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.domain.usecase.category.CategoryMenuUseCase
 import com.dossantos.domain.usecase.offer.OfferUseCase
 import com.dossantos.domain.usecase.suggestions.SuggestionsUseCase
-import com.dossantos.melimobilecandidate.LiveDataTestUtil
+import com.dossantos.melimobilecandidate.TestException
+import com.dossantos.melimobilecandidate.getValue
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -25,7 +26,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlin.reflect.KClass
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
@@ -59,7 +59,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.offerUiState)
+        val obserable = getValue(viewModel.offerUiState)
 
         // Then
         assert(obserable?.uiState is OfferUiState.StateUi.OnSuccess)
@@ -74,7 +74,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.offerUiState)
+        val obserable = getValue(viewModel.offerUiState)
 
         // Then
         assert(obserable?.uiState is OfferUiState.StateUi.OnError)
@@ -89,7 +89,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.categoryMenuUiState)
+        val obserable = getValue(viewModel.categoryMenuUiState)
 
         // Then
         assert(obserable?.uiState is CategoryMenuUiState.StateUi.OnSuccess)
@@ -104,7 +104,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.categoryMenuUiState)
+        val obserable = getValue(viewModel.categoryMenuUiState)
 
         // Then
         assert(obserable?.uiState is CategoryMenuUiState.StateUi.OnError)
@@ -119,7 +119,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.suggestionsUiState)
+        val obserable = getValue(viewModel.suggestionsUiState)
 
         // Then
         assert(obserable?.uiState is SuggestionsUiState.StateUi.OnSuccess)
@@ -134,7 +134,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.init()
-        val obserable = LiveDataTestUtil.getValue(viewModel.suggestionsUiState)
+        val obserable = getValue(viewModel.suggestionsUiState)
 
         // Then
         assert(obserable?.uiState is SuggestionsUiState.StateUi.OnError)
@@ -147,7 +147,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.retryOffer()
-        val obserable = LiveDataTestUtil.getValue(viewModel.offerUiState)
+        val obserable = getValue(viewModel.offerUiState)
 
         // Then
         assert(obserable?.uiState is OfferUiState.StateUi.OnSuccess)
@@ -175,7 +175,7 @@ class HomeViewModelTest {
         count: Int = 0,
         onContinue: (OfferUiState?) -> Unit
     ) {
-        LiveDataTestUtil.getValue(liveData)?.let { value ->
+        getValue(liveData)?.let { value ->
             if (value.uiState is OfferUiState.StateUi.OnError && count < 10) {
                 onContinue(value)
                 recursiveOfferObservation(liveData, count + 1, onContinue)
@@ -190,7 +190,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.retryCategoryMenu()
-        val observable = LiveDataTestUtil.getValue(viewModel.categoryMenuUiState)
+        val observable = getValue(viewModel.categoryMenuUiState)
 
         // Then
         coVerify { categoryMenuUseCase.getMenuCategory() }
@@ -219,7 +219,7 @@ class HomeViewModelTest {
         count: Int = 0,
         onContinue: (CategoryMenuUiState?) -> Unit
     ) {
-        LiveDataTestUtil.getValue(liveData)?.let { value ->
+        getValue(liveData)?.let { value ->
             if (value.uiState is CategoryMenuUiState.StateUi.OnError && count < 10) {
                 onContinue(value)
                 recursiveCategoryObservation(liveData, count + 1, onContinue)
@@ -234,7 +234,7 @@ class HomeViewModelTest {
 
         // When
         viewModel.retrySuggestions()
-        val observable = LiveDataTestUtil.getValue(viewModel.suggestionsUiState)
+        val observable = getValue(viewModel.suggestionsUiState)
 
         // Then
         coVerify { suggestionsUseCase.getSuggestions() }
@@ -263,7 +263,7 @@ class HomeViewModelTest {
         count: Int = 0,
         onContinue: (SuggestionsUiState?) -> Unit
     ) {
-        LiveDataTestUtil.getValue(liveData)?.let { value ->
+        getValue(liveData)?.let { value ->
             if (value.uiState is SuggestionsUiState.StateUi.OnError && count < 10) {
                 onContinue(value)
                 recursiveSuggestionsObservation(liveData, count + 1, onContinue)
@@ -272,15 +272,15 @@ class HomeViewModelTest {
     }
 
     private fun getListOffersThrow() = flow<List<OfferModel>> {
-        throw RuntimeException("crash")
+        throw TestException()
     }
 
     private fun getListOfCategoriesThrow() = flow<List<MenuCategoryModel>> {
-        throw RuntimeException("crash")
+        throw TestException()
     }
 
     private fun getListOfSuggestionsThrow() = flow<List<SuggestionsModel>> {
-        throw RuntimeException("crash")
+        throw TestException()
     }
 
     private fun getListOffers() = flow {

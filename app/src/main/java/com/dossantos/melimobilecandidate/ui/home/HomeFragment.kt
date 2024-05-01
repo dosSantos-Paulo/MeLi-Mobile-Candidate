@@ -6,8 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
-import com.dossantos.designsystem.model.category.MeLiCategory
-import com.dossantos.designsystem.model.offer.MeLiOffer
 import com.dossantos.designsystem.model.suggestions.MeLiProducts
 import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.melimobilecandidate.R

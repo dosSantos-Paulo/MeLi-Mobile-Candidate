@@ -2,7 +2,6 @@ package com.dossantos.melimobilecandidate.ui.search
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AbsListView.OnScrollListener
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController

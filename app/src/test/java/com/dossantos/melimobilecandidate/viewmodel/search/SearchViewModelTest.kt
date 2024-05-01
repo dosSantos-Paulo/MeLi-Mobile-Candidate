@@ -50,7 +50,7 @@ class SearchViewModelTest {
         val observer = mockk<Observer<in SearchStateUi>>()
         val slot = slot<SearchStateUi>()
         coEvery { observer.onChanged(capture(slot)) } answers {}
-        coEvery { searchUseCase.search(searchString, 10) } returns getSearchResponse()
+        coEvery { searchUseCase.searchProductByString(searchString, 10) } returns getSearchResponse()
 
         // When
         viewModel.initSearch(searchString)
@@ -85,7 +85,7 @@ class SearchViewModelTest {
         val observer = mockk<Observer<in SearchStateUi>>()
         val slot = slot<SearchStateUi>()
         coEvery { observer.onChanged(capture(slot)) } answers {}
-        coEvery { searchUseCase.search(searchString, 0) } returns flow { TestException() }
+        coEvery { searchUseCase.searchProductByString(searchString, 0) } returns flow { TestException() }
 
         // When
         viewModel.initSearch(searchString)

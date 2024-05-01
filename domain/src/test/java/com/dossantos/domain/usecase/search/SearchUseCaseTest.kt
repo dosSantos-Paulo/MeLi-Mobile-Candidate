@@ -37,7 +37,7 @@ class SearchUseCaseTest {
         coEvery { searchRepository.searchByString(search, offset) } returns getSearchResponse()
 
         // When
-        useCase.search(search, offset).single().let { response ->
+        useCase.searchProductByString(search, offset).single().let { response ->
 
             // Then
             coVerify { searchRepository.searchByString(search, offset) }
@@ -54,7 +54,7 @@ class SearchUseCaseTest {
 
         // When
         try {
-            useCase.search(search, offset)
+            useCase.searchProductByString(search, offset)
         }catch (exception: Exception) {
 
             // Then
@@ -71,7 +71,7 @@ class SearchUseCaseTest {
         coEvery { searchRepository.searchByCategory(search) } returns getSearchResponse()
 
         // When
-        useCase.search(search, offset).single().let { response ->
+        useCase.searchProductByString(search, offset).single().let { response ->
 
             // Then
             coVerify { searchRepository.searchByCategory(search) }
@@ -88,7 +88,7 @@ class SearchUseCaseTest {
 
         // When
         try {
-            useCase.search(search, offset)
+            useCase.searchProductByString(search, offset)
         }catch (exception: Exception) {
             // Then
             coVerify { searchRepository.searchByCategory(search) }

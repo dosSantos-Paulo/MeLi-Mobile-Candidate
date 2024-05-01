@@ -11,6 +11,7 @@ import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.melimobilecandidate.R
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
+import com.dossantos.melimobilecandidate.ui.product.ProductDetailFragment
 import com.dossantos.melimobilecandidate.ui.search.SearchFragment
 import com.dossantos.melimobilecandidate.utils.ElseNothing
 import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
@@ -27,12 +28,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private var lastSearch = String()
 
+    private val objectDetailSelected = MutableLiveData<String>()
+
+    private var lastObjectDetailSelected = String()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.init()
         setupObservables()
         setupOnSearch()
+        clearSearch()
+    }
 
+    private fun clearSearch() {
+        objectDetailSelected.value = String()
+        searchString.value = String()
+        lastSearch = String()
+        lastObjectDetailSelected = String()
     }
 
     private fun setupOnSearch() {
@@ -45,12 +57,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
         viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
         viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
+
         searchString.observe(viewLifecycleOwner) { string ->
             if (string.isNotEmpty() && string != lastSearch) {
                 lastSearch = string
                 findNavController().navigate(
                     R.id.action_homeFragment_to_searchFragment,
                     bundleOf(SearchFragment.STRING_SEARCH to string)
+                )
+            }
+        }
+
+        objectDetailSelected.observe(viewLifecycleOwner) { string ->
+            if (string.isNotEmpty() && string != lastObjectDetailSelected) {
+                lastObjectDetailSelected = string
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_productDetailFragment,
+                    bundleOf(ProductDetailFragment.SEARCH_PRODUCT to string)
                 )
             }
         }
@@ -95,7 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             is SuggestionsUiState.StateUi.OnSuccess -> {
                 binding.suggestionsRecyclerView.adapter =
                     HomeSuggestionsAdapter(uiState.suggestions.convertTexts())
-                    {}
+                    { objectDetailSelected.postValue(it) }
             }
 
             is SuggestionsUiState.StateUi.OnError -> {

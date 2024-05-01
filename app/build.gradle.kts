@@ -75,6 +75,7 @@ dependencies {
     implementation(Dependencies.Core.activity)
     implementation(Dependencies.Core.constraintlayout)
     implementation(Dependencies.Commons.dotLoading)
+    implementation(Dependencies.Commons.timber)
 
     /**
      * Depedency Injection

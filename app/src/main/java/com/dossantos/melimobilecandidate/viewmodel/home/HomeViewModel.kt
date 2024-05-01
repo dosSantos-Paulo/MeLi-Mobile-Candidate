@@ -15,8 +15,8 @@ import com.dossantos.melimobilecandidate.model.home.toMeLiProduct
 import com.dossantos.melimobilecandidate.utils.Integers.three
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
-import com.dossantos.melimobilecandidate.utils.runOnMain
 import com.dossantos.melimobilecandidate.utils.singleOrThrow
+import timber.log.Timber
 
 class HomeViewModel(
     private val offerUseCase: OfferUseCase,
@@ -51,16 +51,16 @@ class HomeViewModel(
         _offerUiState.postValue(OfferUiState().onLoading())
         offerUseCase.getOffers()
             .singleOrThrow(::onOfferSuccess) { ex ->
-                ex.printStackTrace()
+                Timber.e(ex)
                 _offerUiState.postValue(OfferUiState().onError())
             }
     }
 
-    private fun getCategoryMenu() = runOnMain {
+    private fun getCategoryMenu() = runOnIO {
         _categoryMenuUiState.postValue(CategoryMenuUiState().onLoading())
         categoryMenuUseCase.getMenuCategory()
             .singleOrThrow(::onCategoryMenuSuccess) { ex ->
-                ex.printStackTrace()
+                Timber.e(ex)
                 _categoryMenuUiState.postValue(CategoryMenuUiState().onError())
             }
     }
@@ -69,7 +69,7 @@ class HomeViewModel(
         _suggestionsUiState.postValue(SuggestionsUiState().onLoading())
         suggestionsUseCase.getSuggestions()
             .singleOrThrow(::onSuggestionsSuccess) { ex ->
-                ex.printStackTrace()
+                Timber.e(ex)
                 _suggestionsUiState.postValue(SuggestionsUiState().onError())
             }
     }

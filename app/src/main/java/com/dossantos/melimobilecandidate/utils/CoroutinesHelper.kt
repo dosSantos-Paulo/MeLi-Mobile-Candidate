@@ -25,10 +25,6 @@ suspend fun <T> Flow<T>.singleOrThrow(
     }
 }
 
-fun ViewModel.runOnMain(scope: suspend CoroutineScope.() -> Unit) {
-    viewModelScope.launch(context = Dispatchers.Main, block = scope)
-}
-
 fun ViewModel.runOnIO(scope: suspend CoroutineScope.() -> Unit) {
     viewModelScope.launch(context = Dispatchers.IO, block = scope)
 }

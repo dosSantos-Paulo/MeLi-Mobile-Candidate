@@ -10,25 +10,32 @@ import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.domain.repository.suggestions.SuggestionsRepository
 import java.util.Date
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class SuggestionsRepositoryImpl(
     private val suggestionsDao: MeLiSuggestionsDao,
     private val searchEndpoint: MeLiSearchEndpoint
 ) : SuggestionsRepository {
 
+    @Suppress("TooGenericExceptionCaught")
     override fun addSuggestion(categoryId: String) {
-        suggestionsDao.insertSuggestion(
-            SuggestionsEntity(
-                categoryId = categoryId,
-                dateTimeMills = Date().time,
-                SuggestionsType.ALREADY_VISITED.toString()
+        try {
+            suggestionsDao.insertSuggestion(
+                SuggestionsEntity(
+                    categoryId = categoryId,
+                    dateTimeMills = Date().time,
+                    suggestionType = SuggestionsType.ALREADY_VISITED.toString()
+                )
             )
-        )
+        } catch (ex: Exception) {
+            Timber.e(ex)
+        }
     }
 
     override fun getSuggestions() = flow {
-        val suggestions = suggestionsDao.getSuggestions()
-        emit(if (suggestions.isEmpty()) suggestionsMock() else suggestions.toModel())
+        val getDao = suggestionsDao.getSuggestions()
+        val suggestions = if (getDao.isEmpty()) suggestionsMock() else getDao.toModel()
+        emit(suggestions)
     }
 
     private suspend fun suggestionsMock() = mockedSuggestions().map { categoryId ->

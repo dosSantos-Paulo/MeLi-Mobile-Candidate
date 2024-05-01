@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.dossantos.data.model.suggestions.SuggestionsEntity
 
-@Database(entities = [SuggestionsEntity::class], version = 1, exportSchema = false)
+@Database(entities = [SuggestionsEntity::class], version = 2, exportSchema = false)
 abstract class MeLiSuggestionDataBase: RoomDatabase() {
     abstract fun getSuggestionsDao(): MeLiSuggestionsDao
 }

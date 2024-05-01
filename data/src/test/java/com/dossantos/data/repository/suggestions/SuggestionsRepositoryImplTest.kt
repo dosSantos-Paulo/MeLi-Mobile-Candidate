@@ -136,6 +136,6 @@ class SuggestionsRepositoryImplTest {
     )
 
     private fun suggestions(): List<SuggestionsEntity> = listOf(
-        SuggestionsEntity("MBL0001", 1L, "suggestionType")
+        SuggestionsEntity(categoryId = "MBL0001", dateTimeMills = 1L, suggestionType = "suggestionType")
     )
 }

@@ -16,8 +16,7 @@ class HomeSuggestionsAdapter(
             suggestions: Pair<String, List<MeLiProducts>?>,
             onCardClickListener: (String) -> Unit
         ) {
-            binding.meLiSuggestion.setup(suggestions.first, suggestions.second)
-            binding.meLiSuggestion.setOnItemClickListener(onCardClickListener)
+            binding.meLiSuggestion.setup(suggestions.first, suggestions.second, onCardClickListener)
         }
     }
 

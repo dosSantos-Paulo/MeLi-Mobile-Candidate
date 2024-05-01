@@ -6,6 +6,12 @@ import com.dossantos.data.model.search.SearchProductDto
 import com.dossantos.data.model.search.SearchResponseDto
 import com.dossantos.data.network.search.MeLiSearchEndpoint
 import com.dossantos.data.utils.Numbers.Integers.oneHunderd
+import com.dossantos.data.utils.calculateDiscount
+import com.dossantos.data.utils.eraseString
+import com.dossantos.data.utils.formatDiscountToString
+import com.dossantos.data.utils.replaceThumbnailToPicture
+import com.dossantos.data.utils.showOriginalPrice
+import com.dossantos.data.utils.toCurrency
 import com.dossantos.domain.model.InstallmentsModel
 import com.dossantos.domain.model.PagingInfoModel
 import com.dossantos.domain.model.search.ProductsModel
@@ -46,53 +52,16 @@ class SearchRepositoryImpl(
         private fun SearchPagingInfoDto?.toModel() = PagingInfoModel(this?.limit, this?.offset)
 
         private fun SearchProductDto.toModel() = ProductsModel(
-            id,
-            title,
-            price.toCurrency(installments?.currencyId),
-            showOriginalPrice().toCurrency(installments?.currencyId).erase(),
-            categoryId,
-            thumbnail.replaceThumbnailToPicture(),
-            installments.toModel(),
-            itemDiscount = calculateDiscount()
+            id = id,
+            title = title,
+            price = price.toCurrency(installments?.currencyId),
+            originalPrice = showOriginalPrice(originalPrice, price).toCurrency(installments?.currencyId).eraseString(),
+            categoryId = categoryId,
+            thumbnail = thumbnail.replaceThumbnailToPicture(),
+            installments = installments.toModel(),
+            itemDiscount = calculateDiscount(originalPrice, price).formatDiscountToString()
         )
 
         private fun SearchInstallmentsDto?.toModel() = InstallmentsModel(this?.currencyId)
-
-        private fun Double?.toCurrency(currencyId: String?): String? {
-            if (this == null) return null
-
-            val format: NumberFormat = NumberFormat.getCurrencyInstance()
-            format.currency = Currency.getInstance(currencyId?:"BRL")
-            return format.format(this)
-        }
-
-        private fun SearchProductDto.calculateDiscount(): String? {
-            if (originalPrice == null || price == null) return null
-
-            return if (originalPrice > price) {
-                "${(((originalPrice - price) / originalPrice) * oneHunderd).roundToInt()}% OFF"
-            } else null
-        }
-
-        private fun SearchProductDto.showOriginalPrice() =
-            if (originalPrice != null && price != null && originalPrice > price) originalPrice
-            else null
-
-        private fun String?.erase(): String? {
-            if (this == null) return null
-
-            val builder = StringBuilder()
-            for (char in this) {
-                builder.append(char)
-                builder.append("\u0336")
-            }
-            return builder.toString()
-        }
-
-        private fun String?.replaceThumbnailToPicture(): String? {
-            if (this == null) return null
-
-            return replace("-I.jpg", "-O.jpg")
-        }
     }
 }

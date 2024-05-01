@@ -2,6 +2,7 @@ package com.dossantos.melimobilecandidate.ui.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import com.dossantos.melimobilecandidate.R
 import com.dossantos.melimobilecandidate.databinding.FragmentSearchBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
 import com.dossantos.melimobilecandidate.ui.home.SearchInterface
+import com.dossantos.melimobilecandidate.ui.product.ProductDetailFragment
 import com.dossantos.melimobilecandidate.utils.Integers.one
 import com.dossantos.melimobilecandidate.viewmodel.search.SearchStateUi
 import com.dossantos.melimobilecandidate.viewmodel.search.SearchViewModel
@@ -110,9 +112,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         binding.recyclerView.adapter = searchAdapter
     }
 
-
     private fun setOnProductClickListener(itemId: String) {
-        println(itemId)
+        findNavController().navigate(
+            R.id.action_searchFragment_to_productDetailFragment,
+            bundleOf(ProductDetailFragment.SEARCH_PRODUCT to itemId)
+        )
     }
 
     companion object {

@@ -5,7 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "meli_suggestions")
 data class SuggestionsEntity(
-    @PrimaryKey val categoryId: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val categoryId: String,
     val dateTimeMills: Long,
     val suggestionType: String
 )

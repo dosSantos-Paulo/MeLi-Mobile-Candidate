@@ -10,6 +10,7 @@ import com.dossantos.melimobilecandidate.model.home.toMeLiProduct
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
 import com.dossantos.melimobilecandidate.utils.singleOrThrow
+import timber.log.Timber
 
 class SearchViewModel(
     private val searchUseCase: SearchUseCase,
@@ -48,18 +49,20 @@ class SearchViewModel(
 
     private fun meLiSearch() = runOnIO {
         _searchStateUi.postValue(SearchStateUi().onLoading())
-        searchUseCase.search(currentSearch, pageIndex)
+        _searchStateUi.postValue(SearchStateUi().onLoading())
+        searchUseCase.searchProductByString(currentSearch, pageIndex)
             .singleOrThrow(::onSearchSuccess, ::onError)
     }
 
     private fun onSearchSuccess(response: SearchResponseModel) {
         response.products?.let { products ->
-            _searchStateUi.postValue(SearchStateUi().onSuccess(products.map { it.toMeLiProduct() }))
+            val newResponse = products.map { it.toMeLiProduct() }
+            _searchStateUi.postValue(SearchStateUi().onSuccess(newResponse))
         }
     }
 
     private fun onError(ex: Exception) {
-        ex.printStackTrace()
+        Timber.e(ex)
         _searchStateUi.postValue(SearchStateUi().onError())
     }
 }

@@ -19,4 +19,5 @@
     <dimen name="suggestion_price_size">18sp</dimen>
     <dimen name="offer_width">350dp</dimen>
     <dimen name="category_max_size">80dp</dimen>
+    <dimen name="meli_image_size">300dp</dimen>
 </resources>

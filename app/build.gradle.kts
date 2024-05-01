@@ -152,7 +152,7 @@ fun updateFirebaseApi(key: String) {
 
     jsonFile.writeText(
         jsonContent.replace(
-            "\"current_key\": \"wrong_api\"",
+            "\"current_key\": \"wrong_key\"",
             "\"current_key\": $key"
         )
     )

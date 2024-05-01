@@ -2,14 +2,18 @@ package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import com.dossantos.designsystem.model.category.MeLiCategory
 import com.dossantos.designsystem.model.offer.MeLiOffer
-import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
+import com.dossantos.designsystem.model.suggestions.MeLiProducts
 import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.melimobilecandidate.R
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.ui.base.BaseFragment
+import com.dossantos.melimobilecandidate.ui.search.SearchFragment
 import com.dossantos.melimobilecandidate.utils.ElseNothing
 import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
 import com.dossantos.melimobilecandidate.viewmodel.home.HomeViewModel
@@ -21,25 +25,49 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModel()
 
+    private val searchString = MutableLiveData<String>()
+
+    private var lastSearch = String()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.init()
         setupObservables()
+        setupOnSearch()
+
+    }
+
+    private fun setupOnSearch() {
+        (requireActivity() as? SearchInterface)?.getToolbarView()?.onSearch {
+            searchString.postValue(it)
+        }
     }
 
     private fun setupObservables() {
         viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
         viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
         viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
+        searchString.observe(viewLifecycleOwner) { string ->
+            if (string.isNotEmpty() && string != lastSearch) {
+                lastSearch = string
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_searchFragment,
+                    bundleOf(SearchFragment.STRING_SEARCH to string)
+                )
+            }
+        }
     }
 
     private fun onOffers(observable: OfferUiState) = when (val uiState = observable.uiState) {
         is OfferUiState.StateUi.OnSuccess -> {
-            showOffers(uiState.offers)
+            binding.meLiOfferCarousel.setup(uiState.offers, requireActivity())
+            binding.meLiOfferCarousel.setOnCardClickListener { searchString.postValue(it) }
         }
+
         is OfferUiState.StateUi.OnError -> {
             viewModel.retryOffer()
         }
+
         else -> ElseNothing
     }
 
@@ -48,40 +76,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             is CategoryMenuUiState.StateUi.OnSuccess -> {
                 binding.categoryLoading.isVisible = false
                 binding.categoryLayout.isVisible = true
-                showMenu(uiState.categories)
+                binding.meLiCategoryCarousel.setup(uiState.categories)
+                { searchString.postValue(it) }
             }
+
             is CategoryMenuUiState.StateUi.OnError -> {
                 binding.categoryLayout.isVisible = false
                 viewModel.retryCategoryMenu()
             }
+
             is CategoryMenuUiState.StateUi.ShowLoading -> {
                 binding.categoryLoading.isVisible = true
             }
+
             else -> ElseNothing
         }
 
     private fun onSuggestions(observable: SuggestionsUiState) =
         when (val uiState = observable.uiState) {
             is SuggestionsUiState.StateUi.OnSuccess -> {
-                showSuggestions(uiState.suggestions)
+                binding.suggestionsRecyclerView.adapter =
+                    HomeSuggestionsAdapter(uiState.suggestions.convertTexts())
+                    {}
             }
+
             is SuggestionsUiState.StateUi.OnError -> {
                 viewModel.retrySuggestions()
             }
+
             else -> ElseNothing
         }
 
-    private fun showOffers(offers: List<MeLiOffer>) = binding.meLiOfferCarousel
-        .setup(offers, requireActivity())
-
-    private fun showMenu(categories: List<MeLiCategory>) = binding.meLiCategoryCarousel
-        .setup(categories)
-
-    private fun showSuggestions(suggestions: List<Pair<SuggestionsType, List<MeLiSuggestion>?>>) {
-        binding.suggestionsRecyclerView.adapter = HomeSuggestionsAdapter(suggestions.convertTexts())
-    }
-
-    private fun List<Pair<SuggestionsType, List<MeLiSuggestion>?>>.convertTexts() = map { pair ->
+    private fun List<Pair<SuggestionsType, List<MeLiProducts>?>>.convertTexts() = map { pair ->
         pair.first.toSuggestionTitle() to pair.second
     }
 

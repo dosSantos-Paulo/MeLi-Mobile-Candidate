@@ -11,7 +11,7 @@ import com.dossantos.domain.usecase.offer.OfferUseCase
 import com.dossantos.domain.usecase.suggestions.SuggestionsUseCase
 import com.dossantos.melimobilecandidate.model.home.toMeLiCategory
 import com.dossantos.melimobilecandidate.model.home.toMeLiOffer
-import com.dossantos.melimobilecandidate.model.home.toMeLiSuggestion
+import com.dossantos.melimobilecandidate.model.home.toMeLiProduct
 import com.dossantos.melimobilecandidate.utils.Integers.three
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
@@ -104,7 +104,7 @@ class HomeViewModel(
     private fun onSuggestionsSuccess(suggestions: List<SuggestionsModel?>) {
         _suggestionsUiState.postValue(
             SuggestionsUiState().onSuccess(
-                suggestions.toMeLiSuggestion()
+                suggestions.toMeLiProduct()
             )
         )
     }

@@ -103,7 +103,7 @@ class SearchRepositoryImplTest {
         coEvery { searchEndpoint.searchByString(string = "currentSearch") } returns searchResponseDto()
 
         // When
-        searchRepository.searchByString(string).single().let {
+        searchRepository.searchByString(string,).single().let {
 
 
             // Then
@@ -119,7 +119,7 @@ class SearchRepositoryImplTest {
         )
 
         // When
-        searchRepository.searchByString(string = "categoryId").catch {
+        searchRepository.searchByString(string = "categoryId",).catch {
 
             // Then
             assert("crash" == it.message)

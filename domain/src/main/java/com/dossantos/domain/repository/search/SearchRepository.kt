@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface SearchRepository {
     fun searchByCategory(categoryId: String): Flow<SearchResponseModel>
     fun searchByCategories(categoriesId: List<String>): Flow<List<SearchResponseModel>>
-    fun searchByString(string: String): Flow<SearchResponseModel>
+    fun searchByString(string: String, offset: Int = 0): Flow<SearchResponseModel>
 }

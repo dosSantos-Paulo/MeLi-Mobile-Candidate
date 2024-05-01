@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MeLi Mobile Candidate</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="unknown_error">Houve um erro inesperado</string>
+    <string name="suggestion_message">Acreditamos que talvez você goste destes produtos</string>
+    <string name="already_suggestion_message">Como você já viu algo parecido antes, o que acha ?</string>
+    <string name="back">voltar</string>
+    <string name="search_again">Pesquisar Novamente</string>
+    <string name="unexpected_error">Ops... Houve um erro inesperado. 😞</string>
+    <string name="buy">Comprar</string>
 </resources>

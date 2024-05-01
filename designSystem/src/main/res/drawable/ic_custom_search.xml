@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <inset
+            android:drawable="@color/transparent"  android:insetLeft="12dp"  android:insetTop="6dp"  android:insetRight="6dp"  android:insetBottom="6dp"  />
+    </item>
+    <item>
+        <layer-list>
+            <item android:drawable="@drawable/baseline_search_ic" />  </layer-list>
+    </item>
+</layer-list>

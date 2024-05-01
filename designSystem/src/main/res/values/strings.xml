@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_hint">Buscar no MeLi Mobile</string>
+    <string name="back_buttom_description">botão de voltar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="shopping_kart_button_description">botão de carrinho</string>
+    <string name="shopping_cart_message">Você poderá acessar isso no futuro</string>
+    <string name="fake_address">Av. Paulista, 513</string>
+    <string name="price">R$ %1s</string>
+    <string name="lastPrice"><strike>R$ %1s</strike></string>
+    <string name="discount">%1s %</string>
+    <string name="badge_count">%1$s/%2$s</string>
+</resources>

@@ -19,23 +19,11 @@ class MeLiSuggestionCard @JvmOverloads constructor(
 
     private var adapter: MeLiSuggestionCardAdapter? = null
 
-    private var onItemClicked: (suggestionId: String) -> Unit = {}
-
-    init {
-        if (isInEditMode) {
-            setup("", listOf(MeLiProducts("", "", "2500,00", "", "2500,00", null)))
-        }
-    }
-
-    fun setup(title: String, suggestions: List<MeLiProducts>?) {
+    fun setup(title: String, suggestions: List<MeLiProducts>?, onClick: (suggestionId: String) -> Unit) {
         if (suggestions == null) return
 
         binding.suggestionTitle.text = title
-        adapter = MeLiSuggestionCardAdapter(suggestions, onItemClicked)
+        adapter = MeLiSuggestionCardAdapter(suggestions, onClick)
         binding.recyclerView.adapter = adapter
-    }
-
-    fun setOnItemClickListener(onClick: (suggestionId: String) -> Unit) {
-        onItemClicked = onClick
     }
 }

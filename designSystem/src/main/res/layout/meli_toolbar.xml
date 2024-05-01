@@ -86,11 +86,12 @@
         android:id="@+id/icon"
         android:layout_width="14dp"
         android:layout_height="14dp"
+        android:layout_marginStart="16dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/outline_add_location_24"
         app:layout_constraintBottom_toBottomOf="@+id/addressText"
-        app:layout_constraintStart_toStartOf="@+id/searchField"
-        app:layout_constraintTop_toTopOf="@+id/addressText"
-        android:importantForAccessibility="no" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addressText" />
 
     <TextView
         android:id="@+id/addressText"

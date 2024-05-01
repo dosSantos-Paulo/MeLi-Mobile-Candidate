@@ -10,6 +10,7 @@ import com.dossantos.domain.usecase.products.ProductsUseCase
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
 import com.dossantos.melimobilecandidate.utils.singleOrThrow
+import timber.log.Timber
 
 class ProductDetailViewModel(
     private val productId: String,
@@ -49,7 +50,7 @@ class ProductDetailViewModel(
     }
 
     private fun onProductError(ex: Exception) {
-        ex.printStackTrace()
+        Timber.e(ex)
         _productDetailStateUi.postValue(ProductDetailStateUi().onError())
     }
 

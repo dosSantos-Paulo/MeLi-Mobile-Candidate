@@ -47,6 +47,7 @@ dependencies {
      */
     implementation(Dependencies.Core.coreKtx)
     implementation(Dependencies.Core.liveData)
+    implementation(Dependencies.Commons.timber)
 
     /**
      * Coroutines

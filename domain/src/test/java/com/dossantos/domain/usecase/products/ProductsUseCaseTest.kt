@@ -84,6 +84,6 @@ class ProductsUseCaseTest {
     }
 
     private fun getProductsResponseThrow() =
-        flow<ProductResponseModel> { throw RuntimeException("crash") }
+        flow<ProductResponseModel> { throw NullPointerException("crash") }
 
 }

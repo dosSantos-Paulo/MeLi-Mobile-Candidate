@@ -31,6 +31,7 @@ class MeLiToolbar @JvmOverloads constructor(
         setupTextField()
     }
 
+    @Suppress("LongParameterList")
     fun setup(
         isDefaultSetup: Boolean = false,
         backButtonVisibility: Boolean = false,

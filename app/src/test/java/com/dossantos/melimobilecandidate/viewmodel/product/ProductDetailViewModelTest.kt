@@ -6,7 +6,6 @@ import com.dossantos.designsystem.model.product.MeLiProductModel
 import com.dossantos.domain.model.product.ProductResponseModel
 import com.dossantos.domain.usecase.products.ProductsUseCase
 import com.dossantos.melimobilecandidate.TestException
-import com.dossantos.melimobilecandidate.viewmodel.home.OfferUiState
 import io.mockk.coEvery
 import io.mockk.coVerifySequence
 import io.mockk.mockk

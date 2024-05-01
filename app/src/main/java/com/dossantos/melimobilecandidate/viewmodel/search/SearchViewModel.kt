@@ -10,6 +10,7 @@ import com.dossantos.melimobilecandidate.model.home.toMeLiProduct
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
 import com.dossantos.melimobilecandidate.utils.singleOrThrow
+import timber.log.Timber
 
 class SearchViewModel(
     private val searchUseCase: SearchUseCase,
@@ -61,7 +62,7 @@ class SearchViewModel(
     }
 
     private fun onError(ex: Exception) {
-        ex.printStackTrace()
+        Timber.e(ex)
         _searchStateUi.postValue(SearchStateUi().onError())
     }
 }

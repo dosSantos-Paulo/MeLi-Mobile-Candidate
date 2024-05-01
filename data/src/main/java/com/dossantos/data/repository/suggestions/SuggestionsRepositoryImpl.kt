@@ -10,12 +10,14 @@ import com.dossantos.domain.model.suggestions.SuggestionsType
 import com.dossantos.domain.repository.suggestions.SuggestionsRepository
 import java.util.Date
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class SuggestionsRepositoryImpl(
     private val suggestionsDao: MeLiSuggestionsDao,
     private val searchEndpoint: MeLiSearchEndpoint
 ) : SuggestionsRepository {
 
+    @Suppress("TooGenericExceptionCaught")
     override fun addSuggestion(categoryId: String) {
         try {
             suggestionsDao.insertSuggestion(
@@ -26,7 +28,7 @@ class SuggestionsRepositoryImpl(
                 )
             )
         } catch (ex: Exception) {
-            ex.printStackTrace()
+            Timber.e(ex)
         }
     }
 

@@ -36,17 +36,20 @@ class MeLiToolbar @JvmOverloads constructor(
         backButtonVisibility: Boolean = false,
         cancelButtonVisibility: Boolean = false,
         cartButtonVisibility: Boolean = true,
+        searchBoxVisibility: Boolean = true,
         isFixed: Boolean = false
     ) {
         if (isDefaultSetup) {
             setDefaultButtons()
             clearTextField()
             cancelSearching()
+            binding.searchField.visibility = VISIBLE
             fixeButtons = false
         } else {
             binding.buttonBack.isVisible = backButtonVisibility
             binding.buttonCancelSearch.isVisible = cancelButtonVisibility
             binding.buttonShoppingCart.isVisible = cartButtonVisibility
+            binding.searchField.visibility = if (searchBoxVisibility) VISIBLE else INVISIBLE
             fixeButtons = isFixed
         }
     }

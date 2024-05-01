@@ -1,6 +1,6 @@
 package com.dossantos.designsystem.model.suggestions
 
-data class MeLiSuggestion(
+data class MeLiProducts(
     val itemId: String?,
     val title: String?,
     val lastPrice: String?,

@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.dossantos.designsystem.databinding.MeliSuggestionItemBinding
-import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
+import com.dossantos.designsystem.model.suggestions.MeLiProducts
 import com.dossantos.designsystem.utils.checkAndUseImage
 
 class MeLiSuggestionCardAdapter(
-    private val suggestions: List<MeLiSuggestion>,
+    private val suggestions: List<MeLiProducts>,
     private val onItemClicked: (suggestionId: String) -> Unit
 ) : RecyclerView.Adapter<MeLiSuggestionCardAdapter.ViewHolder>() {
 
@@ -17,7 +17,7 @@ class MeLiSuggestionCardAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(
-            suggestion: MeLiSuggestion,
+            suggestion: MeLiProducts,
             onItemClicked: (suggestionId: String) -> Unit
         ) {
             binding.image.checkAndUseImage(suggestion.imageUrl)

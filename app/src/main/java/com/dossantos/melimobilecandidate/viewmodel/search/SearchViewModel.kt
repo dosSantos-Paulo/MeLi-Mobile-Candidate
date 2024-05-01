@@ -48,13 +48,15 @@ class SearchViewModel(
 
     private fun meLiSearch() = runOnIO {
         _searchStateUi.postValue(SearchStateUi().onLoading())
-        searchUseCase.search(currentSearch, pageIndex)
+        _searchStateUi.postValue(SearchStateUi().onLoading())
+        searchUseCase.searchProductByString(currentSearch, pageIndex)
             .singleOrThrow(::onSearchSuccess, ::onError)
     }
 
     private fun onSearchSuccess(response: SearchResponseModel) {
         response.products?.let { products ->
-            _searchStateUi.postValue(SearchStateUi().onSuccess(products.map { it.toMeLiProduct() }))
+            val newResponse = products.map { it.toMeLiProduct() }
+            _searchStateUi.postValue(SearchStateUi().onSuccess(newResponse))
         }
     }
 

@@ -15,7 +15,6 @@ import com.dossantos.melimobilecandidate.model.home.toMeLiProduct
 import com.dossantos.melimobilecandidate.utils.Integers.three
 import com.dossantos.melimobilecandidate.utils.Integers.zero
 import com.dossantos.melimobilecandidate.utils.runOnIO
-import com.dossantos.melimobilecandidate.utils.runOnMain
 import com.dossantos.melimobilecandidate.utils.singleOrThrow
 
 class HomeViewModel(
@@ -56,7 +55,7 @@ class HomeViewModel(
             }
     }
 
-    private fun getCategoryMenu() = runOnMain {
+    private fun getCategoryMenu() = runOnIO {
         _categoryMenuUiState.postValue(CategoryMenuUiState().onLoading())
         categoryMenuUseCase.getMenuCategory()
             .singleOrThrow(::onCategoryMenuSuccess) { ex ->

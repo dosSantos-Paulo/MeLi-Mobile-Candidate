@@ -33,8 +33,8 @@ class SearchRepositoryImpl(
         )
     }
 
-    override fun searchByString(string: String) = flow {
-        emit(searchEndpoint.searchByString(string = string).toModel())
+    override fun searchByString(string: String, offset: Int) = flow {
+        emit(searchEndpoint.searchByString(string = string, offset = offset).toModel())
     }
 
     companion object {

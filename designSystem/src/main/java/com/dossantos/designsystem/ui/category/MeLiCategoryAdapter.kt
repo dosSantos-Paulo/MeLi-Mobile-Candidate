@@ -9,19 +9,19 @@ import com.dossantos.designsystem.model.category.MeLiCategory
 
 class MeLiCategoryAdapter(
     private val categoryList: List<MeLiCategory>,
-    private val onCategoryClickListener: (MeLiCategory) -> Unit
+    private val onCategoryClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<MeLiCategoryAdapter.ViewHolder>() {
     class ViewHolder(val binding: MeliCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(
             category: MeLiCategory,
-            onCategoryClickListener: (MeLiCategory) -> Unit
+            onCategoryClickListener: (String) -> Unit
         ) {
             binding.categoryTitle.text = category.name
             Glide.with(binding.root).load(category.imageUrl).into(binding.image)
             binding.image.contentDescription = category.name
 
             binding.card.setOnClickListener {
-                onCategoryClickListener(category)
+                onCategoryClickListener(category.id.orEmpty())
             }
         }
     }

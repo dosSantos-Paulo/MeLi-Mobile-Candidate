@@ -24,9 +24,31 @@ class MeLiToolbar @JvmOverloads constructor(
 
     private var onSearch: (String) -> Unit = {}
 
+    private var fixeButtons = false
+
     init {
-        setupButtons()
+        setDefaultButtons()
         setupTextField()
+    }
+
+    fun setup(
+        isDefaultSetup: Boolean = false,
+        backButtonVisibility: Boolean = false,
+        cancelButtonVisibility: Boolean = false,
+        cartButtonVisibility: Boolean = true,
+        isFixed: Boolean = false
+    ) {
+        if (isDefaultSetup) {
+            setDefaultButtons()
+            clearTextField()
+            cancelSearching()
+            fixeButtons = false
+        } else {
+            binding.buttonBack.isVisible = backButtonVisibility
+            binding.buttonCancelSearch.isVisible = cancelButtonVisibility
+            binding.buttonShoppingCart.isVisible = cartButtonVisibility
+            fixeButtons = isFixed
+        }
     }
 
     fun onSearch(doOnSearch: (search: String) -> Unit) {
@@ -38,29 +60,31 @@ class MeLiToolbar @JvmOverloads constructor(
         hideKeyboard()
     }
 
-    fun cancelButtonSetOnClickListener(action: (View) -> Unit) {
+    fun setOnCancelButtonClickListener(action: (View) -> Unit) {
         binding.buttonCancelSearch.setOnClickListener(action)
     }
 
-    fun backButtonSetOnClickListener(action: (View) -> Unit) {
+    fun setOnBackButtonClickListener(action: (View) -> Unit) {
         binding.buttonBack.setOnClickListener(action)
     }
 
-    fun shoppingCartButtonSetOnClickListener(action: (View) -> Unit) {
+    fun setOnCartButtonClickListener(action: (View) -> Unit) {
         binding.buttonShoppingCart.setOnClickListener(action)
     }
 
-    private fun setupButtons() {
-        cancelButtonSetOnClickListener { clearTextField() }
-        backButtonSetOnClickListener { clearTextField() }
-        shoppingCartButtonSetOnClickListener { clearTextField() }
+    private fun setDefaultButtons() {
+        setOnCancelButtonClickListener { clearTextField() }
+        setOnBackButtonClickListener { clearTextField() }
+        setOnCartButtonClickListener { clearTextField() }
     }
 
     private fun setupTextField() = with(binding.searchField) {
         editText?.doOnTextChanged { text, _, _, _ ->
             text?.length?.let { length ->
-                if (length > zero) isSearching()
-                else cancelSearching()
+                if (fixeButtons.not()) {
+                    if (length > zero) isSearching()
+                    else cancelSearching()
+                }
             }
         }
 

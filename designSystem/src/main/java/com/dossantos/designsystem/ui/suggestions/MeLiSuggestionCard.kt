@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.dossantos.designsystem.databinding.MeliSuggestionsCardBinding
-import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
+import com.dossantos.designsystem.model.suggestions.MeLiProducts
 
 class MeLiSuggestionCard @JvmOverloads constructor(
     context: Context,
@@ -23,11 +23,11 @@ class MeLiSuggestionCard @JvmOverloads constructor(
 
     init {
         if (isInEditMode) {
-            setup("", listOf(MeLiSuggestion("", "", "2500,00", "", "2500,00", null)))
+            setup("", listOf(MeLiProducts("", "", "2500,00", "", "2500,00", null)))
         }
     }
 
-    fun setup(title: String, suggestions: List<MeLiSuggestion>?) {
+    fun setup(title: String, suggestions: List<MeLiProducts>?) {
         if (suggestions == null) return
 
         binding.suggestionTitle.text = title

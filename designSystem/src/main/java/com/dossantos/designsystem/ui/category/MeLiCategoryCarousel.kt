@@ -19,18 +19,12 @@ class MeLiCategoryCarousel @JvmOverloads constructor(
 
     private var adapter: MeLiCategoryAdapter? = null
 
-    private var setOnCategoryClickListener: (MeLiCategory) -> Unit = {}
-
     init {
-        if (isInEditMode) setup(listOf(MeLiCategory("auto", "", "")))
+        if (isInEditMode) setup(listOf(MeLiCategory("auto", "", "")), {})
     }
 
-    fun setup(category: List<MeLiCategory>) {
-        this.adapter = MeLiCategoryAdapter(category, setOnCategoryClickListener)
+    fun setup(category: List<MeLiCategory>, onClick: (String) -> Unit) {
+        this.adapter = MeLiCategoryAdapter(category, onClick)
         binding.recyclerView.adapter = adapter
-    }
-
-    fun setOnCategoryClickListener(onClick: (MeLiCategory) -> Unit) {
-        setOnCategoryClickListener = onClick
     }
 }

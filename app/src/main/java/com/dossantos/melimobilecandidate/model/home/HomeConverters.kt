@@ -2,7 +2,7 @@ package com.dossantos.melimobilecandidate.model.home
 
 import com.dossantos.designsystem.model.category.MeLiCategory
 import com.dossantos.designsystem.model.offer.MeLiOffer
-import com.dossantos.designsystem.model.suggestions.MeLiSuggestion
+import com.dossantos.designsystem.model.suggestions.MeLiProducts
 import com.dossantos.domain.model.category.MenuCategoryModel
 import com.dossantos.domain.model.offer.OfferModel
 import com.dossantos.domain.model.search.ProductsModel
@@ -21,17 +21,17 @@ fun MenuCategoryModel.toMeLiCategory() = MeLiCategory(
     id = this.categoryId
 )
 
-fun List<SuggestionsModel?>.toMeLiSuggestion(): List<Pair<SuggestionsType, List<MeLiSuggestion>?>> {
-    val list = mutableListOf<Pair<SuggestionsType, List<MeLiSuggestion>?>>()
+fun List<SuggestionsModel?>.toMeLiProduct(): List<Pair<SuggestionsType, List<MeLiProducts>?>> {
+    val list = mutableListOf<Pair<SuggestionsType, List<MeLiProducts>?>>()
     forEach { suggestions ->
         suggestions?.run {
-            list.add(suggestionsType to products?.map { product -> product.toMeLiSuggestion() })
+            list.add(suggestionsType to products?.map { product -> product.toMeLiProduct() })
         }
     }
     return list.toList()
 }
 
-fun ProductsModel.toMeLiSuggestion() = MeLiSuggestion(
+fun ProductsModel.toMeLiProduct() = MeLiProducts(
     itemId = id,
     title = title,
     lastPrice = originalPrice,

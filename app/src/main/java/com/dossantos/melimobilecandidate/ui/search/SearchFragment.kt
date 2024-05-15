@@ -95,7 +95,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setupViews() {
-        (requireActivity() as? SearchInterface)?.getToolbarView()?.let { toolbar ->
+        (activity as? SearchInterface)?.getToolbarView()?.let { toolbar ->
             toolbar.onSearch { newStringSearch.postValue(it) }
             toolbar.setup(
                 backButtonVisibility = true,

@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setupOnSearch() {
-        (requireActivity() as? SearchInterface)?.getToolbarView()?.onSearch {
+        (activity as? SearchInterface)?.getToolbarView()?.onSearch {
             searchString.postValue(it)
         }
     }
@@ -81,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onOffers(observable: OfferUiState) = when (val uiState = observable.uiState) {
         is OfferUiState.StateUi.OnSuccess -> {
-            binding.meLiOfferCarousel.setup(uiState.offers, requireActivity())
+            activity?.let { binding.meLiOfferCarousel.setup(uiState.offers, it) }
             binding.meLiOfferCarousel.setOnCardClickListener { searchString.postValue(it) }
         }
 
@@ -133,10 +133,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun SuggestionsType.toSuggestionTitle() = when (this) {
-        SuggestionsType.ONLY_SUGGESTION ->
-            requireActivity().getString(R.string.suggestion_message)
-
-        SuggestionsType.ALREADY_VISITED ->
-            requireActivity().getString(R.string.already_suggestion_message)
+        SuggestionsType.ONLY_SUGGESTION -> activity?.getString(R.string.suggestion_message)
+        SuggestionsType.ALREADY_VISITED -> activity?.getString(R.string.already_suggestion_message)
     }
 }

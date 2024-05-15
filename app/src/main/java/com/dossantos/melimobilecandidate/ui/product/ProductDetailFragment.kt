@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.dossantos.designsystem.model.product.MeLiProductModel
 import com.dossantos.melimobilecandidate.databinding.FragmentProductDetailBinding
@@ -34,7 +35,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     private fun setupToolbar() {
-        (requireActivity() as? SearchInterface)?.getToolbarView()?.let { toolbar ->
+        (activity as? SearchInterface)?.getToolbarView()?.let { toolbar ->
             toolbar.setup(
                 backButtonVisibility = true,
                 cancelButtonVisibility = false,
@@ -83,10 +84,14 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
     private fun setupViews(product: MeLiProductModel) {
         product.productDescription?.let {
-            if (it.length > maxLength)  binding.buyButton2.isVisible = true
+            if (it.length > maxLength) binding.buyButton2.isVisible = true
         }
+
+        product.picturesUrl?.let { pic ->
+            activity?.let { binding.meLiImageCarousel.setup(pic, it) }
+        }
+
         binding.title.text = product.title
-        product.picturesUrl?.let { binding.meLiImageCarousel.setup(it, requireActivity()) }
         binding.originalPrice.text = product.originalPrice
         binding.price.text = product.price
         binding.discount.text = product.discountAmount

@@ -60,37 +60,37 @@ private val viewModelModules = module {
 }
 
 private val useCaseModules = module {
-    single { OfferUseCase(offerRepository = get()) }
-    single { CategoryMenuUseCase(categoryRepository = get()) }
-    single { SuggestionsUseCase(suggestionsRepository = get()) }
-    single { SearchUseCase(searchRepository = get()) }
-    single { ProductsUseCase(productRepository = get(), suggestionsRepository = get()) }
+    factory { OfferUseCase(offerRepository = get()) }
+    factory { CategoryMenuUseCase(categoryRepository = get()) }
+    factory { SuggestionsUseCase(suggestionsRepository = get()) }
+    factory { SearchUseCase(searchRepository = get()) }
+    factory { ProductsUseCase(productRepository = get(), suggestionsRepository = get()) }
 }
 
 private val repositoryModules = module {
-    single<OfferRepository> { OfferRepositoryImpl() }
+    factory<OfferRepository> { OfferRepositoryImpl() }
 
-    single<CategoryRepository> {
+    factory<CategoryRepository> {
         CategoryRepositoryImpl(
             categoryEndpoint = MeLiCategoryEndpoint.instance,
             infoEndpoint = MeLiBrInfoEndpoint.instance
         )
     }
 
-    single<SuggestionsRepository> {
+    factory<SuggestionsRepository> {
         SuggestionsRepositoryImpl(
             suggestionsDao = get(),
             searchEndpoint = MeLiSearchEndpoint.instance
         )
     }
 
-    single<SearchRepository> { SearchRepositoryImpl(searchEndpoint = MeLiSearchEndpoint.instance) }
+    factory<SearchRepository> { SearchRepositoryImpl(searchEndpoint = MeLiSearchEndpoint.instance) }
 
-    single<ProductRepository> { ProductRepositoryImpl(productEndpoint = MeLiProductEndpoint.instance) }
+    factory<ProductRepository> { ProductRepositoryImpl(productEndpoint = MeLiProductEndpoint.instance) }
 }
 
 private val extraModules = module {
-    single {
+    factory {
         Room.databaseBuilder(
             androidContext(),
             MeLiSuggestionDataBase::class.java,
@@ -98,5 +98,5 @@ private val extraModules = module {
         ).build()
     }
 
-    single<MeLiSuggestionsDao> { get<MeLiSuggestionDataBase>().getSuggestionsDao() }
+    factory<MeLiSuggestionsDao> { get<MeLiSuggestionDataBase>().getSuggestionsDao() }
 }

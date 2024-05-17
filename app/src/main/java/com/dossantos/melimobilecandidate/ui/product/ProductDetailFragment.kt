@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.dossantos.designsystem.model.product.MeLiProductModel
 import com.dossantos.melimobilecandidate.databinding.FragmentProductDetailBinding
@@ -132,6 +131,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     companion object {
-        const val SEARCH_PRODUCT = "SEARCH_PRODUCT"
+        const val SEARCH_PRODUCT = "productId"
     }
 }

@@ -120,6 +120,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     companion object {
-        const val STRING_SEARCH = "STRING_SEARCH"
+        //Deeplink or navigation
+        const val STRING_SEARCH = "search"
     }
 }

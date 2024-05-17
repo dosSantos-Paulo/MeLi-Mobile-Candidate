@@ -14,6 +14,8 @@ import com.dossantos.melimobilecandidate.ui.base.BaseFragment
 import com.dossantos.melimobilecandidate.ui.product.ProductDetailFragment
 import com.dossantos.melimobilecandidate.ui.search.SearchFragment
 import com.dossantos.melimobilecandidate.utils.ElseNothing
+import com.dossantos.melimobilecandidate.utils.homeToDetail
+import com.dossantos.melimobilecandidate.utils.homeToSearch
 import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
 import com.dossantos.melimobilecandidate.viewmodel.home.HomeViewModel
 import com.dossantos.melimobilecandidate.viewmodel.home.OfferUiState
@@ -61,20 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         searchString.observe(viewLifecycleOwner) { string ->
             if (string.isNotEmpty() && string != lastSearch) {
                 lastSearch = string
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_searchFragment,
-                    bundleOf(SearchFragment.STRING_SEARCH to string)
-                )
+                findNavController().homeToSearch(bundleOf(SearchFragment.STRING_SEARCH to string))
             }
         }
 
         objectDetailSelected.observe(viewLifecycleOwner) { string ->
             if (string.isNotEmpty() && string != lastObjectDetailSelected) {
                 lastObjectDetailSelected = string
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_productDetailFragment,
-                    bundleOf(ProductDetailFragment.SEARCH_PRODUCT to string)
-                )
+                findNavController().homeToDetail(bundleOf(ProductDetailFragment.SEARCH_PRODUCT to string))
             }
         }
     }

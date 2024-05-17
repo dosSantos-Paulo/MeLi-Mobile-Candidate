@@ -14,6 +14,8 @@ import com.dossantos.melimobilecandidate.ui.base.BaseFragment
 import com.dossantos.melimobilecandidate.ui.home.SearchInterface
 import com.dossantos.melimobilecandidate.ui.product.ProductDetailFragment
 import com.dossantos.melimobilecandidate.utils.Integers.one
+import com.dossantos.melimobilecandidate.utils.searchToDetail
+import com.dossantos.melimobilecandidate.utils.searchToSelf
 import com.dossantos.melimobilecandidate.viewmodel.search.SearchStateUi
 import com.dossantos.melimobilecandidate.viewmodel.search.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,7 +36,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         setupObservables()
         setupErrorScreen()
         setupInfinityScroll()
-        newStringSearch.postValue(arguments?.getString(STRING_SEARCH, ""))
+        searchViewmodel.initSearch(arguments?.getString(STRING_SEARCH, String()).orEmpty())
     }
 
     private fun setupObservables() {
@@ -47,8 +49,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
 
         newStringSearch.observe(viewLifecycleOwner) { string ->
-            searchAdapter.clear()
-            searchViewmodel.initSearch(string)
+            if (string.isEmpty()) return@observe
+            findNavController().searchToSelf(bundleOf(STRING_SEARCH to string))
+            newStringSearch.postValue(String())
         }
     }
 
@@ -113,10 +116,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun setOnProductClickListener(itemId: String) {
-        findNavController().navigate(
-            R.id.action_searchFragment_to_productDetailFragment,
-            bundleOf(ProductDetailFragment.SEARCH_PRODUCT to itemId)
-        )
+        findNavController().searchToDetail(bundleOf(ProductDetailFragment.SEARCH_PRODUCT to itemId))
     }
 
     companion object {

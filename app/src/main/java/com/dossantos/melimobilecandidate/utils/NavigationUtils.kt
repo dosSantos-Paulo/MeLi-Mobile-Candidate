@@ -18,5 +18,4 @@ fun NavController.homeToDetail(bundle: Bundle? = null) {
 
 fun NavController.searchToDetail(bundle: Bundle? = null) {
     navigate(R.id.action_searchFragment_to_productDetailFragment, bundle)
-
 }

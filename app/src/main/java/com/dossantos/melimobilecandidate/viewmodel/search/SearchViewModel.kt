@@ -49,7 +49,6 @@ class SearchViewModel(
 
     private fun meLiSearch() = runOnIO {
         _searchStateUi.postValue(SearchStateUi().onLoading())
-        _searchStateUi.postValue(SearchStateUi().onLoading())
         searchUseCase.searchProductByString(currentSearch, pageIndex)
             .singleOrThrow(::onSearchSuccess, ::onError)
     }

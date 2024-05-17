@@ -1,5 +1,6 @@
 package com.dossantos.melimobilecandidate.viewmodel.search
 
+import android.util.Log
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dossantos.designsystem.model.suggestions.MeLiProducts
@@ -243,7 +244,8 @@ class SearchViewModelTest {
         viewModel.initSearch(searchString)
         viewModel.searchStateUi.observeForever(observer)
 
-        for (i in 0..10) {
+        for (i in 0 until 10) {
+            Log.d("Retry", "Attempt $i")
             delay(100) // simulate simultaneous retry attempts
             viewModel.retrySearch()
         }

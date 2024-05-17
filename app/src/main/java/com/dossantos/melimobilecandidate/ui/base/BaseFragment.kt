@@ -19,6 +19,11 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ) = inflateBinding(inflater, container)
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 
     @Suppress("UNCHECKED_CAST")
     private fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): View =

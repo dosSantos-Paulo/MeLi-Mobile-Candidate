@@ -131,6 +131,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     companion object {
+        //Deeplink or navigation
         const val SEARCH_PRODUCT = "productId"
     }
 }

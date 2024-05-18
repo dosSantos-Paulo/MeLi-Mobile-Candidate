@@ -19,30 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
-# OkHttp
--keepattributes Signature
--keepattributes *Annotation*
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
--dontwarn com.squareup.okhttp.**
-
-
-# Retrofit
--keep class com.google.gson.** { *; }
--keep public class com.google.gson.** {public private protected *;}
--keep class com.google.inject.** { *; }
--keep class org.apache.http.** { *; }
--keep class org.apache.james.mime4j.** { *; }
--keep class javax.inject.** { *; }
--keep class javax.xml.stream.** { *; }
--keep class retrofit.** { *; }
--keep class com.google.appengine.** { *; }
--keepattributes *Annotation*
--keepattributes Signature
--dontwarn com.squareup.okhttp.*
--dontwarn rx.**
--dontwarn javax.xml.stream.**
--dontwarn com.google.appengine.**
--dontwarn java.nio.file.**
--dontwarn org.codehaus.**

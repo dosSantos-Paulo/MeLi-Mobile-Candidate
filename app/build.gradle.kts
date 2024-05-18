@@ -46,6 +46,10 @@ android {
             }
         }
     }
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -103,14 +107,6 @@ dependencies {
     implementation(Dependencies.Navigation.fragment)
 
     /**
-     * Test
-     */
-    testImplementation(Dependencies.Test.junit)
-    testImplementation(Dependencies.Test.koin)
-    androidTestImplementation(Dependencies.Test.androidxJunit)
-    androidTestImplementation(Dependencies.Test.espressoCore)
-
-    /**
      * Room
      */
     implementation(Dependencies.Room.runtime)
@@ -121,15 +117,32 @@ dependencies {
      * Test
      */
     implementation(Dependencies.Test.testCore)
+    implementation("io.insert-koin:koin-test")
+
+
+    testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.koin)
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockK)
     testImplementation(Dependencies.Test.roboletrics)
     testImplementation(Dependencies.Test.archCore)
     testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.stdLib)
+    testImplementation ("io.insert-koin:koin-test-junit4")
+
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
+    androidTestImplementation(Dependencies.Test.mockK)
+    androidTestImplementation(Dependencies.Test.koin)
+    androidTestImplementation(Dependencies.Test.archCore)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.espressoCore)
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+    debugImplementation("androidx.fragment:fragment-testing:1.7.1")
+
     compileOnly(Dependencies.Test.stdLib)
-    testImplementation(Dependencies.Test.stdLib)
 }
 
 fun getSecret(key: String): String? {

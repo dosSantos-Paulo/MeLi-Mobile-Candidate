@@ -1,7 +1,6 @@
 package com.dossantos.melimobilecandidate.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -25,7 +24,9 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val viewModel: HomeViewModel by activityViewModel()
+    private val _viewModel: HomeViewModel by activityViewModel()
+    val viewModel: HomeViewModel
+        get() = _viewModel
 
     private val searchString = MutableLiveData<String>()
 
@@ -37,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.init()
+        _viewModel.init()
         setupObservables()
         setupOnSearch()
         clearSearch()
@@ -57,9 +58,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setupObservables() {
-        viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
-        viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
-        viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
+        _viewModel.offerUiState.observe(viewLifecycleOwner, ::onOffers)
+        _viewModel.categoryMenuUiState.observe(viewLifecycleOwner, ::onCategoryMenu)
+        _viewModel.suggestionsUiState.observe(viewLifecycleOwner, ::onSuggestions)
 
         searchString.observe(viewLifecycleOwner) { string ->
             if (string.isNotEmpty() && string != lastSearch) {
@@ -83,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         is OfferUiState.StateUi.OnError -> {
-            viewModel.retryOffer()
+            _viewModel.retryOffer()
         }
 
         else -> ElseNothing
@@ -100,7 +101,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             is CategoryMenuUiState.StateUi.OnError -> {
                 binding.categoryLayout.isVisible = false
-                viewModel.retryCategoryMenu()
+                _viewModel.retryCategoryMenu()
             }
 
             is CategoryMenuUiState.StateUi.ShowLoading -> {
@@ -119,7 +120,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
 
             is SuggestionsUiState.StateUi.OnError -> {
-                viewModel.retrySuggestions()
+                _viewModel.retrySuggestions()
             }
 
             else -> ElseNothing

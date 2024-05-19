@@ -15,7 +15,7 @@ object Versions {
         const val junitVersion = "1.1.5"
         const val espressoCore = "3.5.1"
         const val mockK = "1.13.10"
-        const val roboletrics = "4.6.1"
+        const val roboletrics = "4.9"
         const val archCore = "2.1.0"
         const val testCore = "1.5.0"
         const val stdLib = "7:1.1.2"

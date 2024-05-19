@@ -49,6 +49,7 @@ android {
     packaging {
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
+        jniLibs.useLegacyPackaging = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -82,7 +83,7 @@ dependencies {
     implementation(Dependencies.Commons.timber)
 
     /**
-     * Depedency Injection
+     * Dependency Injection
      */
     implementation(platform(Dependencies.Koin.bom))
     implementation(Dependencies.Koin.core)
@@ -124,12 +125,12 @@ dependencies {
     testImplementation(Dependencies.Test.koin)
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.mockK)
-    testImplementation(Dependencies.Test.roboletrics)
     testImplementation(Dependencies.Test.archCore)
     testImplementation(Dependencies.Test.coroutines)
     testImplementation(Dependencies.Test.stdLib)
     testImplementation ("io.insert-koin:koin-test-junit4")
 
+//    androidTestImplementation(Dependencies.Test.roboletrics)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
     androidTestImplementation(Dependencies.Test.mockK)
@@ -139,6 +140,7 @@ dependencies {
     androidTestImplementation(Dependencies.Test.espressoCore)
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("io.mockk:mockk-android:1.13.10")
 
     debugImplementation("androidx.fragment:fragment-testing:1.7.1")
 

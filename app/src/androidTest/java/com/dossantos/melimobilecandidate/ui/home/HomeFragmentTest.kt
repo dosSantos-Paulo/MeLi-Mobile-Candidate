@@ -1,100 +1,73 @@
 package com.dossantos.melimobilecandidate.ui.home
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.core.view.isVisible
+import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.dossantos.melimobilecandidate.R
-import com.dossantos.melimobilecandidate.di.getMainModules
-import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
-import com.dossantos.melimobilecandidate.viewmodel.home.HomeViewModel
+import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
 import com.dossantos.melimobilecandidate.viewmodel.home.OfferUiState
-import com.dossantos.melimobilecandidate.viewmodel.home.SuggestionsUiState
-import io.mockk.Runs
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
 import io.mockk.mockkClass
-import io.mockk.slot
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.dsl.koinApplication
-import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.mock.MockProvider
-import org.koin.test.mock.declareMock
+import kotlin.test.fail
 
 @RunWith(AndroidJUnit4::class)
-class HomeFragmentTest: KoinTest {
+class HomeFragmentTest : KoinTest {
 
-//    @get:Rule
-//    val koinTestRule = MockProvider.register {
-//        mockkClass(it)
-//    }
+    private lateinit var homeFragmentLauncher: FragmentScenario<HomeFragment>
 
-//    @get:Rule
-//    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @Before
+    fun setup() {
+        MockProvider.register { mockkClass(it) }
 
-//    private val app = koinApplication {
-//        androidLogger()
-//        androidContext(getInstrumentation().targetContext.applicationContext)
-//        getMainModules()
-//    }
-
-//    val offerObserver: Observer<in OfferUiState> = mockk(relaxed = true)
-//    val categoryObserver: Observer<in CategoryMenuUiState> = mockk(relaxed = true)
-//    val suggestionsObserver: Observer<in SuggestionsUiState> = mockk(relaxed = true)
-//
-//    val slotOffer = slot<OfferUiState>()
-//    val slotCategory = slot<CategoryMenuUiState>()
-//    val slotSuggestions = slot<SuggestionsUiState>()
-//
-//    @Before
-//    fun setup() {
-//        with(app.koin) {
-//            declareMock<HomeViewModel> {
-//                every { init() } just Runs
-//            }
-//        }
-//    }
-
+        homeFragmentLauncher = launchFragmentInContainer<HomeFragment>(
+            initialState = Lifecycle.State.STARTED,
+            themeResId = R.style.Theme_MeLiMobileCandidate
+        )
+    }
 
     @Test
     fun testIfHomeFragmentIsLaunched() {
         // Given
-        val homeFragmentLauncher = launchFragmentInContainer<HomeFragment>(
-            initialState = Lifecycle.State.STARTED,
-            themeResId = R.style.Theme_MeLiMobileCandidate
-        )
+        var binding: FragmentHomeBinding? = null
+
+        // When
+        homeFragmentLauncher.onFragment { homeFragment ->
+            homeFragment.view?.let { binding = FragmentHomeBinding.bind(it) }
+        }
+
+        // Then
+        assert(binding != null)
+    }
+
+    @Test
+    fun testGetOffersWithSuccess() {
+        // Given
+        var binding: FragmentHomeBinding? = null
 
         // When
         homeFragmentLauncher.onFragment { homeFragment ->
 
-            // Then
-            assert(homeFragment.view != null)
+            homeFragment.view?.let { binding = FragmentHomeBinding.bind(it) }
+
+            homeFragment.viewModel.offerUiState.observe(homeFragment.viewLifecycleOwner) {
+                if (binding == null) fail("Binding is null")
+
+                // Then
+                when (val state = it.uiState) {
+                    is OfferUiState.StateUi.OnSuccess -> {
+                        assert(binding!!.meLiOfferCarousel.isVisible)
+                        assert(state.offers.isNotEmpty())
+                    }
+
+                    else -> fail("State is not OnSuccess")
+                }
+            }
         }
     }
-
-//    @Test
-//    fun testGetOffers() {
-//        // Given
-////        with(app.koin)
-//
-//        val homeFragmentLauncher = launchFragmentInContainer<HomeFragment>(
-//            initialState = Lifecycle.State.STARTED,
-//            themeResId = R.style.Theme_MeLiMobileCandidate
-//        )
-//
-//        // When
-////        homeFragmentLauncher.onFragment { homeFragment ->
-////            homeFragment.viewModel = mockViewModel
-////        }
-//    }
 }

@@ -19,25 +19,17 @@
       <SelectionState runConfigName="designSystem">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testOnViewCreated()">
+      <SelectionState runConfigName="testGetOffersWithError()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testGetOffers()">
+      <SelectionState runConfigName="testGetCategoriesWithError()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testIfHomeFragmentIsLaunched()">
+      <SelectionState runConfigName="testGetCategoriesWithSuccess()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testGetOffersWithSuccess()">
+      <SelectionState runConfigName="test_G_takeSnapshot()">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-05-19T18:49:22.346893Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="Default" identifier="serial=192.168.0.97:39821;connection=b924d8f7" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>

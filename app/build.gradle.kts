@@ -118,8 +118,7 @@ dependencies {
      * Test
      */
     implementation(Dependencies.Test.testCore)
-    implementation("io.insert-koin:koin-test")
-
+    implementation(Dependencies.Test.koin)
 
     testImplementation(Dependencies.Test.junit)
     testImplementation(Dependencies.Test.koin)
@@ -128,9 +127,11 @@ dependencies {
     testImplementation(Dependencies.Test.archCore)
     testImplementation(Dependencies.Test.coroutines)
     testImplementation(Dependencies.Test.stdLib)
-    testImplementation ("io.insert-koin:koin-test-junit4")
+    testImplementation(Dependencies.Test.koinJunir4)
 
-//    androidTestImplementation(Dependencies.Test.roboletrics)
+    /**
+     * Instrumented Test
+     */
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
     androidTestImplementation(Dependencies.Test.mockK)
@@ -138,11 +139,11 @@ dependencies {
     androidTestImplementation(Dependencies.Test.archCore)
     androidTestImplementation(Dependencies.Test.androidxJunit)
     androidTestImplementation(Dependencies.Test.espressoCore)
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("io.mockk:mockk-android:1.13.10")
+    androidTestImplementation(Dependencies.Test.runner)
+    androidTestImplementation(Dependencies.Test.androidxJunit)
+    androidTestImplementation(Dependencies.Test.mockKAndroid)
 
-    debugImplementation("androidx.fragment:fragment-testing:1.7.1")
+    debugImplementation(Dependencies.Test.fragmentTesting)
 
     compileOnly(Dependencies.Test.stdLib)
 }
@@ -194,6 +195,8 @@ subprojects {
     }
 
     reportMerge {
-        input.from(tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().map { it.xmlReportFile }) // or .sarifReportFile
+        input.from(
+            tasks.withType<io.gitlab.arturbosch.detekt.Detekt>()
+                .map { it.xmlReportFile }) // or .sarifReportFile
     }
 }

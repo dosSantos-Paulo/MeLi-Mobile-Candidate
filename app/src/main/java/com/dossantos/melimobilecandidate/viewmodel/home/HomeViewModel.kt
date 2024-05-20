@@ -79,9 +79,10 @@ class HomeViewModel(
         if (offersRetry <= maxRetry) getOffers()
     }
 
-    fun retryCategoryMenu() {
+    fun retryCategoryMenu(elseRetry: () -> Unit) {
         categoryMenuRetry++
         if (categoryMenuRetry <= maxRetry) getCategoryMenu()
+        else elseRetry()
     }
 
     fun retrySuggestions() {

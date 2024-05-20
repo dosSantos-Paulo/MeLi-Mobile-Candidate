@@ -101,7 +101,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
             is CategoryMenuUiState.StateUi.OnError -> {
                 binding.categoryLayout.isVisible = false
-                _viewModel.retryCategoryMenu()
+                _viewModel.retryCategoryMenu {
+                    binding.categoryLoading.isVisible = false
+                }
             }
 
             is CategoryMenuUiState.StateUi.ShowLoading -> {

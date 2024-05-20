@@ -22,7 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
-    private val searchViewmodel by viewModel<SearchViewModel>()
+    private val _viewModel by viewModel<SearchViewModel>()
+    val viewModel: SearchViewModel
+        get() = _viewModel
 
     private var newStringSearch = MutableLiveData<String>()
 
@@ -36,15 +38,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         setupObservables()
         setupErrorScreen()
         setupInfinityScroll()
-        searchViewmodel.initSearch(arguments?.getString(STRING_SEARCH, String()).orEmpty())
+        _viewModel.initSearch(arguments?.getString(STRING_SEARCH, String()).orEmpty())
     }
 
     private fun setupObservables() {
-        searchViewmodel.retryPossibility.observe(viewLifecycleOwner) { hasPossibility ->
+        _viewModel.retryPossibility.observe(viewLifecycleOwner) { hasPossibility ->
             hasPossibilityToRetry = hasPossibility
         }
 
-        searchViewmodel.searchStateUi.observe(viewLifecycleOwner) { uiState ->
+        _viewModel.searchStateUi.observe(viewLifecycleOwner) { uiState ->
             uiState.uiState?.let { onObservable(it) }
         }
 
@@ -61,7 +63,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             else getString(R.string.back)
 
         retryButton.setOnClickListener {
-            if (hasPossibilityToRetry) searchViewmodel.retrySearch()
+            if (hasPossibilityToRetry) _viewModel.retrySearch()
             else findNavController().popBackStack()
         }
     }
@@ -74,7 +76,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 val totalItemsCount = layoutManager.itemCount
                 val lastVisible = layoutManager.findLastVisibleItemPosition()
 
-                if (lastVisible == totalItemsCount - one) searchViewmodel.tryNextPage()
+                if (lastVisible == totalItemsCount - one) _viewModel.tryNextPage()
             }
         })
     }

@@ -14,6 +14,8 @@ object Versions {
         const val junit = "4.13.2"
         const val junitVersion = "1.1.5"
         const val espressoCore = "3.5.1"
+        const val fragment = "1.7.1"
+        const val runner = "1.5.2"
         const val mockK = "1.13.10"
         const val roboletrics = "4.9"
         const val archCore = "2.1.0"

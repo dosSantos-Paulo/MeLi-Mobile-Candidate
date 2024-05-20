@@ -20,15 +20,17 @@ import org.koin.core.parameter.parametersOf
 
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
-    private val viewModel: ProductDetailViewModel by viewModel {
+    private val _viewModel: ProductDetailViewModel by viewModel {
         parametersOf(arguments?.getString(SEARCH_PRODUCT, String()))
     }
+    val viewModel: ProductDetailViewModel
+        get() = _viewModel
 
     private var retryPossibility = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.init()
+        _viewModel.init()
         setupObservables()
         setupToolbar()
     }
@@ -51,9 +53,9 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     private fun setupObservables() {
-        viewModel.retryPossibility.observe(viewLifecycleOwner) { retryPossibility = it }
+        _viewModel.retryPossibility.observe(viewLifecycleOwner) { retryPossibility = it }
 
-        viewModel.productDetailStateUi.observe(viewLifecycleOwner)
+        _viewModel.productDetailStateUi.observe(viewLifecycleOwner)
         { observer -> observer.uiState?.let { stateUi -> onProductDetail(stateUi) } }
     }
 
@@ -109,7 +111,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
             binding.includedLayout.isVisible = false
             binding.errorView.root.isVisible = false
             binding.loadingView.root.isVisible = false
-            viewModel.retryProductDetail()
+            _viewModel.retryProductDetail()
         }
     }
 

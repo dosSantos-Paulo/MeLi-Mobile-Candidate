@@ -10,6 +10,7 @@ import com.dossantos.domain.usecase.offer.OfferUseCase
 import com.dossantos.domain.usecase.suggestions.SuggestionsUseCase
 import com.dossantos.melimobilecandidate.R
 import com.dossantos.melimobilecandidate.databinding.FragmentHomeBinding
+import com.dossantos.melimobilecandidate.ui.JustIgnore
 import com.dossantos.melimobilecandidate.viewmodel.home.CategoryMenuUiState
 import com.dossantos.melimobilecandidate.viewmodel.home.OfferUiState
 import com.dossantos.melimobilecandidate.viewmodel.home.SuggestionsUiState
@@ -28,8 +29,6 @@ import org.koin.test.KoinTest
 import org.koin.test.mock.MockProvider
 import org.koin.test.mock.declareMock
 import kotlin.test.fail
-
-typealias JustIgnore = Unit
 
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
